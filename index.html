@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light-paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PETs Practice Quiz Portal</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Load Data -->
+  <script src="data.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">📜</div>
+        <div>
+          <div class="brand-title">PETs Practice Quiz</div>
+          <div class="brand-subtitle">Privacy Enhancing Technologies • Weeks 1 to 8</div>
+        </div>
+      </div>
+      <div>
+        <button id="theme-toggle-btn" class="theme-toggle">🌙 Dark Paper</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Control Panel -->
+    <section class="control-panel">
+      <div class="panel-grid">
+        <div class="form-group">
+          <label for="week-filter">Select Week / Mode</label>
+          <select id="week-filter" class="form-control">
+            <option value="all" selected>🔀 All Weeks Shuffled (Full Pool)</option>
+            <option value="1">Week 1 — Homomorphic Encryption & Intro</option>
+            <option value="2">Week 2 — TGLWE, TGSW & TFHE Bootstrapping</option>
+            <option value="3">Week 3 — CKKS Scheme & Approximate Arithmetic</option>
+            <option value="4">Week 4 — CKKS Rescaling, CRT & Bootstrapping</option>
+            <option value="5">Week 5 — TFHE Gates, MPC & Secret Sharing</option>
+            <option value="6">Week 6 — Beaver Triples & MPC Division</option>
+            <option value="7">Week 7 — Oblivious Transfer (OT) & GMW</option>
+            <option value="8">Week 8 — Shamir, SSE & Security Games</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="count-filter">Questions Limit</label>
+          <select id="count-filter" class="form-control">
+            <option value="all" selected>All Questions</option>
+            <option value="10">10 Questions</option>
+            <option value="20">20 Questions</option>
+            <option value="50">50 Questions</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mode-filter">Quiz Mode</label>
+          <select id="mode-filter" class="form-control">
+            <option value="practice" selected>Practice Mode (Auto-Reveal Explanation)</option>
+            <option value="exam">Exam Mode (Submit at End)</option>
+          </select>
+        </div>
+
+        <div>
+          <button id="start-quiz-btn" class="btn" style="width: 100%;">
+            🔀 Shuffle & Start
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz Meta & Progress -->
+    <div class="quiz-meta">
+      <div id="progress-text" style="font-weight: 700; color: var(--text-muted); font-size: 0.95rem;">
+        Loading Quiz...
+      </div>
+    </div>
+    <div class="progress-bar-container">
+      <div id="progress-bar-fill" class="progress-bar-fill"></div>
+    </div>
+
+    <!-- Summary Section (Initially Hidden) -->
+    <section id="summary-section" style="display: none;">
+      <div class="summary-card">
+        <h2>Quiz Summary</h2>
+        <div class="score-circle" id="score-circle" style="--score-pct: 0;">
+          <div class="score-inner">
+            <div class="score-number" id="score-number">0/0</div>
+            <div class="score-label" id="score-pct-label">0%</div>
+          </div>
+        </div>
+        <p id="summary-status" style="font-size: 1.05rem; font-weight: 600; color: var(--text-muted); margin-top: 0.5rem;"></p>
+        <div class="summary-actions">
+          <button id="restart-btn" class="btn">🔀 Try Another Shuffled Quiz</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions Container -->
+    <section id="quiz-section">
+      <div id="questions-container"></div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Action Bar for Exam Mode -->
+  <div id="bottom-bar" class="bottom-bar" style="display: none;">
+    <div class="bottom-container">
+      <span style="font-weight: 700;">Finished answering all questions?</span>
+      <button id="submit-quiz-btn" class="btn btn-success">
+        Submit Quiz & View Score
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
