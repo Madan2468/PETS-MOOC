@@ -1,57 +1,57 @@
 window.QUIZ_DATA = [
   {
     "week": 1,
-    "count": 23,
+    "count": 20,
     "questions": [
       {
         "id": "W1_Q1",
         "week": 1,
-        "header": "Q1 — Privacy vs Security (BUG example)",
-        "question": "Why does the \"BUG\" cloud storage system violate its privacy policy even though the access control matrix technically enforces security?",
+        "header": "Q1 — Privacy vs Security (BUG Cloud Storage)",
+        "question": "In the \"BUG (Big Unnamed Group)\" cloud storage example from the lecture 1, why does the system violate its stated privacy policy even though the access control matrix technically enforces security?",
         "options": [
           {
             "key": "a",
-            "text": "Tom and Jerry can both read each other's files directly"
+            "text": "Because Tom and Jerry can both read each other's files directly"
           },
           {
             "key": "b",
-            "text": "BUG granted itself \"share\" access to all files, letting it authorize other users without owner approval"
+            "text": "Because BUG granted itself \"share\" access to all files, letting it authorize other users to access files without the owners' approval"
           },
           {
             "key": "c",
-            "text": "The access control matrix was not encrypted"
+            "text": "Because the access control matrix was not encrypted"
           },
           {
             "key": "d",
-            "text": "Jerry has \"Write\" access to Tom's files without permission"
+            "text": "Because Jerry has \"Write\" access to Tom's files without permission"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "BUG granted itself 'share' access to all user files. This means it can re-authorize other users to view Tom's files without Tom's consent, violating the privacy policy even though access controls technically function."
+        "explanation": "The example illustrates that security (enforcing the access control matrix as written) and privacy (honoring the intended policy that only owners can grant access to their files) are not the same thing. Although the matrix technically restricts direct access, i.e., Tom cannot read Jerry's files and vice versa (ruling out Option a and Option d, since the matrix does not grant them cross-access), BUG has quietly given itself \"share\" rights on every file. This means BUG could authorize any user to access any other user's files without the actual owner's consent, directly contradicting the stated policy that only the owner can grant such access. The issue has nothing to do with encryption of the matrix itself (ruling out Option c); it is about who holds the power to grant access, showing that a system can remain \"secure\" (matrix is enforced as configured) while still being fundamentally unprivate, since the privacy violation stems from the design/configuration of permissions rather than a breach of the security mechanism."
       },
       {
         "id": "W1_Q2",
         "week": 1,
         "header": "Q2 — Classification of PET Types",
-        "question": "Which pairings of PET category and example are accurate?",
+        "question": ": Based on the classification of PET types, which of the following pairings of PET category and correct example are accurate?",
         "options": [
           {
             "key": "a",
-            "text": "Reduce identifiability: Differential Privacy, Synthetic Data"
+            "text": "PETs that reduce identifiability of individuals: Differential Privacy, Synthetic Data"
           },
           {
             "key": "b",
-            "text": "Hide/shield data: Homomorphic Encryption, Zero-Knowledge Proofs"
+            "text": "PETs that focus on hiding/shielding data: Homomorphic Encryption, Zero-Knowledge Proofs"
           },
           {
             "key": "c",
-            "text": "Split dataset/control access: TEEs, SMPC, Federated Learning"
+            "text": "PETs that split datasets or control access to data: Trusted Execution Environments, Secure Multi-Party Computation, Federated Learning"
           },
           {
             "key": "d",
-            "text": "Reduce identifiability: Homomorphic Encryption, Federated Learning"
+            "text": "PETs that reduce identifiability of individuals: Homomorphic Encryption, Federated Learning"
           }
         ],
         "correct": [
@@ -59,13 +59,13 @@ window.QUIZ_DATA = [
           "b",
           "c"
         ],
-        "explanation": "Privacy Enhancing Technologies (PETs) fall into specific functional categories: Differential Privacy and Synthetic Data reduce identifiability; Homomorphic Encryption and Zero-Knowledge Proofs hide/shield data; TEEs, SMPC, and Federated Learning control access and split datasets."
+        "explanation": "The first category reduces the identifiability of individuals to whom the data relates, with Differential Privacy and Synthetic Data given as examples, noting this may reduce data utility compared to the original dataset (confirming Option a). The second category focuses on hiding or shielding data itself, with Homomorphic Encryption (allowing computation on encrypted data without revealing plaintext) and Zero-Knowledge Proofs (proving a statement is true without revealing the underlying information) as examples (confirming Option b). The third category splits datasets or controls access to parts of data using a systems approach, with Trusted Execution Environments, Secure Multi-Party Computation/Private Set Intersection, and Federated Learning as examples (confirming c). Option d incorrectly reassigns Homomorphic Encryption and Federated Learning into the \"identifiability reduction\" category, since neither of these constructions are inherently designed for non-anonymous use-cases."
       },
       {
         "id": "W1_Q3",
         "week": 1,
-        "header": "Q3 — Computing on Encrypted Data",
-        "question": "Which PET lets a cloud server compute on data without ever seeing the plaintext?",
+        "header": "Q3 — Semantic Security & IND-CPA Definition",
+        "question": "A privacy engineer wants to allow a cloud server to perform computations on a user's data without the server ever being able to view the unencrypted content. Which type of PET, as categorized in the lecture, directly enables this capability?",
         "options": [
           {
             "key": "a",
@@ -87,49 +87,49 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "Homomorphic Encryption (HE) allows computations to be evaluated directly on ciphertexts without ever decrypting or revealing plaintext to the cloud server."
+        "explanation": "Homomorphic Encryption focuses on allowing computation on encrypted data without revealing the plaintext, exactly matching the scenario of a server processing data it can never actually see. Differential Privacy (Option a) belongs instead to the category of PETs that reduce identifiability of individuals by adding statistical noise to datasets or query results, which is a different mechanism aimed at protecting individual records within aggregate data rather than enabling computation on encrypted values. Synthetic Data (Option c) also falls under the identifiability-reduction category, working by generating artificial data that mimics statistical properties of the original dataset rather than operating on the real data at all. Federated Learning (Option d) belongs to the category of PETs that split datasets or control access to data, where model training happens locally on distributed devices and only model updates (not raw data or encrypted computations) are shared centrally."
       },
       {
         "id": "W1_Q4",
         "week": 1,
-        "header": "Q4 — Homomorphism Definition",
-        "question": "f: G → H is a homomorphism if:",
+        "header": "Q4 — Symmetric Homomorphic Encryption (SHE)",
+        "question": "In group theory terms, a function f: G → H is called a homomorphism if it satisfies which of the following properties?",
         "options": [
           {
             "key": "a",
-            "text": "f(g1+g2) = f(g1)+f(g2), same operation in both G and H"
+            "text": "f(g1 + g2) = f(g1) + f(g2), where + is the same operation in both G and H"
           },
           {
             "key": "b",
-            "text": "f(g1+g2) = f(g1) † f(g2), + is the operation in G and † is the operation in H"
+            "text": "f(g1 + g2) = f(g1) † f(g2), where + is the operation in G and † is the transformed operation in H"
           },
           {
             "key": "c",
-            "text": "f(g1) = f(g2) for all g1, g2"
+            "text": "f(g1) = f(g2) for all g1, g2 ∈ G"
           },
           {
             "key": "d",
-            "text": "f(g1×g2) = f(g1) - f(g2)"
+            "text": "f(g1 × g2) = f(g1) - f(g2)"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "A algebraic homomorphism f: G → H maps an operation in group G (e.g., +) to another operation in group H (e.g., †), so f(g1 + g2) = f(g1) † f(g2)."
+        "explanation": "Homomorphism from group G to group H is a function f such that f(g1 + g2) = f(g1) † f(g2), where g1 and g2 are elements of G, \"+\" denotes the operation in G, and \"†\" denotes the transformed operation in H. This formalism is important precisely because it does not require the operation in H to be identical to the operation in G. Option (a) incorrectly assumes the operations in G and H must be the same, which is too restrictive. Option © describes a constant function, which trivially preserves structure but is not homomorphism by definition. Option (d) mixes multiplication and subtraction inconsistently and does not correspond to the homomorphism."
       },
       {
         "id": "W1_Q5",
         "week": 1,
-        "header": "Q5 — RSA Multiplicative Homomorphism",
-        "question": "If c1 = m1^e mod N and c2 = m2^e mod N, what does (c1 × c2) mod N represent?",
+        "header": "Q5 — Limitations of Symmetric vs Asymmetric HE",
+        "question": "In the RSA encryption scheme, if c 1 = m 1 e mod N and c 2 = m 2 e mod N, what does the value (c 1 × c 2 ) mod N represent, based on the multiplicative homomorphism property?",
         "options": [
           {
             "key": "a",
-            "text": "Encryption of (m1+m2)"
+            "text": "An encryption of (m 1 + m 2 )"
           },
           {
             "key": "b",
-            "text": "Encryption of m1 only, with m2 discarded"
+            "text": "An encryption of m 1 only, with m 2 discarded"
           },
           {
             "key": "c",
@@ -137,51 +137,51 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Encryption of (m1×m2)"
+            "text": "An encryption of (m 1 × m 2 )"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "In textbook RSA, multiplying two ciphertexts c1 and c2 mod N results in (m1^e * m2^e) mod N = (m1*m2)^e mod N, which decrypts to the product of plaintexts (m1 × m2)."
+        "explanation": "Note that RSA exhibits multiplicative homomorphism: given ciphertexts c 1 = m 1 e mod N and c 2 = m 2 e mod N, computing c* = c 1 × c 2 × ... × c n mod N yields (m 1 × m 2 × ... × m n ) e mod N, which is precisely the valid RSA encryption of the product (m 1 × m 2 × ... × m n ). This is not additive homomorphism (ruling out Option a), since RSA as presented does not support recovering m 1 + m 2 from any combination of c 1 and c 2 using standard modular operations. The ciphertext product remains perfectly valid and decryptable using the secret key d (ruling out Option c), and both m 1 and m 2 genuinely contribute to the result rather than one being discarded (ruling out Option b)."
       },
       {
         "id": "W1_Q6",
         "week": 1,
-        "header": "Q6 — Paillier Additive Homomorphism",
-        "question": "Which operation on Paillier ciphertexts yields Enc(m1+m2)?",
+        "header": "Q6 — Gentry's 2009 FHE Breakthrough",
+        "question": "In the Paillier cryptosystem, if c 1 is an encryption of m 1 and c 2 is an encryption of m 2 , which operation on the ciphertexts yields a valid encryption of (m 1 + m 2 )?",
         "options": [
           {
             "key": "a",
-            "text": "Multiplying the ciphertexts: c1×c2 mod n²"
+            "text": "Multiplying the ciphertexts: c 1 × c 2 mod n²"
           },
           {
             "key": "b",
-            "text": "Adding the ciphertexts: c1+c2"
+            "text": "Adding the ciphertexts: c 1 + c 2"
           },
           {
             "key": "c",
-            "text": "Raising c1 to the power of c2"
+            "text": "Raising c 1 to the power of c 2"
           },
           {
             "key": "d",
-            "text": "Subtracting the ciphertexts: c1-c2"
+            "text": "Subtracting the ciphertexts: c 1 - c 2"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "Paillier encryption is additively homomorphic: multiplying two ciphertexts (c1 × c2 mod n²) results in the encryption of the sum of the plaintexts Enc(m1 + m2)."
+        "explanation": "In the Paillier scheme, ciphertexts have the form c 1 = g m1 · r 1 n mod n² and c 2 = g m2 · r 2 n mod n². Multiplying these two ciphertexts gives c 1 × c 2 = g (m1+m2) · (r 1 × r 2 ) n mod n², which is precisely a valid Paillier encryption of the sum (m 1 + m 2 ), since the exponents of g add when the ciphertexts are multiplied. This makes Paillier an additively homomorphic scheme, in contrast to RSA's multiplicative homomorphism."
       },
       {
         "id": "W1_Q7",
         "week": 1,
-        "header": "Q7 — Why Parameters Matter",
-        "question": "A symmetric HE scheme fails to decrypt correctly when p=7, but works when p=23 (same m1, m2, similar r1, r2). What does this show?",
+        "header": "Q7 — Noise Growth in LWE Ciphertexts",
+        "question": "In the lecture's numerical example demonstrating \"Why Parameters are Important,\" the encryption scheme fails to correctly decrypt when p = 7 but succeeds when p = 23, using the same m 1 , m 2 , and similarly sized r 1 , r 2 values. What does this illustrate about the homomorphic symmetric encryption scheme?",
         "options": [
           {
             "key": "a",
-            "text": "The scheme is completely broken and can't be used for additive homomorphism"
+            "text": "The scheme is completely broken and cannot be used for any additive homomorphism"
           },
           {
             "key": "b",
@@ -189,51 +189,51 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "The secret key p must be large enough relative to the noise terms (2r1+2r2+m1+m2) so the sum stays smaller than p and doesn't wrap around during the mod p operation"
+            "text": "The secret key p must be large enough relative to the noise terms (2r 1 + 2r 2 + m 1 + m 2 ) so that the sum stays smaller than p and does not wrap around during the mod p operation"
           },
           {
             "key": "d",
-            "text": "The value of q has no effect on correctness"
+            "text": "The value of q (the random large multiplier) has no effect on correctness"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "Decryption modulo p requires the accumulated noise terms (2r1 + 2r2 + m1 + m2) to remain smaller than p. If p is too small, noise wraps around mod p and corrupts decryption."
+        "explanation": "The scheme's correctness relies on the combined noise term (2(r 1 +r 2 ) + (m 1 +m 2 )) remaining strictly smaller than p, so that when decryption computes ((c 1 +c 2 ) mod p) mod 2, the mod p operation correctly strips away the multiples of p and leaves only the noise term intact for the final mod 2 to extract. With p = 7, the noise term becomes large enough relative to p that it \"wraps around\" during the mod p operation, corrupting the result and yielding the incorrect plaintext. With p = 23, the noise term stays comfortably smaller than p, so the mod p operation behaves as intended and correctly yields the plaintext. This does not mean the scheme is fundamentally broken (ruling out Option a); rather, it demonstrates that correct parameter selection is essential for the scheme to function properly. The example never suggests p must be prime (ruling out Option b), and q clearly does affect the ciphertext value even though it is designed to be eliminated by the mod p operation during correct decryption (ruling out d)."
       },
       {
         "id": "W1_Q8",
         "week": 1,
-        "header": "Q8 — Semantic Security via Approximate GCD",
-        "question": "Given x1=s1+p·q1 and x2=s2+p·q2 (where s1, s2 are much smaller than p), can p be computed efficiently from just x1 and x2?",
+        "header": "Q8 — LWE Problem (Learning With Errors)",
+        "question": "Recall that the \"approximate GCD problem\" is the basis for semantic security of the homomorphic scheme discussed in the lecture. Given x 1 = s 1 + p·q 1 and x 2 = s 2 + p·q 2 , where s 1 and s 2 are much smaller than p, what is the conclusion about computing p efficiently from x 1 and x 2 alone?",
         "options": [
           {
             "key": "a",
-            "text": "Yes, easily, using the standard Euclidean algorithm"
+            "text": "It is easy, using the standard Euclidean algorithm, since GCD computation is always polynomial-time"
           },
           {
             "key": "b",
-            "text": "No — the approximate GCD problem appears hard even with arbitrarily many samples"
+            "text": "It is not possible in general, to the best of current knowledge, since the approximate GCD problem appears hard even with arbitrarily many samples"
           },
           {
             "key": "c",
-            "text": "Only possible if p is an even number"
+            "text": "It is possible only when p is an even number"
           },
           {
             "key": "d",
-            "text": "Trivial, because s1 and s2 can simply be subtracted out algebraically"
+            "text": "It is trivial because s1 and s2 can simply be subtracted out algebraically"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "The Approximate GCD problem adds small unknown noise (s1, s2) to multiples of prime p. Finding p without knowing the noise is computationally hard, which guarantees semantic security."
+        "explanation": "Note the difference between classical Euclidean GCD problem (which Euclid showed is easy to compute exactly for two integers) from the approximate GCD problem, where p is only an approximate common factor of x 1 and x 2 , each offset by a small unknown noise term (s 1 , s 2 ).To the best of our knowledge, computing p efficiently in this approximate setting remains hard even when given arbitrarily many samples x i = s i + p·q i rather than just two, provided the bit-lengths of s i , p, and q i are chosen appropriately (λ, λ², λ ⁵ bits respectively). Option a incorrectly conflates the easy exact-GCD problem with the hard approximate-GCD problem. Likewise option c is incorrect since the modulo-2 of p does not play a role in the hardness of the problem. Option d is incorrect because s 1 and s 2 are unknown noise terms hidden inside x 1 and x 2 , not values that can simply be subtracted out without already knowing p."
       },
       {
         "id": "W1_Q9",
         "week": 1,
-        "header": "Q9 — Classification of Homomorphic Encryption Schemes",
-        "question": "Which pairings are correct, based on the number of operations supported?",
+        "header": "Q9 — LWE Error Distribution & Ring Choice",
+        "question": "According to the classification of homomorphic encryption schemes based on the operations they support, which of the following pairings are correct? Select all that apply.",
         "options": [
           {
             "key": "a",
@@ -257,13 +257,13 @@ window.QUIZ_DATA = [
           "b",
           "c"
         ],
-        "explanation": "Somewhat HE allows 1 multiplication and unlimited additions; Leveled HE allows a fixed L multiplications and unlimited additions; Fully HE (FHE) allows unlimited additions and multiplications."
+        "explanation": "Somewhat homomorphic schemes permit infinite additions (since noise grows only additively/doubles) but are limited to exactly one multiplication, because multiplication causes noise quadratically rather than linearly. Leveled homomorphic schemes extend this by supporting infinite additions and a bounded, predetermined number L of multiplications, offering more flexibility at the cost of needing to fix L in advance. Fully homomorphic schemes are the strongest category, supporting infinite additions and infinite multiplications, achieved through the bootstrapping technique introduced later in the lecture. Option d inverts the actual definition and is incorrect."
       },
       {
         "id": "W1_Q10",
         "week": 1,
-        "header": "Q10 — Bootstrapping Analogy (Glove Boxes)",
-        "question": "In the \"defective glove box\" analogy, what does placing box B1 inside box B2 (which holds B1's key) and opening B1 represent, in actual bootstrapping?",
+        "header": "Q10 — Search LWE vs Decisional LWE",
+        "question": "In the \"defective glove box\" analogy for error growth, what does placing box B 1 inside box B 2 (which holds the key to B 1 ) and then opening B 1 represent in the actual bootstrapping procedure?",
         "options": [
           {
             "key": "a",
@@ -279,19 +279,19 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Generating a new public key pair for the next round of encryption."
+            "text": "Generating a new public key pair for the next round of encryption"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "In the glove box analogy, evaluating the decryption circuit on an encrypted secret key and noisy ciphertext homomorphically cleans the ciphertext, producing a refreshed ciphertext with smaller noise."
+        "explanation": "In the analogy, box B 1 's gloves \"stiffen\" after limited use, representing a ciphertext accumulating noise until it can no longer support further homomorphic operations. Rather than discarding the work, Alice places B 1 inside a second box B 2 that holds the key to B 1 , and B 1 is opened and processed further inside B 2 . The residue of B 1 's operation continues under B 2 's protection. This directly mirrors the formal bootstrapping procedure. This is not discarding the computation (ruling out Option a) since it explicitly preserves the \"residue\" of the prior operation. It does not reveal the plaintext to the owner, since the entire point is that the worker (analogous to the untrusted server) never sees inside the box (ruling out Option b). It also does not involve generating an entirely new keypair for future encryptions in the everyday sense (ruling out Option d)."
       },
       {
         "id": "W1_Q11",
         "week": 1,
-        "header": "Q11 — The Obstacle to Full Bootstrappability",
-        "question": "Even after bootstrapping computes an encryption of m1+m2, the scheme is \"almost, but not quite\" bootstrappable. What's the technical obstacle?",
+        "header": "Q11 — LWE Encryption Scheme Operations",
+        "question": "Even after the recryption/bootstrapping procedure computes an encryption of m 1 + m 2 under a new public key, the scheme is \"almost, but not quite\" bootstrappable. What specific technical obstacle prevents full bootstrappability at that point?",
         "options": [
           {
             "key": "a",
@@ -303,7 +303,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "Addition can't be performed on ciphertexts encrypted under different public keys"
+            "text": "The addition operation cannot be performed on ciphertexts encrypted under different public keys"
           },
           {
             "key": "d",
@@ -313,21 +313,21 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "Computing [c/p] mod 2 during decryption requires evaluating rounding/division homomorphically, which introduces high circuit complexity and decryption noise error."
+        "explanation": "Decryption in this scheme is computed as m = c - (p · [c/p]) mod 2, where [c/p] denotes c/p rounded to the nearest integer. For bootstrapping to work, this entire decryption function must itself be evaluated homomorphically on encrypted inputs, but computing [c/p] mod 2 is more complex than what the evaluation function can absorb without introducing a decryption error. This is because multiplying c by 1/p effectively means multiplying two log-p bit integers, and every output bit becomes a log-p bit polynomial of the input bits, which is too high-degree for the noise budget to support."
       },
       {
         "id": "W1_Q12",
         "week": 1,
-        "header": "Q12 — Sparse Subset-Sum Fix (Security/Performance Trade-off)",
-        "question": "Regarding the bootstrappable scheme (which uses sparse subset sums r1,...,rβ to approximate 1/p), which statements are accurate?",
+        "header": "Q12 — LWE Homomorphic Addition & Decryption Condition",
+        "question": "Regarding the security and performance trade-offs of the bootstrappable scheme (using sparse subset sums r 1 ,...,r β to approximate 1/p), which of the following statements are accurate?",
         "options": [
           {
             "key": "a",
-            "text": "Security relies on the hardness of the sparse subset-sum problem (SSSP), which has β^α possible secret subsets to search over"
+            "text": "Security relies on the hardness of the sparse subset-sum problem (SSSP), which has β α possible secret subsets to search over"
           },
           {
             "key": "b",
-            "text": "β can be chosen large enough (polynomial in the security parameter λ) that an exponential number of subsets are close to 1/p, making subset-recovery attacks infeasible"
+            "text": "The parameter β can be chosen large enough (polynomial in the security parameter λ) that an exponential number of subsets are close to 1/p, making subset-recovery attacks infeasible"
           },
           {
             "key": "c",
@@ -343,13 +343,13 @@ window.QUIZ_DATA = [
           "b",
           "d"
         ],
-        "explanation": "Bootstrapping uses the Sparse Subset-Sum Problem (SSSP) where β^α subsets exist. β must be polynomial in security parameter λ, and the public key includes a hint of secret key p."
+        "explanation": "The lecture explains that after augmenting the public key with sparse real-number hints r 1 , ..., r β (chosen so some sparse subset S sums to approximately 1/p mod 2), security depends on the hardness of the sparse subset-sum problem, which requires searching among β α possible secret subsets, confirming statement in Option a. To keep this attack infeasible, note that β can be chosen polynomial in the security margin α = λ (specifically β = α ⁵ polylog( λ)) while still yielding an exponential number of subsets whose sum is close to 1/p, thwarting realistic attacks, confirming statement in Option b. Also note that the encryption key contains a hint of the secret key p, and this hint (via the sparse structure of S) is precisely what allows the new decryption function to be computed by a low-degree circuit, since S is sparse, thereby confirming statement Option d. However, statement in Option c is a direct contradiction, since the approach described in the question makes the scheme impractical."
       },
       {
         "id": "W1_Q13",
         "week": 1,
-        "header": "Q13 — Lattices: Definition",
-        "question": "What is used to describe a lattice compactly, and what shape do the connected lattice points form?",
+        "header": "Q13 — Short Integer Solution (SIS) Problem",
+        "question": "In the definition of a lattice, what is used to describe/represent a lattice compactly, and what geometric shape do the lattice points form when connected?",
         "options": [
           {
             "key": "a",
@@ -371,13 +371,13 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "Lattices are discrete grid structures generated by basis vectors spanning a parallelogram. Connecting neighboring points forms congruent parallelograms in n-dimensional space."
+        "explanation": "Lattices are defined as a regular array of points in space, wherein connecting the dots (lattice points) forms parallelograms. A lattice may be described by giving basis vectors that span such a parallelogram, meaning a small set of vectors (the basis) can generate the entire infinite regular point structure through integer linear combinations. Option a is incorrect since a single point cannot generate a full lattice through any covered mechanism, and lattices are not circular structures. Option c incorrectly introduces \"prime modulus,\" not playing a role in the geometric definition of a lattice, and triangular tiling is not how lattice points are geometrically defined. Option d is likewise incorrect."
       },
       {
         "id": "W1_Q14",
         "week": 1,
-        "header": "Q14 — Closest Vector Problem (CVP)",
-        "question": "Given a lattice L with a known basis, and a point P that's not necessarily a lattice point, what is the CVP challenge?",
+        "header": "Q14 — Tor Onion Routing Threat Model",
+        "question": "Referring to the Closest Vector Problem (CVP) using a lattice L with a known basis and a point P that is not necessarily a lattice point, what is the CVP challenge?",
         "options": [
           {
             "key": "a",
@@ -393,27 +393,27 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Compute the greatest common divisor of the coordinates of P​"
+            "text": "Compute the greatest common divisor of the coordinates of P"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "Closest Vector Problem (CVP): Given a target point P in space, CVP asks to find the closest lattice point Q to P."
+        "explanation": "This is the definitional framing of the CVP challenge: given a known basis for lattice L and an arbitrary point P (which may not itself be a lattice point), the \"Challenge\" is to find the lattice point Q that is closest to P. This is distinct from finding the basis itself (Option a), which is a separate concern. It is also more than simply testing exact membership (option b). Option d is unrelated; GCD computation does not belong to the lattice-based CVP framework."
       },
       {
         "id": "W1_Q15",
         "week": 1,
-        "header": "Q15 — LWE: Structure and Hardness",
-        "question": "Which statements accurately describe the Learning with Errors (LWE) problem?",
+        "header": "Q15 — Tor Onion Routing Multi-Layer Encryption",
+        "question": "Regarding the Learning with Errors (LWE) problem, which of the following statements accurately describe its structure and hardness guarantees?",
         "options": [
           {
             "key": "a",
-            "text": "In the search variant, the goal is to find the secret vector s by observing many pairs (ai, bi) where bi = ⟨s, ai⟩ + ei (mod q)"
+            "text": "In the search variant, the goal is to find the secret vector s by observing many pairs (a i , b i ) where b i = ⟨ s , a i ⟩ + e i (mod q)"
           },
           {
             "key": "b",
-            "text": "In the decisional variant, the goal is to distinguish LWE samples (ai, bi) from uniformly random samples"
+            "text": "In the decisional variant, the goal is to distinguish LWE samples (a i , b i ) from uniformly random samples"
           },
           {
             "key": "c",
@@ -421,7 +421,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "The error terms ei must always be large relative to q for LWE to remain secure"
+            "text": "The error terms e i must always be large relative to q for LWE to remain secure"
           }
         ],
         "correct": [
@@ -429,13 +429,13 @@ window.QUIZ_DATA = [
           "b",
           "c"
         ],
-        "explanation": "Learning with Errors (LWE) search variant finds secret vector s; decisional variant distinguishes LWE samples from uniform random; and Regev/Peikert proved LWE is as hard as worst-case lattice problems."
+        "explanation": "We have discussed two variants of the LWE problem: the search variant, where the objective is to recover the secret s by observing the input-output pairs ( a i , b i ), with b i = ⟨ s , a i ⟩ + e i (mod q) and e i being short (confirming Option a); and the decisional variant, where the objective is instead to distinguish genuine LWE samples from uniformly random pairs in the same space (confirming Option b). The foundational hardness result of LWE, attributed to Regev (2005) and Peikert (2009), is that LWE is as hard as certain worst-case lattice problems in dimension n, provided parameters are chosen properly (confirming Option c). Option d is false, since if the error were too large, correct decryption would fail (as shown in Regev's cryptosystem, where correct decryption requires error less than q/4); large errors do not enhance security in the way described, they would simply break correctness."
       },
       {
         "id": "W1_Q16",
         "week": 1,
-        "header": "Q16 — LWE Homomorphic Multiplication (Tensor Product)",
-        "question": "In the tensor product step (⟨s⊗s, c1⊗c2⟩ ≈ σ1σ2q²/4), what side effect requires a \"dimension reduction\" fix afterward?",
+        "header": "Q16 — Homomorphic Encryption Noise Bottleneck",
+        "question": "In Regev's LWE-based cryptosystem, when performing homomorphic multiplication of two ciphertexts via the tensor product step ( ⟨ s ⊗ s, c1 ⊗ c2 ⟩ ≈ σ1·σ2· q²/4), what critical side effect does the lecture identify as a consequence of this operation, necessitating a second \"dimension reduction\" step?",
         "options": [
           {
             "key": "a",
@@ -457,17 +457,17 @@ window.QUIZ_DATA = [
         "correct": [
           "d"
         ],
-        "explanation": "Homomorphic multiplication of LWE ciphertexts via tensor product (c1 ⊗ c2) squares the dimension of the ciphertext and secret key while causing quadratic noise growth, requiring dimension reduction."
+        "explanation": "Recall the discussion about two consequences of the tensor product step. First, the error grows quadratically (since the resulting error term becomes a product of the two original error-containing quantities, approximately σ1·σ2· q²/4 rather than a linear combination). Second, the dimension squares on multiply, meaning the new secret key s* = (s ⊗ s) and corresponding ciphertext c* = c1 ⊗ c2 live in a much higher-dimensional space than the original. This dimension blow-up is precisely why another step, namely \"Dimension Reduction,\" is needed. Option a is incorrect since the secret key is transformed into a new valid key relative to which the tensor-product ciphertext correctly decrypts (it isn't rendered invalid, just changed in dimension). Option c is likewise false. Option b is also incorrect, since with correct parameters and the key-switching step, the ciphertext remains decryptable, as shown by ⟨ s, c ⟩ ≈ σ· q/2 (mod q) after dimension reduction."
       },
       {
         "id": "W1_Q17",
         "week": 1,
-        "header": "Q17 — LWE vs Ring-LWE Key Size",
-        "question": "For parameters n=4, q=7, standard LWE's public key is 40 elements (120 bits), but Ring-LWE's is only 8 elements (24 bits). What's the structural reason for this reduction?",
+        "header": "Q17 — FHE vs Somewhat Homomorphic Encryption (SWHE)",
+        "question": "Based on the worked out example, for parameters n=4, q=7, the public key size for standard LWE was computed as 40 elements (120 bits), while for Ring-LWE it was computed as only 8 elements (24 bits). What is the primary structural reason for this significant reduction in key size under Ring-LWE?",
         "options": [
           {
             "key": "a",
-            "text": "Ring-LWE replaces the m×n random matrix A and length-m vector b of standard LWE with just two degree-(n-1) polynomials a(x) and b(x), each needing only n coefficients"
+            "text": "Ring-LWE replaces the m×n random matrix A and length-m vector b of standard LWE with just two degree-(n−1) polynomials a(x) and b(x), each requiring only n coefficients"
           },
           {
             "key": "b",
@@ -485,13 +485,13 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "Ring-LWE replaces the m×n matrix A and vector b of standard LWE with degree (n-1) polynomials a(x) and b(x), reducing public key size from 40 elements to just 8 elements."
+        "explanation": "In standard LWE, the public key consists of a full m×n random matrix A (with m=2n=8, n=4, giving 32 elements) plus a length-m vector b (8 elements), totaling 40 elements. In contrast, the Ring-LWE example represents the public key using just two polynomials, a(x) and b(x), each of degree n−1 (so each has only n=4 coefficients), for a total of just 2n=8 elements. This reduction arises because the algebraic ring structure (polynomials modulo x ⁴ +1) allows the entire matrix-vector relationship of standard LWE to be compactly captured by polynomial multiplication, replacing an m×n matrix worth of independent random elements with a single random polynomial of only n coefficients. Option b is incorrect since both examples use the identical modulus q=7. Option c is incorrect since the Ring-LWE example explicitly includes an error polynomial added during computation of b(x), just as standard LWE includes an error vector e. Option d is incorrect since both schemes use a secret key of the same underlying dimension n=4 (as a vector in standard LWE, or equivalently as a degree-(n−1) polynomial with n coefficients in Ring-LWE)."
       },
       {
         "id": "W1_Q18",
         "week": 1,
-        "header": "Q18 — The Torus as an Algebraic Structure",
-        "question": "The Torus 𝕋 = ℝ/ℤ under the operation (𝕋, +) forms:",
+        "header": "Q18 — Public Key Encryption vs Symmetric Key Encryption",
+        "question": "The Torus 𝕋 = ℝ / ℤ under the operation ( 𝕋 , +) forms:",
         "options": [
           {
             "key": "a",
@@ -513,17 +513,17 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "The Torus 𝕋 = ℝ/ℤ under addition forms an abelian group (it is commutative, associative, has identity 0, and inverses mod 1)."
+        "explanation": "Note that ( 𝕋 ,+) forms an abelian group, but it is not a ring because inner products (multiplication) between two Torus elements are not defined. A ring requires two operations that satisfy closure, associativity, and distributivity. But since 𝕋 only has a well-defined addition (with multiplication by integers via the external product, not multiplication between two torus elements), it cannot be classified as a ring, field, or vector space. It only satisfies the group axioms (closure, associativity, identity, inverses) under addition, and is commutative, making \"abelian group\" the precise and correct classification."
       },
       {
         "id": "W1_Q19",
         "week": 1,
-        "header": "Q19 — Discretized Torus Representation",
-        "question": "In the discretized Torus 𝕋q, for practical purposes, torus elements are represented as:",
+        "header": "Q19 — LWE Parameter Growth with Homomorphic Depth",
+        "question": "In the discretized Torus 𝕋 q , for practical implementation purposes, torus elements are represented as:",
         "options": [
           {
             "key": "a",
-            "text": "Elements of ℤ_q²"
+            "text": "Elements of ℤ _q²"
           },
           {
             "key": "b",
@@ -541,17 +541,17 @@ window.QUIZ_DATA = [
         "correct": [
           "d"
         ],
-        "explanation": "In discretized Torus 𝕋q, real values in [0,1) are represented by integer numerators modulo q (elements of ℤq)."
+        "explanation": "For practical reasons, torus elements are not represented as fractions but rather as elements modulo q, meaning only the integer numerator is tracked, since the denominator q is fixed and implicit. This is confirmed by the addition rule: given t = a/q and u = b/q, if v = t + u = c/q, then c ≡ a + b (mod q), so all computations reduce to integer arithmetic modulo q using only the numerators. This design choice is what makes discretized Torus arithmetic efficient in practice, avoiding floating-point or fraction-based representations that would be error-prone in hardware/software implementations."
       },
       {
         "id": "W1_Q20",
         "week": 1,
-        "header": "Q20 — TLWE Ciphertext Construction",
-        "question": "In TLWE, the ciphertext c = (a1,...,an, b) is constructed such that b equals which of the following? (Select all that apply)",
+        "header": "Q20 — PETs Classification & Trade-offs",
+        "question": "In the TLWE (Torus LWE) encryption scheme, the ciphertext c = (a ₁ ,...,a\u0000, b) is constructed such that b equals which of the following? (Select all that apply)",
         "options": [
           {
             "key": "a",
-            "text": "Σsⱼaⱼ − μ + e"
+            "text": "Σ s\u0000a\u0000 − μ + e"
           },
           {
             "key": "b",
@@ -559,7 +559,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "Σsⱼaⱼ + μ + e"
+            "text": "Σ s\u0000a\u0000 + μ + e"
           },
           {
             "key": "d",
@@ -570,93 +570,7 @@ window.QUIZ_DATA = [
           "c",
           "d"
         ],
-        "explanation": "In TLWE, b is constructed as Σ(sj * aj) + μ + e, where s is secret key, a is random vector, μ is plaintext message, and e is Gaussian error noise."
-      },
-      {
-        "id": "W1_Q21",
-        "week": 1,
-        "header": "Q21 — ENISA Definition of PETs",
-        "question": "According to the ENISA definition discussed, PETs are best described as:",
-        "options": [
-          {
-            "key": "a",
-            "text": "Legal frameworks that regulate how governments can access citizen data"
-          },
-          {
-            "key": "b",
-            "text": "Software and hardware solutions comprising technical processes, methods, or knowledge to achieve specific privacy/data protection functionality or protect against privacy risks"
-          },
-          {
-            "key": "c",
-            "text": "Marketing techniques used by companies to advertise their commitment to user privacy"
-          },
-          {
-            "key": "d",
-            "text": "Encryption algorithms exclusively designed for securing financial transactions"
-          }
-        ],
-        "correct": [
-          "b"
-        ],
-        "explanation": "ENISA defines PETs as software and hardware solutions comprising technical processes, methods, or knowledge to achieve specific data protection and privacy functionality."
-      },
-      {
-        "id": "W1_Q22",
-        "week": 1,
-        "header": "Q22 — DPDP Act, 2023 — Rights of Data Principals",
-        "question": "Which of the following are identified in the lecture as core rights granted to individuals (\"Data Principals\") under India's DPDP Act, 2023?",
-        "options": [
-          {
-            "key": "a",
-            "text": "Right to Access Information about data being processed and with whom it is shared"
-          },
-          {
-            "key": "b",
-            "text": "Right to Correction and Erasure of inaccurate or unnecessary data"
-          },
-          {
-            "key": "c",
-            "text": "Right to sell one's personal data directly to third parties for profit"
-          },
-          {
-            "key": "d",
-            "text": "Right to Nominate another person to exercise rights in case of death or incapacity"
-          }
-        ],
-        "correct": [
-          "a",
-          "b",
-          "d"
-        ],
-        "explanation": "India's DPDP Act 2023 grants rights to access data processing info, right to correction/erasure, and right to nominate. Selling personal data is not a recognized right."
-      },
-      {
-        "id": "W1_Q23",
-        "week": 1,
-        "header": "Q23 — Alice and the Workers Analogy (FHE)",
-        "question": "In the \"Alice and the workers\" analogy used to explain Fully Homomorphic Encryption (FHE), what does the \"locked glove box\" represent?",
-        "options": [
-          {
-            "key": "a",
-            "text": "The secret key used for decryption"
-          },
-          {
-            "key": "b",
-            "text": "The final jewelry product, i.e., the decrypted output"
-          },
-          {
-            "key": "c",
-            "text": "The raw materials themselves, i.e., the plaintext"
-          },
-          {
-            "key": "d",
-            "text": "The encryption process that allows computation on data without exposing it, corresponding to the Eval function"
-          }
-        ],
-        "correct": [
-          "d"
-        ],
-        "explanation": "In Alice's glove box analogy, the locked glove box represents the Eval function / encryption container that allows workers to manipulate jewelry (data) without touching plaintext."
+        "explanation": "Note that by definition, b = Σ (j=1...n) s\u0000a\u0000 + μ + e, where s = (s ₁ ,...,s\u0000) ← 𝔹 ⁿ is the secret key, μ ∈ P is the message, and e is sampled noise. Option (c) is a direct restatement of this formula. Option (d) is a correct plain-language paraphrase of the same construction. Option (b) is incorrect because b explicitly depends on s through the inner product term. Option (a) is incorrect because the message μ is added, not subtracted, in the correct formula; subtracting μ would break the decryption process described later (μ* = b − Σ s\u0000a\u0000)."
       }
     ]
   },
@@ -667,12 +581,12 @@ window.QUIZ_DATA = [
       {
         "id": "W2_Q1",
         "week": 2,
-        "header": "Q1. In TGLWE encryption, given two polynomials a, b ∈ TN,q[X], what does a · b represent?",
-        "question": "In TGLWE encryption, given two polynomials a, b ∈ TN,q[X], what does a · b represent?",
+        "header": "Q1 — TGLWE Addition Noise Growth",
+        "question": "In TGLWE encryption, given two polynomials a, b ∈ 𝕋 N,q [X], what does the operation a.b represent?",
         "options": [
           {
             "key": "a",
-            "text": "The external product of a and b"
+            "text": "The external product of a and b modulo (X N + 1 , q)"
           },
           {
             "key": "b",
@@ -680,63 +594,63 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "The addition of a and b"
+            "text": "The addition of a and b modulo (X N + 1 , q)"
           },
           {
             "key": "d",
-            "text": "The convolution of a and b"
+            "text": "The convolution of a and b over ℤ q"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "In TGLWE, multiplication a · b between two torus polynomials a, b ∈ TN,q[X] is not defined because the Torus 𝕋 is a ℤ-module, not a ring."
+        "explanation": "Recall that multiplication between two torus polynomials a, b ∈ 𝕋 N,q [X] is \"not defined.\" Option a describes the external product, but that operation is defined only when one operand comes from ℤ N,q [X] (integer polynomials) and the other from 𝕋 N,q [X] (torus polynomials), not when both are torus elements. Option c describes addition, which is a separate, well-defined operation on 𝕋 N,q [X]. Option d is incorrect since convolution is not the operation being described here."
       },
       {
         "id": "W2_Q2",
         "week": 2,
-        "header": "Q2. Why is TGLWE preferred over TLWE when multiple torus elements need to be encrypted?",
+        "header": "Q2 — TGLWE Homomorphic Subtraction & Scalar Ops",
         "question": "Why is TGLWE preferred over TLWE when multiple torus elements need to be encrypted?",
         "options": [
           {
             "key": "a",
-            "text": "TGLWE produces shorter ciphertexts for a single element"
+            "text": "Because TGLWE produces shorter ciphertexts for a single torus element than TLWE"
           },
           {
             "key": "b",
-            "text": "TLWE cannot encrypt more than one element"
+            "text": "Because TLWE cannot encrypt more than one element under any circumstances"
           },
           {
             "key": "c",
-            "text": "Coefficient packing allows up to N torus elements to be encoded as coefficients of one polynomial plaintext"
+            "text": "Because coefficient packing allows up to N torus elements to be encoded as coefficients of a single polynomial plaintext, making TGLWE more efficient for batches"
           },
           {
             "key": "d",
-            "text": "TGLWE eliminates the private key"
+            "text": "Because TGLWE eliminates the need for a private key when encrypting multiple elements"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "TGLWE enables coefficient packing, allowing up to N torus elements to be packed into the N coefficients of a single polynomial plaintext."
+        "explanation": "For a single torus element, TLWE is preferred since its ciphertext is shorter, which directly contradicts option a. TLWE can technically still encrypt elements one at a time (just less efficiently for batches), so option b is an incorrect statement. Option c matches the \"coefficient packing\" concept: up to N torus elements μ ₀ ,...,μ N-1 can each be represented as a coefficient of a polynomial μ( X) = μ ₀ + μ ₁ X + ... + μ N-1 X N-1 , allowing TGLWE to encrypt many elements at once within a single ciphertext, which is why it's preferred for multiple elements. Option d is false: TGLWE still requires a secret key s just like TLWE."
       },
       {
         "id": "W2_Q3",
         "week": 2,
-        "header": "Q3. Which statements about the Gadget Matrix and G-1 are TRUE?",
-        "question": "Which statements about the Gadget Matrix and G-1 are TRUE?",
+        "header": "Q3 — External Product in TFHE (TGSW x TGLWE)",
+        "question": "Which of the following statements about the Gadget Matrix and its inverse transform G ⁻ ¹ are TRUE? Select all that apply.",
         "options": [
           {
             "key": "a",
-            "text": "G-1(v) replaces each entry by its signed radix-B expansion"
+            "text": "G ⁻ ¹(v) replaces each entry of a vector by its signed radix-B expansion"
           },
           {
             "key": "b",
-            "text": "G-1(v)GT is always exactly equal to v"
+            "text": "G ⁻ ¹(v)·G T is always exactly equal to v for any modulus q, regardless of whether B l = q"
           },
           {
             "key": "c",
-            "text": "Gadget matrix technique helps express TLWE ciphertexts as matrices for ciphertext multiplication"
+            "text": "The gadget matrix technique is used to help express TLWE ciphertexts as matrices to enable ciphertext multiplication (Gentry-Sahai-Waters technique)"
           },
           {
             "key": "d",
@@ -748,227 +662,227 @@ window.QUIZ_DATA = [
           "c",
           "d"
         ],
-        "explanation": "Gadget matrix expansion G^-1(v) uses signed radix-B expansion, helps express TLWE ciphertexts as matrices for multiplication, and controls noise growth via bounded small coefficients."
+        "explanation": "Option a is verbatim from the lecture. Option c matches the discussion on multiplication of ciphertexts, where the GSW technique requires expressing TLWE encryptions as matrices, using the gadget matrix concept. Option d is a straightforward implication of the transform. Option b is false: recall that G ⁻ ¹(v)·G^T ≈ v (an approximation) in general, and it is only exactly equal to v in the special case when B l = q. So this statement is only conditionally true, not always true, making it incorrect as a general claim."
       },
       {
         "id": "W2_Q4",
         "week": 2,
-        "header": "Q4. Given n=1, l=2, B=4, q=64, v = (41/64, 26/64), what is G-1(v)?",
-        "question": "Given n=1, l=2, B=4, q=64, v = (41/64, 26/64), what is G-1(v)?",
+        "header": "Q4 — TGSW Encryption & Gadget Matrix Structure",
+        "question": "In the worked out example with n = 1, l = 2, B = 4, q = 64, for v = (41/64, 26/64) ≡ (−23/64, 26/64) mod 1, what is G ⁻ ¹(v)?",
         "options": [
           {
             "key": "a",
-            "text": "[-6, 7]"
+            "text": "[−1, −2, 1, −2, −1, −2]"
           },
           {
             "key": "b",
-            "text": "[-1, -2, -2, -1]"
+            "text": "[−6, 7]"
           },
           {
             "key": "c",
-            "text": "[40/64, 28/64]"
+            "text": "[−1, −2, −2, −1]"
           },
           {
             "key": "d",
-            "text": "[-1, -2, 1, -2, -1, -2]"
+            "text": "[40/64, 28/64]"
           }
         ],
         "correct": [
-          "b"
+          "c"
         ],
-        "explanation": "Decomposing v = (41/64, 26/64) with B=4, l=2 yields the signed radix-4 digit vector [-1, -2, -2, -1]."
+        "explanation": "With l = 2, computes v ₁ * = round(4²·(−23/64)) = −6 and v ₂ * = round(4²·round(26/64)) = 7. Writing these in signed radix-4 form: −6 = −1·4¹ − 2, and 7 = 1·4² − 2·4¹ − 1 = −2·4¹ − 1 (mod 4²), giving digit expansions (−1, −2) and (−2, −1). Concatenating these gives G ⁻ ¹(v) = [−1, −2, −2, −1], matching option c."
       },
       {
         "id": "W2_Q5",
         "week": 2,
-        "header": "Q5. In TGSW encryption, why is the assumption p = Bl made?",
-        "question": "In TGSW encryption, why is the assumption p = Bl made?",
+        "header": "Q5 — TFHE Blind Rotation & CMux Gate",
+        "question": "In TGSW encryption, why is the assumption p = B l made?",
         "options": [
           {
             "key": "a",
-            "text": "So q must always be a power of 2"
+            "text": "So that the private key s can be reused directly from TLWE"
           },
           {
             "key": "b",
-            "text": "So noise distribution becomes zero"
+            "text": "So that the gadget matrix G, whose elements are 0 or of the form B -j , is defined over p -l ℤ / ℤ = 𝕋 p , matching the plaintext modulus"
           },
           {
             "key": "c",
-            "text": "So the gadget matrix is defined over Tp, matching the plaintext modulus"
+            "text": "So that q must always be a power of 2"
           },
           {
             "key": "d",
-            "text": "So the private key can be reused directly"
+            "text": "So that the noise distribution χ becomes zero"
           }
         ],
         "correct": [
-          "c"
+          "b"
         ],
-        "explanation": "Setting p = B^l ensures the gadget matrix is defined over Tp, matching the plaintext modulus structure."
+        "explanation": "Since all elements of the gadget matrix G are 0 or of the form B -j for 1 ≤ j ≤ l, G is naturally defined over B -l ℤ / ℤ ⊆ 𝕋 q . By setting p = B l , this subgroup becomes exactly p -l ℤ / ℤ = 𝕋 p , aligning the gadget matrix's domain with the plaintext space's torus structure. Option a is incorrect since the private key is independently sampled, not \"reused.\" Option c reverses the logic and is not a consequence of p = B l . Option d is unrelated; noise χ is a separate concept from this structural assumption."
       },
       {
         "id": "W2_Q6",
         "week": 2,
-        "header": "Q6. What is the internal product of two TGSW ciphertexts?",
-        "question": "What is the internal product of two TGSW ciphertexts?",
+        "header": "Q6 — RLWE vs LWE Ciphertext Dimensions",
+        "question": "What is the \"internal product\" of two TGSW ciphertexts C ₁ = TGSW s (m ₁ ) and C ₂ = TGSW s (m ₂ ) ?",
         "options": [
           {
             "key": "a",
-            "text": "C1 + C2"
+            "text": "C ₃ = C ₁ + C ₂"
           },
           {
             "key": "b",
-            "text": "G(C1) · C2"
+            "text": "C ₃ = C ₁ ⊠ C ₂ = G ⁻ ¹(C ₂ ) . C ₁"
           },
           {
             "key": "c",
-            "text": "G-1(C2) · C1"
+            "text": "C ₃ = G(C ₁ ) . C ₂"
           },
           {
             "key": "d",
-            "text": "G-1(c2) · C1, where c2 is TLWE"
+            "text": "C ₃ = C ₁ ⊡ C ₂ = G ⁻ ¹(c ₂ ) . C ₁ , where c ₂ is a TLWE ciphertext"
           }
         ],
         "correct": [
-          "c"
+          "b"
         ],
-        "explanation": "The internal product of two TGSW ciphertexts C1 and C2 is computed as G^-1(C2) · C1."
+        "explanation": "This is by definition: the internal product of two TGSW ciphertexts as C ₃ = C ₁ ⊠ C ₂ = G ⁻ ¹(C ₂ ) . C ₁ , which yields a TGSW encryption of m ₁ × m ₂ (mod p) up to rounding and multiplicative noise."
       },
       {
         "id": "W2_Q7",
         "week": 2,
-        "header": "Q7. Which statements are TRUE regarding TGSW multiplicative noise growth? (MSQ)",
-        "question": "Which statements are TRUE regarding TGSW multiplicative noise growth? (MSQ)",
+        "header": "Q7 — Torus GLWE Arithmetic Properties",
+        "question": "Which of the following are TRUE regarding the error/noise growth in TGSW multiplicative homomorphism? Select all that apply",
         "options": [
           {
             "key": "a",
-            "text": "Multiplicative noise remains constant regardless of multiplications"
+            "text": "The error term in Z ₃ has three components: noise from Z ₁ amplified by G ⁻ ¹(C ₂ ), noise from Z ₂ amplified by m ₁ , and a term from the rounding error ϵ ₂ amplified by m ₁"
           },
           {
             "key": "b",
-            "text": "||G-1(C2)||∞ ≤ B/2, helping control noise"
+            "text": "The multiplicative noise cannot grow and remains constant regardless of the number of multiplications"
           },
           {
             "key": "c",
-            "text": "Error has components from amplified Z1, amplified Z2, and amplified rounding error"
+            "text": "The gadget matrix helps control noise growth because ||G ⁻ ¹(C ₂ )||∞ ≤ B/2"
           },
           {
             "key": "d",
-            "text": "C3 can be written as TGSWs(0) + (m1m2)GT when errors remain small"
+            "text": "C ₃ can be written as TGSW s (0) + (m ₁ m ₂ ).G T , assuming the rounding error and multiplicative noise remain small"
           }
         ],
         "correct": [
-          "b",
+          "a",
           "c",
           "d"
         ],
-        "explanation": "TGSW noise control relies on ||G^-1(C2)||∞ ≤ B/2, error components from amplified noise and rounding, and structural representation TGSWs(0) + (m1*m2)G^T."
+        "explanation": "Option a matches the three error components explicitly: noise in Z ₁ amplified by G ⁻ ¹(C ₂ ), noise in Z ₂ amplified by m ₁ , and the ϵ ₂ term amplified by m ₁ . Option c is directly stated: the gadget matrix bounds ||G ⁻ ¹(C ₂ )||∞ ≤ B/2, which helps control (not eliminate) noise growth. Option d matches the final simplified form under the stated assumption that rounding/multiplicative errors stay small. Option b is false."
       },
       {
         "id": "W2_Q8",
         "week": 2,
-        "header": "Q8. What is the result of the External Product C1 ⊡ c2?",
-        "question": "What is the result of the External Product C1 ⊡ c2?",
+        "header": "Q8 — Torus Discretization & Rounding Errors",
+        "question": "In the External Product of Ciphertexts (C ₁ ⊡ c ₂ = G ⁻ ¹(c ₂ ) . C ₁ , where C ₁ ← TGSW s (m ₁ ) and c ₂ ← TLWE s (μ ₂ )), what is the resulting ciphertext type and what does it encrypt?",
         "options": [
           {
             "key": "a",
-            "text": "TGSW encrypting m1 + μ2"
+            "text": "A TGSW ciphertext encrypting m ₁ + μ ₂"
           },
           {
             "key": "b",
-            "text": "TLWE encrypting m1μ2"
+            "text": "A TLWE ciphertext encrypting μ ₃ = m ₁ . μ ₂"
           },
           {
             "key": "c",
-            "text": "TGSW encrypting m1μ2"
+            "text": "A TGSW ciphertext encrypting m ₁ . μ ₂"
           },
           {
             "key": "d",
-            "text": "TLWE encrypting m1 + μ2"
+            "text": "A TLWE ciphertext encrypting m ₁ + μ ₂"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "The External Product C1 ⊡ c2 between a TGSW ciphertext C1 (encrypting m1) and a TLWE ciphertext c2 (encrypting μ2) outputs a TLWE ciphertext encrypting m1 * μ2."
+        "explanation": "Recall that c ₃ = C ₁ ⊡ c ₂ = G ⁻ ¹(c ₂ ).Z ₁ + m ₁ .G ⁻ ¹(c ₂ ).G T ≈ TLWE s (0) + m ₁ .c ₂ = TLWE s (m ₁ . μ ₂ ), which is a valid TLWE encryption of μ ₃ = m ₁ . μ ₂ (provided the rounding error and multiplicative noise stay small). This operation is specifically designed to take a \"large\" TGSW ciphertext and a \"short\" TLWE ciphertext and produce a short TLWE result, motivated by the fact that \"TLWE ciphertexts are much shorter than TGSW ciphertexts.\""
       },
       {
         "id": "W2_Q9",
         "week": 2,
-        "header": "Q9. For TGLWE ciphertext addition, what condition must hold?",
-        "question": "For TGLWE ciphertext addition, what condition must hold?",
+        "header": "Q9 — TGSW Scalar Multiplication",
+        "question": "When extending TGLWE encryption's addition of ciphertexts, if c ₁ = TGLWE s (μ ₁ ) = (a ₁ ,...,a k , b) and c ₂ = TGLWE s (μ ₂ ) = (a ₁ ',...,a k ', b'), what condition must hold for c ₃ = c ₁ + c ₂ to be a valid encryption of μ ₃ = μ ₁ + μ ₂ ?",
         "options": [
           {
             "key": "a",
-            "text": "N = 1"
+            "text": "The noise e ₃ = e ₁ + e ₂ must be small"
           },
           {
             "key": "b",
-            "text": "Reduction modulo XN - 1"
+            "text": "The keys s used for both ciphertexts must be different"
           },
           {
             "key": "c",
-            "text": "Keys must be different"
+            "text": "N must equal 1 for addition to work"
           },
           {
             "key": "d",
-            "text": "e3 = e1 + e2 must be small"
+            "text": "The polynomials must be reduced modulo X N − 1 instead of X N + 1"
           }
         ],
         "correct": [
-          "d"
+          "a"
         ],
-        "explanation": "Addition of TGLWE ciphertexts is valid when error e3 = e1 + e2 remains small enough not to cross the noise threshold."
+        "explanation": "Note that the addition of ciphertexts is that c ₃ = c ₁ + c ₂ = (a ₁ +a ₁ ',...,a k +a k ', b+b') is a valid encryption of μ ₃ = μ ₁ + μ ₂ provided that the error e ₃ = e ₁ + e ₂ is small, mirroring the analogous condition in TLWE. Option b is false: both ciphertexts must be encrypted under the same key s for the homomorphic addition to decrypt correctly. Option c is false: addition of ciphertexts works for general N, not just N = 1 (N = 1 is only the special case where TGLWE reduces to TLWE). Option d is false: TGLWE consistently uses modulo X N + 1."
       },
       {
         "id": "W2_Q10",
         "week": 2,
-        "header": "Q10. How is the gadget matrix extended to the TGLWE polynomial setting?",
-        "question": "How is the gadget matrix extended to the TGLWE polynomial setting?",
+        "header": "Q10 — Gadget Matrix Inverse Decomposition G⁻¹",
+        "question": "In extending the gadget matrix to the polynomial setting (TGLWE), how is the gadget matrix G redefined compared to the TLWE/TGSW case?",
         "options": [
           {
             "key": "a",
-            "text": "Defined only for k = 0"
+            "text": "G is defined over ℤ q instead of 𝕋 q"
           },
           {
             "key": "b",
-            "text": "No longer requires B or l"
+            "text": "G is defined over 𝕋 N,q [X], so that G ∈ 𝕋 N,q [X] (k+1)×(k+1)l"
           },
           {
             "key": "c",
-            "text": "Defined over Zq"
+            "text": "G is defined only for k = 0"
           },
           {
             "key": "d",
-            "text": "Defined over TN,q[X]"
+            "text": "G no longer requires the radix B or integer l"
           }
         ],
         "correct": [
-          "d"
+          "b"
         ],
-        "explanation": "For TGLWE, the gadget matrix G is extended to the polynomial setting and defined over TN,q[X]."
+        "explanation": "In the multiplication of ciphertexts, by definition, the gadget matrix G is over 𝕋 N,q [X]. Thus, G ∈ 𝕋 N,q [X] (k+1)×(k+1)l . This extends the earlier scalar-torus gadget matrix (used for TLWE/TGSW) to a matrix of polynomials, following the same structural pattern but with polynomial entries. Option a is incorrect: the matrix remains defined over the torus polynomial ring, not plain integers. Option c is very restrictive. Option d is false: the radix B and integer l (with B l | q) are still required to define g and hence G, exactly as before."
       },
       {
         "id": "W2_Q11",
         "week": 2,
-        "header": "Q11. In the worked TGLWE example, which statements are TRUE? (MSQ)",
-        "question": "In the worked TGLWE example, which statements are TRUE? (MSQ)",
+        "header": "Q11 — Worked Example: G⁻¹(p) Decomposition",
+        "question": "Based on the worked example (k=1, N=2, l=3, B=4, q=256) computing G ⁻ ¹(p) for p = (41/256 + 26/256X, −25/256 + 35/256X), which of the following are TRUE? Select all that apply.",
         "options": [
           {
             "key": "a",
-            "text": "p1* = 10 + 7X"
+            "text": "p ₁ * was computed as round(4³·41/256) + round(4³·26/256)X = 10 + 7X"
           },
           {
             "key": "b",
-            "text": "Digit expansion begins with (1+X, -1-2X, -2-X, ...)"
+            "text": "The digit expansion of p ₁ * = 10 + 7X gives coefficients that are concatenated into G ⁻ ¹(p) as (1+X, −1−2X, −2−X, ...)"
           },
           {
             "key": "c",
-            "text": "G-1(p)GT exactly equals p because Bl = q"
+            "text": "G ⁻ ¹(p)·G T exactly equals p with zero error, since B l = q in this example"
           },
           {
             "key": "d",
-            "text": "Final verification gives approximately (28X + 40)/256"
+            "text": "The final verification shows G ⁻ ¹(p)·G T ≈ (28X+40)/256, which approximates p ₁ = 41/256 + 26/256X"
           }
         ],
         "correct": [
@@ -976,219 +890,219 @@ window.QUIZ_DATA = [
           "b",
           "d"
         ],
-        "explanation": "TGLWE worked example confirms p1* = 10 + 7X, signed digit expansion starting with (1+X, -1-2X, -2-X), and final verification resulting in approximately (28X + 40)/256."
+        "explanation": "Option a is straightforward computation: p ₁ * = round(4³·41/256) + round(4³·26/256)X = 10 + 7X. Option b is correct: the digit decomposition of 10 = 1·4² − 1·4 − 2 and 7 = 1·4² − 2·4 − 1 gives the coefficient vectors (1,−1,−2) and (1,−2,−1) per power of 4, which when combined with the X-terms yields G ⁻ ¹(p) starting with (1+X, −1−2X, −2−X, ...) as shown. Option d matches the final slide, which shows G ⁻ ¹(p)·G T = (28X+40)/256 ≈ p ₁ . Option c is false: here B l = 4³ = 64, while q = 256, so B l ≠ q; thus the approximation G ⁻ ¹(p)·G T ≈ p holds only approximately (as shown by the \"≈\" in the final result), not exactly."
       },
       {
         "id": "W2_Q12",
         "week": 2,
-        "header": "Q12. What is the key structural difference between TLWE/TGSW and TGLWE G-1?",
-        "question": "What is the key structural difference between TLWE/TGSW and TGLWE G-1?",
+        "header": "Q12 — TGSW External Product Noise Bound",
+        "question": "What is the key structural difference between the TLWE/TGSW gadget matrix and its TGLWE polynomial extension, in terms of what the inverse transform G ⁻ ¹ operates on?",
         "options": [
           {
             "key": "a",
-            "text": "TGLWE G-1 is not needed"
+            "text": "G ⁻ ¹ in TGLWE flattens a vector of (k+1) polynomials into a vector of (k+1)l polynomials in ℤ N [X] with small coefficients, whereas in TLWE it flattens scalar torus elements into small integers"
           },
           {
             "key": "b",
-            "text": "TGLWE flattens (k+1) polynomials into (k+1)l small-coefficient polynomials, while TLWE flattens scalar torus elements into small integers"
+            "text": "G ⁻ ¹ in TGLWE only works when all polynomial coefficients are zero"
           },
           {
             "key": "c",
-            "text": "TGLWE works only with zero coefficients"
+            "text": "G ⁻ ¹ is not needed in TGLWE since polynomials cannot be decomposed"
           },
           {
             "key": "d",
-            "text": "TGLWE produces unbounded coefficients"
+            "text": "G ⁻ ¹ in TGLWE produces coefficients unbounded in magnitude, unlike TLWE"
           }
         ],
         "correct": [
-          "b"
+          "a"
         ],
-        "explanation": "TLWE flattens scalar torus elements into small integers, whereas TGLWE flattens (k+1) polynomials into (k+1)l small-coefficient polynomials."
+        "explanation": "By definition, the corresponding inverse transformation G ⁻ ¹ flattens a vector of (k+1) polynomials to a vector of (k+1)l polynomials of ℤ N [X] with small coefficients in the range [−round(B/2), round(B/2)). This directly parallels the TLWE case, where G ⁻ ¹ flattens a vector of scalar torus elements into a vector of small integers via signed radix-B expansion. Option b and c are contradicted by the worked example, which decomposes nonzero polynomials. Option d is false: the whole point of the gadget decomposition is that G ⁻ ¹'s output coefficients are bounded (within [−round(B/2), round(B/2))), keeping the decomposition \"small,\" just as in the non-polynomial case."
       },
       {
         "id": "W2_Q13",
         "week": 2,
-        "header": "Q13. What is the purpose of CMUX in TFHE?",
-        "question": "What is the purpose of CMUX in TFHE?",
+        "header": "Q13 — CMux Gate Truth Table & Selection",
+        "question": "What is the purpose of the CMUX (Controlled Multiplexer) operation in TFHE?",
         "options": [
           {
             "key": "a",
-            "text": "Removes all noise without bootstrapping"
+            "text": "It always outputs the sum of two encrypted messages irrespective of the control bit."
           },
           {
             "key": "b",
-            "text": "Converts TLWE into TGSW"
+            "text": "It homomorphically selects between two encrypted messages based on an encrypted control bit."
           },
           {
             "key": "c",
-            "text": "Homomorphically selects between two encrypted messages based on an encrypted control bit"
+            "text": "It converts a TLWE ciphertext into a TGGSW ciphertext."
           },
           {
             "key": "d",
-            "text": "Always outputs the sum of two encrypted messages"
+            "text": "It removes all noise from a ciphertext without using bootstrapping."
           }
         ],
         "correct": [
-          "c"
+          "b"
         ],
-        "explanation": "CMUX (Controlled Multiplexer) homomorphically selects between two encrypted inputs based on an encrypted control bit: CMUX(C, c0, c1) = c0 + C ⊡ (c1 - c0)."
+        "explanation": "The primary application of the external product in TFHE is the controlled multiplexer (CMUX). Given two TGLWE encryptions of plaintexts μ ₀ and μ ₁ and a TGGSW encryption of a control bit b ∈ {0,1}, the operation decrypts to μ b . Thus, if b = 0, the output is μ ₀ , and if b = 1, the output is μ ₁ . Option (a) is incorrect because CMUX performs selection, not addition. Option (c) is false because no ciphertext conversion takes place. Option (d) is incorrect since CMUX itself is not a bootstrapping or noise-removal operation."
       },
       {
         "id": "W2_Q14",
         "week": 2,
-        "header": "Q14. Why does programmable bootstrapping introduce polynomials into decryption? (MSQ)",
-        "question": "Why does programmable bootstrapping introduce polynomials into decryption? (MSQ)",
+        "header": "Q14 — Blind Rotation Look-Up Table (LUT)",
+        "question": "Which of the following statements correctly describe why programmable bootstrapping introduces polynomials into the decryption process?",
         "options": [
           {
             "key": "a",
-            "text": "Polynomials encode the rounding function through their coefficients"
+            "text": "The linear computation of the noisy plaintext is straightforward to evaluate homomorphically."
           },
           {
             "key": "b",
-            "text": "It eliminates the need for decryption altogether"
+            "text": "The rounding step of decryption is difficult to evaluate homomorphically."
           },
           {
             "key": "c",
-            "text": "Linear computation of noisy plaintext is straightforward homomorphically"
+            "text": "Polynomials provide a mechanism to encode the rounding function through their coefficients."
           },
           {
             "key": "d",
-            "text": "Rounding is difficult to evaluate homomorphically"
+            "text": "Programmable bootstrapping eliminates the need for decryption altogether."
           }
         ],
         "correct": [
           "a",
-          "c",
-          "d"
+          "b",
+          "c"
         ],
-        "explanation": "Programmable bootstrapping uses polynomials because polynomials encode lookup tables & rounding functions into coefficients, making non-linear evaluation homomorphic."
+        "explanation": "Programmable bootstrapping separates decryption into two stages: 1. Computing the noisy plaintext, which is a linear operation and therefore easy to evaluate homomorphically. 2. Rounding the noisy plaintext to the nearest valid plaintext, which is nonlinear and difficult to evaluate directly. Recall the specially constructed polynomials whose coefficients encode the rounding function, allowing the desired rounded value to appear as the constant coefficient after an appropriate monomial rotation. Option (d) is incorrect because programmable bootstrapping still performs decryption conceptually; it merely evaluates it homomorphically"
       },
       {
         "id": "W2_Q15",
         "week": 2,
-        "header": "Q15. Why is the exponent in blind rotation rescaled from modulo q to modulo 2N?",
+        "header": "Q15 — Sample Extraction: RLWE to LWE",
         "question": "Why is the exponent in blind rotation rescaled from modulo q to modulo 2N?",
         "options": [
           {
             "key": "a",
-            "text": "To eliminate all approximation errors"
+            "text": "Because TGLWE ciphertexts can only represent exponents modulo N."
           },
           {
             "key": "b",
-            "text": "Because multiplication is modulo XN + 1, where X has order 2N"
+            "text": "To eliminate all approximation errors introduced during bootstrapping."
           },
           {
             "key": "c",
-            "text": "To reduce polynomial degree from N to q"
+            "text": "Because polynomial multiplication is performed modulo X N +1, where X has order 2N, making exponent arithmetic naturally occur modulo 2N."
           },
           {
             "key": "d",
-            "text": "TGLWE only represents exponents modulo N"
+            "text": "To reduce the polynomial degree from N to q."
           }
         ],
         "correct": [
-          "b"
+          "c"
         ],
-        "explanation": "In blind rotation, polynomial multiplication is performed modulo X^N + 1, where X has order 2N, requiring the exponent to be rescaled to modulo 2N."
+        "explanation": "Blind rotation performs polynomial multiplication in the ring Z[X] / (X N + 1) where X 2N = 1. Consequently, monomial exponents are interpreted modulo 2N. Therefore, the decryption exponent is rescaled from modulo q to modulo 2N before the blind rotation is carried out. This enables the exponent to correspond correctly to polynomial rotations. Option (b) is false because the lecture explicitly notes that this rescaling introduces an additional approximation error. Options (a) and (d) do not describe the mathematical reason for the rescaling."
       },
       {
         "id": "W2_Q16",
         "week": 2,
-        "header": "Q16. Why is the MSB of the rescaled exponent constrained to zero?",
-        "question": "Why is the MSB of the rescaled exponent constrained to zero?",
+        "header": "Q16 — Key Switching in TFHE",
+        "question": "Why is the most significant bit (MSB) of the rescaled exponent constrained to be zero during blind rotation?",
         "options": [
           {
             "key": "a",
-            "text": "To ensure all polynomial coefficients become zero"
+            "text": "To ensure every polynomial coefficient becomes zero before multiplication."
           },
           {
             "key": "b",
-            "text": "To guarantee only one bootstrapping key"
+            "text": "To guarantee that only one bootstrapping key is required."
           },
           {
             "key": "c",
-            "text": "To ensure the exponent has at most N distinct values, matching the N coefficients in the test polynomial"
+            "text": "To prevent negative coefficients from appearing in the test polynomial."
           },
           {
             "key": "d",
-            "text": "To prevent negative coefficients"
+            "text": "To ensure the exponent assumes at most N distinct values, matching the N coefficients available in the test polynomial."
           }
         ],
         "correct": [
-          "c"
+          "d"
         ],
-        "explanation": "Constraining the MSB to 0 ensures the exponent has at most N distinct values, matching the N available coefficients in the test polynomial."
+        "explanation": "The test polynomial contains exactly N coefficients, meaning it can encode at most N different values. Since the rescaled exponent is represented modulo 2N, unrestricted values would require twice as many encodable positions. By forcing the most significant bit to zero, the exponent is restricted to only N possible values, allowing every exponent to correspond to one coefficient of the test polynomial. Options (a), (b), and (c) are unrelated to the purpose of this constraint."
       },
       {
         "id": "W2_Q17",
         "week": 2,
-        "header": "Q17. What is the primary purpose of modulus switching in TFHE bootstrapping?",
+        "header": "Q17 — Modulus Switching & Noise Reduction",
         "question": "What is the primary purpose of modulus switching in TFHE bootstrapping?",
         "options": [
           {
             "key": "a",
-            "text": "Converts TGLWE into TLWE"
+            "text": "It converts an LWE ciphertext from a larger modulus to a smaller modulus while proportionally scaling the message and noise."
           },
           {
             "key": "b",
-            "text": "Eliminates noise completely"
+            "text": "It removes the secret key from the ciphertext."
           },
           {
             "key": "c",
-            "text": "Converts LWE ciphertext from a larger modulus to a smaller modulus while proportionally scaling message and noise"
+            "text": "It converts a TGLWE ciphertext into a TLWE ciphertext."
           },
           {
             "key": "d",
-            "text": "Removes the secret key"
+            "text": "It eliminates the ciphertext noise completely."
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "Modulus switching converts an LWE ciphertext from modulus q to a smaller modulus q* by definition. Option (b) is incorrect because the secret key remains unchanged. Option (c) describes coefficient extraction, not modulus switching. Option (d) is false since the noise is scaled rather than removed."
+      },
+      {
+        "id": "W2_Q18",
+        "week": 2,
+        "header": "Q18 — Worked Example: Modulus Switching Modulus Scale",
+        "question": "In the worked example, after switching the ciphertext modulus from 64 to 32 , what is the new scaled message factor Δ*?",
+        "options": [
+          {
+            "key": "a",
+            "text": "2"
+          },
+          {
+            "key": "b",
+            "text": "8"
+          },
+          {
+            "key": "c",
+            "text": "4"
+          },
+          {
+            "key": "d",
+            "text": "16"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "Modulus switching scales down LWE ciphertext from a larger modulus to a smaller modulus while proportionally preserving message phase and scaling noise."
-      },
-      {
-        "id": "W2_Q18",
-        "week": 2,
-        "header": "Q18. After switching ciphertext modulus from 64 to 32, what is the new Δ*?",
-        "question": "After switching ciphertext modulus from 64 to 32, what is the new Δ*?",
-        "options": [
-          {
-            "key": "a",
-            "text": "16"
-          },
-          {
-            "key": "b",
-            "text": "4"
-          },
-          {
-            "key": "c",
-            "text": "2"
-          },
-          {
-            "key": "d",
-            "text": "8"
-          }
-        ],
-        "correct": [
-          "b"
-        ],
-        "explanation": "Switching ciphertext modulus from 64 to 32 scales the plaintext step size Δ* from 8 to 4 (64/32 * original Δ*)."
+        "explanation": "Recall that Δ* = Δ x 32 / 64 = (q / t) x (32 / 64) = 32 / 8 = 4"
       },
       {
         "id": "W2_Q19",
         "week": 2,
-        "header": "Q19. What are the three major stages of TFHE noise bootstrapping? (MSQ)",
-        "question": "What are the three major stages of TFHE noise bootstrapping? (MSQ)",
+        "header": "Q19 — Three Stages of TFHE Bootstrapping",
+        "question": "According to the TFHE noise bootstrapping example, which of the following are the three major stages of the bootstrapping procedure?",
         "options": [
           {
             "key": "a",
-            "text": "Blind Rotation"
+            "text": "Modulus Switching"
           },
           {
             "key": "b",
-            "text": "Key Switching"
+            "text": "Blind Rotation"
           },
           {
             "key": "c",
@@ -1196,43 +1110,43 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Modulus Switching"
+            "text": "Key Switching"
           }
         ],
         "correct": [
           "a",
-          "c",
-          "d"
+          "b",
+          "c"
         ],
-        "explanation": "The three key stages of TFHE noise bootstrapping are Modulus Switching, Blind Rotation, and Sample/Coefficient Extraction."
+        "explanation": "The lecture explicitly divides TFHE noise bootstrapping into three steps: 1. Modulus Switching 2. Blind Rotation 3. Coefficient Extraction Key switching is an important primitive in TFHE but is not one of the three stages in this end-to-end bootstrapping."
       },
       {
         "id": "W2_Q20",
         "week": 2,
-        "header": "Q20. Why does rotating the encrypted lookup polynomial by 4 positions recover m=1m=1?",
-        "question": "Why does rotating the encrypted lookup polynomial by 4 positions recover m=1m=1?",
+        "header": "Q20 — Blind Rotation Phase Accumulator",
+        "question": "During the blind rotation example, why does rotating the encrypted lookup polynomial by 4 positions recover the plaintext m=1?",
         "options": [
           {
             "key": "a",
-            "text": "Secret key is cancelled"
+            "text": "Because every rotation always places the plaintext in the constant coefficient."
           },
           {
             "key": "b",
-            "text": "Every rotation places plaintext in constant coefficient"
+            "text": "Because the computed rotation amount equals Δ* . m + e* = 4, and the lookup table is constructed so that the constant coefficient after a rotation of 4 equals v 4 = 1 =m."
           },
           {
             "key": "c",
-            "text": "Coefficient extraction automatically changes the coefficient to the message"
+            "text": "Because the secret key is cancelled during the rotation."
           },
           {
             "key": "d",
-            "text": "Rotation amount is Δ*m + e* = 4, and the lookup table has v4 = 1 = m"
+            "text": "Because coefficient extraction automatically changes every constant coefficient to the message."
           }
         ],
         "correct": [
-          "d"
+          "b"
         ],
-        "explanation": "Rotating by 4 positions shifts coefficient v4 = 1 = m into the constant position, evaluating the target function at input m=1."
+        "explanation": "After modulus switching, the blind rotation computes the rotation amount: b* - Σ i a i * s i = Δ* . m + e* = 4. The encrypted lookup polynomial is then rotated 4 positions, causing the coefficient v 4 to become the constant term. Since the lookup table is designed so that v 4 = 1, the constant coefficient corresponds to the original plaintext m=1."
       }
     ]
   },
@@ -1243,108 +1157,108 @@ window.QUIZ_DATA = [
       {
         "id": "W3_Q1",
         "week": 3,
-        "header": "Q1. Why is fixed-point arithmetic preferred over floating-point arithmetic in CKKS?",
-        "question": "Why is fixed-point arithmetic preferred over floating-point arithmetic in CKKS?",
+        "header": "Q1 — CKKS Fixed-Point vs Floating-Point Arithmetic",
+        "question": "In CKKS, why is fixed-point arithmetic preferred over floating-point arithmetic for homomorphic computation?",
         "options": [
           {
             "key": "a",
-            "text": "It removes the need for encryption"
+            "text": "Because fixed-point numbers require fewer bits to represent than floating-point numbers"
           },
           {
             "key": "b",
-            "text": "The scaling factor remains fixed"
+            "text": "Because the scaling factor stays the same for all values of a type and does not change during the entire computation"
           },
           {
             "key": "c",
-            "text": "It eliminates noise completely"
+            "text": "Because fixed-point arithmetic eliminates approximation error entirely"
           },
           {
             "key": "d",
-            "text": "It allows exact recovery of all values"
+            "text": "Because floating-point arithmetic cannot represent negative numbers"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "CKKS uses fixed-point arithmetic so the scaling factor Δ remains fixed across operations, avoiding dynamic floating-point exponent management."
+        "explanation": "Recall that in IEEE-754 floating-point representation, the scaling factor (the exponent of the base) can shift with every operation, whereas in fixed-point representation, the scaling factor is fixed for all values of the same type and stays constant throughout the computation. This consistency is precisely what makes fixed-point arithmetic more suitable for homomorphic encryption, since ciphertexts must be combined predictably without needing to track a changing exponent."
       },
       {
         "id": "W3_Q2",
         "week": 3,
-        "header": "Q2. What does the canonical embedding σ do?",
-        "question": "What does the canonical embedding σ do?",
+        "header": "Q2 — Canonical Embedding σ in CKKS Decoding",
+        "question": "What does the canonical embedding σ do in the CKKS decoding step?",
         "options": [
           {
             "key": "a",
-            "text": "Converts ciphertext directly into plaintext"
+            "text": "It encrypts the plaintext polynomial using the public key"
           },
           {
             "key": "b",
-            "text": "Converts complex values into integers"
+            "text": "It maps a vector z ∈ ℂᴺ to a polynomial m(X) by interpolation"
           },
           {
             "key": "c",
-            "text": "Evaluates a polynomial at the roots of Φ2N(X) = XN + 1"
+            "text": "It evaluates the polynomial m(X) at the N roots of the cyclotomic polynomial Φ2N(X) = Xᴺ + 1, producing the vector z"
           },
           {
             "key": "d",
-            "text": "Removes the encryption noise"
+            "text": "It rescales the ciphertext by dividing out the scaling factor"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "The canonical embedding σ evaluates a polynomial p(X) at the 2N-th roots of unity, which are the roots of Φ2N(X) = X^N + 1."
+        "explanation": "Decoding in CKKS is defined via the canonical embedding σ: ℂ[X]/(Xᴺ+1) → ℂᴺ, which evaluates a polynomial m(X) at the N roots of Φ2N(X) = Xᴺ + 1. These roots are the odd powers of ξ = e^(2iπ/2N) (i.e., ξ, ξ³, …, ξ^(2N−1)). This gives the decoded vector z = σ(m) = (m(ξ), m(ξ³), …, m(ξ^(2N−1))), and σ is an isomorphism, so this correspondence is unique in both directions."
       },
       {
         "id": "W3_Q3",
         "week": 3,
-        "header": "Q3. For Aα = z, how can α be obtained when A is a Vandermonde/DFT matrix?",
-        "question": "For Aα = z, how can α be obtained when A is a Vandermonde/DFT matrix?",
+        "header": "Q3 — Vandermonde DFT Matrix Inversion in CKKS",
+        "question": "To encode a target vector z into a polynomial m(X), recall that the unknown coefficient vector α must satisfy Aα = z, where A is the Vandermonde matrix built from powers of ξ. How is α actually computed in the worked example (N = 4)?",
         "options": [
           {
             "key": "a",
-            "text": "α = Az"
+            "text": "By directly inverting A using Gaussian elimination on the full N×N matrix"
           },
           {
             "key": "b",
-            "text": "α = ATz"
+            "text": "By using α = A⁻¹z, where A⁻¹ is computed via the Hermitian (conjugate) transpose, A⁻¹ = (1/N)·A*"
           },
           {
             "key": "c",
-            "text": "α = A-1z, where A-1 = (1/N) A*"
+            "text": "By applying the discrete Fourier transform in the real domain only"
           },
           {
             "key": "d",
-            "text": "α = NAz"
+            "text": "By rounding z directly to the nearest integer polynomial coefficients"
           }
         ],
         "correct": [
-          "c"
+          "b"
         ],
-        "explanation": "For Vandermonde/DFT matrix A, inverse transformation is α = A^-1 z where A^-1 = (1/N) A* (conjugate transpose scaled by 1/N)."
+        "explanation": "Since A is a Vandermonde matrix over roots of unity (thereby being a DFT matrix), it has the special property A·A⁻¹ = I, where A⁻¹ = (1/N)·A* (A* being the complex conjugate/Hermitian transpose of A). This equation is the exact identity used."
       },
       {
         "id": "W3_Q4",
         "week": 3,
-        "header": "Q4. Which statements about the CKKS pipeline are correct?",
-        "question": "Which statements about the CKKS pipeline are correct?",
+        "header": "Q4 — CKKS Message to Ciphertext Pipeline",
+        "question": "Which of the following correctly describes the CKKS pipeline?",
         "options": [
           {
             "key": "a",
-            "text": "Encoding converts the message into plaintext"
+            "text": "Encoding converts a Message into a Plaintext, and Decoding converts a Plaintext back into a Message"
           },
           {
             "key": "b",
-            "text": "Encryption uses the public key"
+            "text": "Encryption uses the public key (pk), while Decryption uses the secret key (sk)"
           },
           {
             "key": "c",
-            "text": "Homomorphic operations are performed directly on the original message"
+            "text": "Homomorphic operations (add, mul, rescale, rotation, etc.) are performed directly on the Message before encoding"
           },
           {
             "key": "d",
-            "text": "Decryption uses the secret key"
+            "text": "A scaling factor is associated with the plaintext at both the encoding and decoding ends of the pipeline"
           }
         ],
         "correct": [
@@ -1352,227 +1266,227 @@ window.QUIZ_DATA = [
           "b",
           "d"
         ],
-        "explanation": "The CKKS pipeline consists of Encoding (message → plaintext polynomial), Encryption (using public key), and Decryption (using secret key)."
+        "explanation": "The pipeline runs Message → (Encoding) → Plaintext → (Encryption, pk/sk) → Ciphertext → Homomorphic operations → Ciphertext → (Decryption, sk) → Plaintext → (Decoding) → Message, so Option a is correct. Also note that Option (b) is definitional. Option (d) is also straightforward."
       },
       {
         "id": "W3_Q5",
         "week": 3,
-        "header": "Q5. Why can the canonical embedding not map the integer polynomial ring directly onto all of CN?",
-        "question": "Why can the canonical embedding not map the integer polynomial ring directly onto all of CN?",
+        "header": "Q5 — Canonical Embedding σ Range & Real Subspace ℋ",
+        "question": "Why can't the canonical embedding σ map ℝ = ℤ[X]/(Xᴺ+1) directly onto all of ℂᴺ when the target vector z is drawn from ℂᴺ?",
         "options": [
           {
             "key": "a",
-            "text": "The image of the integer polynomial ring is countable"
+            "text": "Because σ is not injective, so multiple polynomials could map to the same vector"
           },
           {
             "key": "b",
-            "text": "G-1(v)GT = v is always exact"
+            "text": "Because σ(ℝ) is countable (since ℝ has integer coefficients), while ℋ = {z ∈ ℂᴺ : zⱼ = conj(z₋ⱼ)} is uncountable, so a general element of ℋ need not lie in σ(ℝ)"
           },
           {
             "key": "c",
-            "text": "The complex vector space is uncountable"
+            "text": "Because the roots of Xᴺ+1 are not well-defined over ℂ"
           },
           {
             "key": "d",
-            "text": "A projection onto the appropriate embedded space is needed"
+            "text": "Because σ only works for real-valued vectors, never complex ones"
           }
         ],
         "correct": [
-          "a",
-          "c",
-          "d"
+          "b"
         ],
-        "explanation": "The integer polynomial ring image is countable while C^N is uncountable, requiring projection onto the real-symmetric canonical embedding subspace."
+        "explanation": "Since ℝ requires integer coefficients (so that LWE/RLWE operations work on integer polynomials), the polynomial ring ℝ is countable, and therefore σ(ℝ) is countable too. However, ℋ - the subspace of ℂᴺ satisfying the conjugate-symmetry constraint zⱼ = conj(z₋ⱼ) - is isomorphic to ℝ^N (via an isometric isomorphism), which is uncountable. So an arbitrary element of ℋ is not guaranteed to already sit inside σ(ℝ). This is precisely why a projection step is needed before applying σ⁻¹."
       },
       {
         "id": "W3_Q6",
         "week": 3,
-        "header": "Q6. How many independent complex slots can CKKS provide?",
-        "question": "How many independent complex slots can CKKS provide?",
+        "header": "Q6 — Conjugate Roots & N/2 Slot Packing",
+        "question": "Recall that for any integer polynomial m(X) ∈ ℝ, evaluating at conjugate roots gives m(ξʲ) = conj(m(ξ⁻ʲ)). What is the direct consequence of this property that motivates using a vector of size N/2 for encoding instead of N?",
         "options": [
           {
             "key": "a",
-            "text": "N"
+            "text": "It shows σ is not well-defined for odd N"
           },
           {
             "key": "b",
-            "text": "2N"
+            "text": "It shows the scaling factor Δ must always equal N/2"
           },
           {
             "key": "c",
-            "text": "N - 1"
+            "text": "It proves that integer polynomials cannot be evaluated at complex roots at all"
           },
           {
             "key": "d",
-            "text": "N/2"
+            "text": "Any element of σ(ℝ) is actually constrained to a space of dimension N/2, not N, since the second half of coordinates is fully determined as the conjugate of the first half"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "For degree N polynomial ring X^N + 1, CKKS packs N/2 independent complex numbers into slots due to conjugate symmetry."
+        "explanation": "Because coefficients aᵢ of m(X) are integers (hence real, so conj(aᵢ) = aᵢ), evaluating at a conjugate root ω̄ gives a value that is precisely the conjugate of the value at ω: m(ω̄) = conj(m(ω)). This means half the coordinates of σ(m) are redundant, so σ(ℝ) effectively lives in a space of dimension N/2. Consequently, if a user wants to encode a complex vector of size N/2, it must first be expanded to a full-length vector in ℋ by appending the conjugates of the other half."
       },
       {
         "id": "W3_Q7",
         "week": 3,
-        "header": "Q7. Given n=1, l=2, B=4, q=64, and v = (41/64, 26/64), what is the Gadget decomposition?",
-        "question": "Given n=1, l=2, B=4, q=64, and v = (41/64, 26/64), what is the Gadget decomposition? What is Gadget decomposition?",
+        "header": "Q7 — Coordinate-wise Random Rounding & Scaling Δ",
+        "question": "Which of the following statements correctly describe the \"coordinate-wise random rounding\" technique and the role of the scaling factor Δ in CKKS encoding?",
         "options": [
           {
             "key": "a",
-            "text": "[-1, -2, -2, -1]"
+            "text": "Coordinate-wise random rounding rounds a real number x to either ⌊x⌋ or ⌊x⌋+1, with higher probability assigned to whichever is closer to x"
           },
           {
             "key": "b",
-            "text": "[1, 2, 2, 1]"
+            "text": "The scaling factor Δ is introduced because naive rounding to integers could destroy significant digits of small or precise values"
           },
           {
             "key": "c",
-            "text": "[-2, -1, -1, -2]"
+            "text": "Multiplying by Δ before rounding, then dividing by Δ afterward, allows the encoding to preserve precision up to roughly 1/Δ"
           },
           {
             "key": "d",
-            "text": "[2, 1, 1, 2]"
+            "text": "The scaling factor Δ replaces the need for the canonical embedding σ entirely"
+          }
+        ],
+        "correct": [
+          "a",
+          "b",
+          "c"
+        ],
+        "explanation": "Recall that coordinate-wise random rounding maps a real x to ⌊x⌋ or ⌊x⌋+1 probabilistically, favoring the nearer integer. Also note that this rounding could \"destroy some significant numbers,\" so a scaling factor Δ > 0 is introduced. We have worked out an example (x = 1.4, Δ = 4) showing ⌊Δx⌋ = ⌊5.6⌋ = 6, and dividing back by Δ gives 6/4 = 1.5, a multiple of 1/Δ = 0.25 close to the original 1.4, thereby confirming Option c, since this preserves precision to roughly 1/Δ rather than rounding straight to the nearest integer. Option d is incorrect: Δ works alongside σ (first multiply by Δ, then project onto σ(ℝ), then apply σ⁻¹). It does not replace the canonical embedding, which remains essential to map between ℂᴺ and the polynomial ring."
+      },
+      {
+        "id": "W3_Q8",
+        "week": 3,
+        "header": "Q8 — CKKS Encoding Step Sequence",
+        "question": "According to the final encoding procedure in CKKS, what is the correct order of steps to encode a vector z ∈ ℂ^(N/2) into a polynomial m(X) ∈ ℝ?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Expand z to π⁻¹(z) ∈ ℋ → Multiply by Δ for precision → Project the result onto σ(ℝ) using rounding → Apply σ⁻¹ to get m(X) ∈ ℝ"
+          },
+          {
+            "key": "b",
+            "text": "Project on σ(ℝ) → Expand via π⁻¹ → Multiply by Δ → Apply σ⁻¹"
+          },
+          {
+            "key": "c",
+            "text": "Apply σ⁻¹ directly to z → Multiply by Δ → Round to nearest integer"
+          },
+          {
+            "key": "d",
+            "text": "Multiply z by Δ → Apply σ directly → Expand via π⁻¹"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "Gadget decomposition of v = (41/64, 26/64) with B=4, l=2 yields [-1, -2, -2, -1]."
-      },
-      {
-        "id": "W3_Q8",
-        "week": 3,
-        "header": "Q8. What is the correct order of CKKS encoding?",
-        "question": "What is the correct order of CKKS encoding?",
-        "options": [
-          {
-            "key": "a",
-            "text": "Multiply by Δ → round → expand → project → inverse embedding"
-          },
-          {
-            "key": "b",
-            "text": "Project → expand → multiply by Δ → round → inverse embedding"
-          },
-          {
-            "key": "c",
-            "text": "Expand using π-1 → multiply by Δ → project → round → apply σ-1"
-          },
-          {
-            "key": "d",
-            "text": "Round → multiply by Δ → project → expand → inverse embedding"
-          }
-        ],
-        "correct": [
-          "c"
-        ],
-        "explanation": "CKKS encoding pipeline order: Expand using π^-1 → multiply by Δ → project → round to integer polynomial → apply σ^-1."
+        "explanation": "Recall the final encoding pipeline: take z ∈ ℂ^(N/2), expand it to π⁻¹(z) ∈ ℋ (filling in the conjugate half), multiply by Δ for precision, project the scaled value onto σ(ℝ) using coordinate-wise random rounding, and finally apply σ⁻¹ to obtain m(X) = σ⁻¹([Δ·π⁻¹(z)]_σ(ℝ)) ∈ ℝ."
       },
       {
         "id": "W3_Q9",
         "week": 3,
-        "header": "Q9. For z = [4.3 + 8.1i, 7.5 - 6.7i] with N = 4, what is π-1(z)?",
-        "question": "For z = [4.3 + 8.1i, 7.5 - 6.7i] with N = 4, what is π-1(z)? with N=4N=4, what is π−1(z)\\pi^{-1}(z)?",
+        "header": "Q9 — Worked Example: π⁻¹(z) Vector Expansion",
+        "question": "In the worked example, the vector to be encoded is v = [4.3+8.1i, 7.5−6.7i] ∈ ℂ². Since N = 4, this vector must first be expanded to π⁻¹(z) ∈ ℋ before scaling. What is the correct expansion?",
         "options": [
           {
             "key": "a",
-            "text": "[z1, z2, z1, z2]"
+            "text": "π⁻¹(z) = (4.3+8.1i, 7.5−6.7i, 7.5+6.7i, 4.3−8.1i)"
           },
           {
             "key": "b",
-            "text": "[z1, z2, z̄2, z̄1]"
+            "text": "π⁻¹(z) = (4.3+8.1i, 7.5−6.7i, 4.3−8.1i, 7.5+6.7i)"
           },
           {
             "key": "c",
-            "text": "[z1, z̄1, z2, z̄2]"
+            "text": "π⁻¹(z) = (4.3−8.1i, 7.5+6.7i, 4.3+8.1i, 7.5−6.7i)"
           },
           {
             "key": "d",
-            "text": "[z1, z2, -z2, -z1]"
+            "text": "π⁻¹(z) = (4.3+8.1i, 4.3−8.1i, 7.5−6.7i, 7.5+6.7i)"
           }
         ],
         "correct": [
-          "b"
+          "a"
         ],
-        "explanation": "π^-1(z) expands complex vector z of size N/2 into N roots by appending complex conjugates: [z1, z2, z̄2, z̄1]."
+        "explanation": "Recall the expansion π⁻¹(z) = (z₁, z₂, z̄₂, z̄₁), which appends the conjugates of the two given values in reverse order, so that the result satisfies the conjugate-symmetry condition wⱼ = conj(w₋ⱼ) needed for membership in ℋ. Substituting z₁ = 4.3+8.1i and z₂ = 7.5−6.7i gives π⁻¹(z) = (4.3+8.1i, 7.5−6.7i, 7.5+6.7i, 4.3−8.1i), which matches option a."
       },
       {
         "id": "W3_Q10",
         "week": 3,
-        "header": "Q10. If the CKKS scaling factor is Δ = 10, what approximate precision does it provide?",
-        "question": "If the CKKS scaling factor is Δ = 10, what approximate precision does it provide?",
+        "header": "Q10 — Worked Example: Scaling by Δ and Rounding",
+        "question": "Why does the example choose the scaling factor Δ = 10 before projecting onto σ(ℝ)?",
         "options": [
           {
             "key": "a",
-            "text": "10 decimal digits"
+            "text": "Because Δ must always equal N to keep the polynomial degree consistent"
           },
           {
             "key": "b",
-            "text": "1 decimal digit"
+            "text": "Because a larger Δ guarantees exact recovery of z with zero error"
           },
           {
             "key": "c",
-            "text": "0.01 decimal digits"
+            "text": "Because multiplying by Δ = 10 preserves roughly one decimal digit of precision before the values are rounded to integer coordinates"
           },
           {
             "key": "d",
-            "text": "No precision"
-          }
-        ],
-        "correct": [
-          "b"
-        ],
-        "explanation": "A scaling factor of Δ = 10^1 provides approximately 1 decimal digit of fixed-point precision (Δ = 10^k gives k decimal digits)."
-      },
-      {
-        "id": "W3_Q11",
-        "week": 3,
-        "header": "Q11. Given c0 = 46, c1 = -8.13, c2 = 23, c3 = 1.30, what polynomial is obtained after rounding?",
-        "question": "Given c0 = 46, c1 = -8.13, c2 = 23, c3 = 1.30, what polynomial is obtained after rounding? What polynomial is obtained after rounding?",
-        "options": [
-          {
-            "key": "a",
-            "text": "46 - 8.13X + 23X2 + 1.30X3"
-          },
-          {
-            "key": "b",
-            "text": "46 + 8X + 23X2 + X3"
-          },
-          {
-            "key": "c",
-            "text": "46 - 8X + 23X2 + X3"
-          },
-          {
-            "key": "d",
-            "text": "45 - 9X + 22X2 + 2X3"
+            "text": "Because Δ is fixed by the choice of roots of unity ξ, ξ³, ξ⁵, ξ⁷"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "Rounding coefficients (46, -8.13, 23, 1.30) to nearest integers gives polynomial: 46 - 8X + 23X^2 + X^3."
+        "explanation": "Since the final encoding step rounds the projected coordinates to integers (to land in σ(ℝ), which requires integer polynomial coefficients), scaling by Δ first means that dividing back by Δ afterward recovers values accurate to about 1/Δ = 0.1."
+      },
+      {
+        "id": "W3_Q11",
+        "week": 3,
+        "header": "Q11 — Worked Example: Decoding Matrix Multiplication",
+        "question": "After computing the projection coefficients c₀ = 46, c₁ = −8.13, c₂ = 23, and c₃ = 1.30, it rounds them before applying σ⁻¹. What is the resulting encoded polynomial m(X)?",
+        "options": [
+          {
+            "key": "a",
+            "text": "m(X) = 46 − 8.13X + 23X² + 1.30X³"
+          },
+          {
+            "key": "b",
+            "text": "m(X) = 46 + 8X + 23X² + 1X³"
+          },
+          {
+            "key": "c",
+            "text": "m(X) = 46X − 8X² + 23X³ + 1"
+          },
+          {
+            "key": "d",
+            "text": "m(X) = 46 − 8X + 23X² + 1X³"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Coordinate-wise rounding takes c₀ = 46 🠂 46, c₁ = −8.13 🠂 −8, c₂ = 23 🠂 23, and c₃ = 1.30 🠂 1 (each to its nearest integer). Applying σ⁻¹(u) = c₀·σ⁻¹(b₀) + c₁·σ⁻¹(b₁) + c₂·σ⁻¹(b₂) + c₃·σ⁻¹(b₃), and using σ(Xᵏ) = bₖ, gives m(X) = 46·1 + (−8)·X + 23·X² + 1·X³ = 46 − 8X + 23X² + 1X³, exactly matching option d."
       },
       {
         "id": "W3_Q12",
         "week": 3,
-        "header": "Q12. Which statements about CKKS decoding are correct?",
-        "question": "Which statements about CKKS decoding are correct?",
+        "header": "Q12 — Worked Example: Approximate Decoding Accuracy",
+        "question": "Which of the following statements about the decoding step in the worked example are correct?",
         "options": [
           {
             "key": "a",
-            "text": "The plaintext polynomial is first scaled by Δ-1"
+            "text": "Decoding first computes p(X) = Δ⁻¹m(X), giving p(X) = 2.2 − 0.5X + 1.8X² + 1.1X³"
           },
           {
             "key": "b",
-            "text": "Decoding always recovers the exact original value"
+            "text": "Since N = 4, decoding recovers all 4 slots of σ(p) and averages them pairwise to get the final 2-element vector"
           },
           {
             "key": "c",
-            "text": "The polynomial is evaluated at the appropriate roots"
+            "text": "The decoded vector is obtained by evaluating p(X) at ξ and ξ³ only, since only the first N/2 = 2 slots are kept"
           },
           {
             "key": "d",
-            "text": "The result is approximate because of rounding/noise"
+            "text": "The final decoded vector z' ≈ (1.0686+2.2243i, 3.3314−1.3757i) is close to, but not exactly equal to, the original z = (1.1+2.2i, 3.3−1.4i), due to the earlier rounding step"
           }
         ],
         "correct": [
@@ -1580,232 +1494,233 @@ window.QUIZ_DATA = [
           "c",
           "d"
         ],
-        "explanation": "CKKS decoding scales plaintext by Δ^-1, evaluates polynomial at roots, and yields approximate results due to rounding noise."
+        "explanation": "Only Option b is incorrect: decoding does not average four slots pairwise. It simply discards the redundant conjugate slots and evaluates only at the two roots, ξ and ξ³, which are needed to recover the two original values."
       },
       {
         "id": "W3_Q13",
         "week": 3,
-        "header": "Q13. In CKKS encryption, which expression represents the ciphertext component bb?",
-        "question": "In CKKS encryption, which expression represents the ciphertext component bb?",
+        "header": "Q13 — RLWE Public Key Encryption in CKKS",
+        "question": "In the CKKS encryption step Encrypt_s(μ), what is computed as b, given the random polynomial a = (a₁,...,a_k) and the secret s = (s₁,...,s_k)?",
         "options": [
           {
             "key": "a",
-            "text": "b = ∑ aisi - μ"
+            "text": "b = Σᵢ aᵢ · μ + s̄"
           },
           {
             "key": "b",
-            "text": "b = ∑ aisi + μ̄, where μ̄ = μ + e"
+            "text": "b = μ − Σ aᵢ · sᵢ"
           },
           {
             "key": "c",
-            "text": "b = μ - e"
+            "text": "b = Σᵢ=1,...,k aᵢ · sᵢ + μ̄, where μ̄ = μ + e"
           },
           {
             "key": "d",
-            "text": "b = ∑ ai + μ"
+            "text": "b = Δ · μ̄, where μ̄ is the noisy message"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "The encryption steps given are: choose a random polynomial a = (a₁,...,a_k), compute μ̄ = μ + e (adding a small noise polynomial e), and then compute b = Σᵢ₌₁,...,k aᵢ·sᵢ + μ̄. This matches option c exactly, and the output ciphertext is c = (a₁,...,a_k, b)."
+      },
+      {
+        "id": "W3_Q14",
+        "week": 3,
+        "header": "Q14 — CKKS Approximate Decryption vs Exact Decryption",
+        "question": "In CKKS decryption, the output is described as μ = Δm ∈ ℤ_q[X]/(X^N+1), and the process involves computing ⌈μ̄ / Δ⌋₁/Δ ≈ m. What is the key structural difference this reflects compared to TFHE?",
+        "options": [
+          {
+            "key": "a",
+            "text": "CKKS uses a public key for decryption, while TFHE uses a secret key"
+          },
+          {
+            "key": "b",
+            "text": "Unlike TFHE, each CKKS message value mᵢ is originally a real number with decimal digits rather than an element already lying in the modulus ring, so exact decryption to the original value is not possible"
+          },
+          {
+            "key": "c",
+            "text": "CKKS ciphertexts do not require any noise term e, while TFHE ciphertexts always do"
+          },
+          {
+            "key": "d",
+            "text": "TFHE performs decryption using rounding, while CKKS never requires rounding"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "In CKKS encryption, component b is constructed as b = ∑ a_i s_i + μ̄, where μ̄ = μ + e (plaintext message plus error)."
+        "explanation": "In CKKS, each message value mᵢ is originally not in the modulus ring but is a real number with decimal digits. This is precisely why decryption ends with an approximate rounding step ⌈μ̄ / Δ⌋₁/Δ ≈ m rather than an exact recovery, matching option b."
       },
       {
-        "id": "W3_Q14",
+        "id": "W3_Q15",
         "week": 3,
-        "header": "Q14. What is a fundamental characteristic of CKKS?",
-        "question": "What is a fundamental characteristic of CKKS?",
+        "header": "Q15 — Homomorphic Addition in CKKS",
+        "question": "Consider two encrypted messages c₀ = Encrypt_s(μ₀) and c₁ = Encrypt_s(μ₁), with b₀ = Σaᵢ⁰·sᵢ + μ₀ + e₀ and b₁ = Σaᵢ¹·sᵢ + μ₁ + e₁. Which of the following statements about the homomorphic addition c_add = c₀ + c₁ are correct?",
         "options": [
           {
             "key": "a",
-            "text": "It performs approximate arithmetic on real/complex values"
+            "text": "c_add is computed simply as (a₀+a₁, b₀+b₁)"
           },
           {
             "key": "b",
-            "text": "It always recovers the exact original values"
+            "text": "Decrypting c_add gives exactly μ₀ + μ₁ with no residual error term"
           },
           {
             "key": "c",
-            "text": "It works only with integers"
+            "text": "Decrypting c_add yields b_add − a_add·s = (μ₀+μ₁) + (e₀+e₁), which is approximately μ₀+μ₁ because the noise terms are small"
           },
           {
             "key": "d",
-            "text": "It does not use scaling"
+            "text": "Homomorphic addition requires first performing relinearization, just like multiplication does"
+          }
+        ],
+        "correct": [
+          "a",
+          "c"
+        ],
+        "explanation": "Holds by definition"
+      },
+      {
+        "id": "W3_Q16",
+        "week": 3,
+        "header": "Q16 — Homomorphic Multiplication & Degree Expansion",
+        "question": "Why is relinearization necessary for CKKS homomorphic multiplication?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Because decrypting c_mul = c₀·c₁ produces d₀ + d₁·s + d₂·s², and repeated multiplications cause the number of polynomials representing the ciphertext to grow (3, then 5, then 9, ...), making the ciphertext size grow exponentially and impractical"
+          },
+          {
+            "key": "b",
+            "text": "Because multiplication in CKKS is undefined unless relinearization is applied first"
+          },
+          {
+            "key": "c",
+            "text": "Because relinearization is needed to add the noise term e to the ciphertext before multiplication"
+          },
+          {
+            "key": "d",
+            "text": "Because the public key p = (−A·s+e, A) cannot be computed without relinearization"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "CKKS specifically targets approximate arithmetic over real and complex numbers, making it ideal for machine learning and statistics."
+        "explanation": "Decrypting a single ciphertext product c_mul requires evaluating a degree-2 polynomial in s: Decrypt_s(c_mul) = d₀ + d₁·s + d₂·s². This means that each multiplication increases the degree of the polynomial (in s) needed to decrypt and, correspondingly, the number of polynomial components representing the ciphertext grows (from 3 to 5 to 9, and so on), causing the ciphertext size to grow exponentially and become unusable in practice."
       },
       {
-        "id": "W3_Q15",
+        "id": "W3_Q17",
         "week": 3,
-        "header": "Q15. Which statements about homomorphic addition are correct?",
-        "question": "Which statements about homomorphic addition are correct?",
+        "header": "Q17 — Relinearization & Evaluation Key (evk)",
+        "question": "What is the fundamental problem that relinearization is designed to solve, as stated in CKKS?",
         "options": [
           {
             "key": "a",
-            "text": "cadd = c0 + c1"
+            "text": "The evaluation key evk cannot be made public without compromising the secret key"
           },
           {
             "key": "b",
-            "text": "Decryption approximately gives μ0 + μ1, with combined noise"
+            "text": "The scaling factor Δ grows uncontrollably after each addition operation"
           },
           {
             "key": "c",
-            "text": "Homomorphic addition requires relinearization"
+            "text": "Decrypting c_mul requires computing d₂·s², a degree-2 term in the secret key, which, if left unaddressed, would cause the ciphertext size to grow with every subsequent multiplication"
           },
           {
             "key": "d",
-            "text": "Addition directly modifies the original plaintexts"
+            "text": "The public key p = (a·s+e, a) cannot decrypt ciphertexts produced by homomorphic multiplication"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "Recall that decryption of c_mul requires evaluating d₀ + d₁·s + d₂·s², and if a way could be found to compute d₂·s² using only a degree-1 polynomial (as in regular decryption), ciphertext size would stay constant. This is exactly the essence of relinearization: finding polynomials (d₀', d₁') = Relin(c_mul) such that Decrypt_s(d₀', d₁') = d₀'+d₁'·s equals the original degree-2 expression, avoiding the need for the ciphertext to carry an ever-growing polynomial tuple."
+      },
+      {
+        "id": "W3_Q18",
+        "week": 3,
+        "header": "Q18 — Evaluation Key Decryption & d₂·s² Isolation",
+        "question": "The evaluation key is initially defined as evk = (a₀·s + e₀ + s², a₀). What does applying Decrypt_s to this evk yield, and why is this useful?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Decrypt_s(evk) = s², which directly gives the secret key squared for public distribution"
+          },
+          {
+            "key": "b",
+            "text": "Decrypt_s(evk) = e₀ + s², which is useful because it lets us construct P = d₂·evk so that decrypting P approximately isolates the needed d₂·s² term"
+          },
+          {
+            "key": "c",
+            "text": "Decrypt_s(evk) = a₀·s, which recovers the secret key masked by only a₀"
+          },
+          {
+            "key": "d",
+            "text": "Decrypt_s(evk) = d₀ + d₁·s, matching the regular decryption formula directly"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Recall that we compute Decrypt_s(evk) = e₀ + s² directly from the definition evk = (a₀·s+e₀+s², a₀), since decryption subtracts a₀·s from the first component. Because this result is (approximately) s², multiplying evk by d₂ gives P = d₂·evk, whose decryption is d₂·s² + d₂·e₀, which is close to the target d₂·s² term needed to complete relinearization, matching option b."
+      },
+      {
+        "id": "W3_Q19",
+        "week": 3,
+        "header": "Q19 — Scaling Parameter p in Evaluation Key",
+        "question": "Why is the evaluation key modified to evk = (a₀·s + e₀ + p·s², a₀) mod p·q, introducing a large integer p, rather than using the simpler evk = (a₀·s + e₀ + s², a₀)?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Because decrypting the simple P = d₂·evk gives d₂·s² + d₂·e₀, and since d₂ = c₁·c₁' involves uniformly sampled polynomials, the term d₂·e₀ becomes much larger than the usual small noise, breaking the approximation d₂·s²+d₂·e₀ ≈ d₂·s²"
+          },
+          {
+            "key": "b",
+            "text": "Multiplying by p and later dividing by p (rounding, then reducing mod q) shrinks the noise contribution introduced by the multiplication with d₂ back down to an acceptable size"
+          },
+          {
+            "key": "c",
+            "text": "The parameter p is required so that relinearization can be applied before any multiplication takes place"
+          },
+          {
+            "key": "d",
+            "text": "Introducing p eliminates the need for an evaluation key altogether"
           }
         ],
         "correct": [
           "a",
           "b"
         ],
-        "explanation": "Homomorphic addition adds ciphertexts component-wise (cadd = c0 + c1) and yields μ0 + μ1 with combined noise without requiring relinearization."
-      },
-      {
-        "id": "W3_Q16",
-        "week": 3,
-        "header": "Q16. Why is relinearization required after ciphertext multiplication?",
-        "question": "Why is relinearization required after ciphertext multiplication?",
-        "options": [
-          {
-            "key": "a",
-            "text": "To remove the scaling factor"
-          },
-          {
-            "key": "b",
-            "text": "To convert complex numbers into integers"
-          },
-          {
-            "key": "c",
-            "text": "Because multiplication introduces a higher-degree s2 term"
-          },
-          {
-            "key": "d",
-            "text": "Because addition cannot be performed without it"
-          }
-        ],
-        "correct": [
-          "c"
-        ],
-        "explanation": "Multiplying two ciphertexts produces a degree-2 term in secret key s (d2 * s^2). Relinearization transforms this back into a standard linear ciphertext (c0, c1)."
-      },
-      {
-        "id": "W3_Q17",
-        "week": 3,
-        "header": "Q17. What is the fundamental problematic term created after ciphertext multiplication?",
-        "question": "What is the fundamental problematic term created after ciphertext multiplication?",
-        "options": [
-          {
-            "key": "a",
-            "text": "d0s"
-          },
-          {
-            "key": "b",
-            "text": "d1s"
-          },
-          {
-            "key": "c",
-            "text": "d2s2"
-          },
-          {
-            "key": "d",
-            "text": "d0 + d1"
-          }
-        ],
-        "correct": [
-          "c"
-        ],
-        "explanation": "The quadratic secret key term d2 * s^2 created during ciphertext multiplication must be relinearized back into linear terms."
-      },
-      {
-        "id": "W3_Q18",
-        "week": 3,
-        "header": "Q18. What is the primary purpose of the evaluation key in CKKS?",
-        "question": "What is the primary purpose of the evaluation key in CKKS?",
-        "options": [
-          {
-            "key": "a",
-            "text": "To encode the original message"
-          },
-          {
-            "key": "b",
-            "text": "To perform initial encryption"
-          },
-          {
-            "key": "c",
-            "text": "To help transform/manage the s2 term during relinearization"
-          },
-          {
-            "key": "d",
-            "text": "To eliminate the scaling factor completely"
-          }
-        ],
-        "correct": [
-          "c"
-        ],
-        "explanation": "The evaluation key (evk) encrypts s^2 under secret key s, allowing the evaluator to replace d2 * s^2 homomorphically during relinearization."
-      },
-      {
-        "id": "W3_Q19",
-        "week": 3,
-        "header": "Q19. Why is the evaluation key modified by introducing a large integer pp?",
-        "question": "Why is the evaluation key modified by introducing a large integer pp?",
-        "options": [
-          {
-            "key": "a",
-            "text": "To help control the additional noise/error introduced during relinearization"
-          },
-          {
-            "key": "b",
-            "text": "To remove the s2 term without any computation"
-          },
-          {
-            "key": "c",
-            "text": "To make ciphertexts plaintext"
-          },
-          {
-            "key": "d",
-            "text": "To eliminate the need for a secret key"
-          }
-        ],
-        "correct": [
-          "a"
-        ],
-        "explanation": "Introducing large integer P scales up the evaluation key so that dividing by P during relinearization shrinks the added noise."
+        "explanation": "With the simple evk, note that Decrypt_s(P) = d₂·s² + d₂·e₀ cannot be approximated as d₂·s² because d₂·e₀ is much bigger than the usual noise. This is because d₂ = c₁·c₁' involves polynomials “a” that are uniformly sampled over ℛ_q, making them large compared to small error terms, which confirms Option a. To fix this, the evaluation key is scaled by a large integer p, and after computing P = ⌊p⁻¹·d₂·evk⌉ mod q, the division by p (with rounding) reduces the noise introduced by the multiplication with d₂ back to a manageable size, confirming Option b."
       },
       {
         "id": "W3_Q20",
         "week": 3,
-        "header": "Q20. After multiplying two CKKS ciphertexts with scale Δ\\Delta, the scale becomes approximately Δ2\\Delta^2. What operation brings it back toward the desired scale?",
-        "question": "After multiplying two CKKS ciphertexts with scale Δ\\Delta, the scale becomes approximately Δ2\\Delta^2. What operation brings it back toward the desired scale?",
+        "header": "Q20 — Rescaling Operation in CKKS",
+        "question": "After relinearization keeps ciphertext size constant, there is a remaining issue: RLWE_s(Δ²m₁·m₂) = RLWE_s(Δm₁)·RLWE_s(Δm₂), but we actually require RLWE_s(Δ²m₁·m₂) = RLWE_s(Δm₁·m₂). What operation is introduced in CKKS to resolve this mismatch in scaling factor?",
         "options": [
           {
             "key": "a",
-            "text": "Encoding"
+            "text": "Relinearization, applied a second time"
           },
           {
             "key": "b",
-            "text": "Rescaling"
+            "text": "Rescale"
           },
           {
             "key": "c",
-            "text": "Relinearization"
+            "text": "Bootstrapping"
           },
           {
             "key": "d",
-            "text": "Bootstrapping"
+            "text": "Coordinate-wise random rounding"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "Ciphertext multiplication squares the scale factor from Δ to Δ^2. The Rescaling operation divides by Δ, restoring scale back to Δ."
+        "explanation": "After multiplying two ciphertexts each carrying scaling factor Δ, the product carries scaling factor Δ² (since Δm₁·Δm₂ = Δ²·m₁m₂), but what's actually needed is a ciphertext carrying just Δ·(m₁m₂). This is where rescaling helps."
       }
     ]
   },
@@ -1816,8 +1731,8 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q1",
         "week": 4,
-        "header": "QUESTION 1 [MCQ]",
-        "question": "Why can we not simply divide the ciphertext RLWEs(delta2 · m1 · m2) by delta to obtain RLWEs(delta · m1 · m2)?",
+        "header": "Q1 — Why Naive Bootstrapping Fails in CKKS",
+        "question": "Why can we not simply divide the ciphertext RLWE s (delta 2 · m 1 · m 2 ) by delta to obtain RLWE s (delta · m 1 · m 2 )?",
         "options": [
           {
             "key": "a",
@@ -1829,7 +1744,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "Because m1 and m2 must first be re-encrypted before division is possible"
+            "text": "Because m 1 and m 2 must first be re-encrypted before division is possible"
           },
           {
             "key": "d",
@@ -1839,45 +1754,45 @@ window.QUIZ_DATA = [
         "correct": [
           "d"
         ],
-        "explanation": "As shown with the example mu1 = 26, mu2 = 4, qL = 32, delta = 2: dividing (26 x 4) mod 32 by delta directly gives 20 mod 32, which does not equal 8/2 = 4. Since the ciphertext lives in modular arithmetic, direct division by delta is not well-defined. Instead, scaling the modulus itself (dividing q by delta) works correctly, which is the basis of modulus switching."
+        "explanation": "As shown with the example mu 1 = 26, mu 2 = 4, q L = 32, delta = 2: dividing (26 x 4) mod 32 by delta directly gives 20 mod 32, which does not equal 8/2 = 4. Since the ciphertext lives in modular arithmetic, direct division by delta is not well-defined. Instead, scaling the modulus itself (dividing q by delta) works correctly, which is the basis of modulus switching."
       },
       {
         "id": "W4_Q2",
         "week": 4,
-        "header": "QUESTION 2 [MCQ]",
+        "header": "Q2 — CKKS Modulus Switching & Noise Shrinking",
         "question": "In the modulus switch approach to rescaling, upon each ciphertext-to-ciphertext multiplication, how does the ciphertext modulus change, and what happens once the level reaches 0?",
         "options": [
           {
             "key": "a",
-            "text": "The modulus increases from q0 to q0 · delta(i+1), and further multiplications become more accurate"
+            "text": "The modulus increases from q 0 to q 0 · delta (i+1) , and further multiplications become more accurate"
           },
           {
             "key": "b",
-            "text": "The modulus switches from q0 · deltai to q0 · delta(i-1); once level 0 is reached, no more ciphertext-ciphertext multiplication is possible without bootstrapping"
+            "text": "The modulus switches from q 0 · delta i to q 0 · delta (i-1) ; once level 0 is reached, no more ciphertext-ciphertext multiplication is possible without bootstrapping"
           },
           {
             "key": "c",
-            "text": "The modulus stays fixed at q0 · deltaL throughout all computations"
+            "text": "The modulus stays fixed at q 0 · delta L throughout all computations"
           },
           {
             "key": "d",
-            "text": "The modulus is reset to delta2 after every addition operation"
+            "text": "The modulus is reset to delta 2 after every addition operation"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "Upon each multiplication, the modulus switches from q0 · deltai to q0 · delta(i-1), effectively converting the plaintext's squared scaling factor delta2 back to delta. Once the ciphertext's level reaches 0 (modulus q0), no further ciphertext-ciphertext multiplication can be performed, and a special process called bootstrapping is needed to re-initialize the modulus level to L."
+        "explanation": "Upon each multiplication, the modulus switches from q 0 · delta i to q 0 · delta (i-1) , effectively converting the plaintext's squared scaling factor delta 2 back to delta. Once the ciphertext's level reaches 0 (modulus q0), no further ciphertext-ciphertext multiplication can be performed, and a special process called bootstrapping is needed to re-initialize the modulus level to L."
       },
       {
         "id": "W4_Q3",
         "week": 4,
-        "header": "QUESTION 3 [MCQ]",
+        "header": "Q3 — Scale-Factor Division in CKKS Rescaling",
         "question": "What problem motivates the use of the Chinese Remainder Theorem (CRT) in the CKKS rescaling setup, and how does CRT address it?",
         "options": [
           {
             "key": "a",
-            "text": "deltaL becomes a huge number, making homomorphic operations over modulo deltaL computationally expensive; CRT isomorphically decomposes it into a vector of smaller co-prime moduli (w0, w1, ..., wL) for element-wise computation"
+            "text": "delta L becomes a huge number, making homomorphic operations over modulo delta L computationally expensive; CRT isomorphically decomposes it into a vector of smaller co-prime moduli (w 0 , w 1 , ..., w L ) for element-wise computation"
           },
           {
             "key": "b",
@@ -1895,53 +1810,53 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "Since deltaL is a huge number, performing homomorphic addition or multiplication over modulo deltaL directly is computationally expensive. CRT allows an integer x mod W (where W = w0 w1 ... wL, a product of L+1 co-primes) to be isomorphically mapped to a vector of smaller numbers (d0, d1, ..., dL), each reduced modulo the respective wm. This lets addition/multiplication be done element-wise on smaller values before decoding the final big-number result."
+        "explanation": "Since delta L is a huge number, performing homomorphic addition or multiplication over modulo delta L directly is computationally expensive. CRT allows an integer x mod W (where W = w 0 w 1 ... w L , a product of L+1 co-primes) to be isomorphically mapped to a vector of smaller numbers (d 0 , d 1 , ..., d L ), each reduced modulo the respective w m . This lets addition/multiplication be done element-wise on smaller values before decoding the final big-number result."
       },
       {
         "id": "W4_Q4",
         "week": 4,
-        "header": "QUESTION 4 [MCQ]",
-        "question": "In the CRT-based moduli setup for CKKS, how are the individual moduli w0, w1, ..., wL chosen relative to delta and q0?",
+        "header": "Q4 — RNS Representation (Residue Number System)",
+        "question": "In the CRT-based moduli setup for CKKS, how are the individual moduli w 0 , w 1 , ..., w L chosen relative to delta and q 0 ?",
         "options": [
           {
             "key": "a",
-            "text": "All wi (including w0) are set approximately equal to delta for uniform precision"
+            "text": "All w i (including w 0 ) are set approximately equal to delta for uniform precision"
           },
           {
             "key": "b",
-            "text": "w0 = q0 is much greater than delta, while all other wi are approximately equal to delta"
+            "text": "w 0 = q 0 is much greater than delta, while all other w i are approximately equal to delta"
           },
           {
             "key": "c",
-            "text": "w0 is set to 1, and all other wi are set equal to q0"
+            "text": "w 0 is set to 1, and all other w i are set equal to q 0"
           },
           {
             "key": "d",
-            "text": "All wi are chosen to be much smaller than delta to minimize ciphertext size"
+            "text": "All w i are chosen to be much smaller than delta to minimize ciphertext size"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "The CKKS scheme's maximal ciphertext modulus is designed as W = product of wm from m=0 to L, where L is the maximum multiplicative level. Here w0 = q0 is chosen to be much greater than delta (for accuracy during bootstrapping), while all other wi are approximately equal to delta, ensuring the scaled plaintext never overflows the ciphertext modulus even at the lowest multiplicative level."
+        "explanation": "The CKKS scheme's maximal ciphertext modulus is designed as W = product of w m from m=0 to L, where L is the maximum multiplicative level. Here w 0 = q 0 is chosen to be much greater than delta (for accuracy during bootstrapping), while all other w i are approximately equal to delta, ensuring the scaled plaintext never overflows the ciphertext modulus even at the lowest multiplicative level."
       },
       {
         "id": "W4_Q5",
         "week": 4,
-        "header": "QUESTION 5 [MCQ]",
-        "question": "During ciphertext-ciphertext multiplication, the encrypted noisy plaintext becomes (delta·m1 + e1)·(delta·m2 + e2) = delta2·m1m2 + delta·(m1e2 + m2e1) + e1e2. After rescaling, divide this by delta. Why does the noise still actually grow with each multiplication despite the scaling-down effect?",
+        "header": "Q5 — CRT Basis Representation for Large Moduli",
+        "question": "During ciphertext-ciphertext multiplication, the encrypted noisy plaintext becomes (delta·m 1 + e 1 )·(delta·m 2 + e 2 ) = delta 2 ·m 1 m 2 + delta·(m 1 e 2 + m 2 e 1 ) + e 1 e 2 . After rescaling, divide this by delt",
         "options": [
           {
             "key": "a",
-            "text": "Because rescaling only affects m1 and m2, never touching the error terms e1 and e2"
+            "text": "Why does the noise still actually grow with each multiplication despite the scaling-down effect? a. Because rescaling only affects m 1 and m 2 , never touching the error terms e 1 and e 2"
           },
           {
             "key": "b",
-            "text": "Because the term e1.e2/delta becomes negative and destabilizes the ciphertext modulus"
+            "text": "Because the term e 1 .e 2 /delta becomes negative and destabilizes the ciphertext modulus"
           },
           {
             "key": "c",
-            "text": "Because the resulting (m1e2 + m2e1) term is not eliminated by rescaling, so the noise accumulates and ultimately limits the multiplicative depth CKKS can support"
+            "text": "Because the resulting (m 1 e 2 + m 2 e 1 ) term is not eliminated by rescaling, so the noise accumulates and ultimately limits the multiplicative depth CKKS can support"
           },
           {
             "key": "d",
@@ -1951,17 +1866,17 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "After rescaling (dividing by delta), the result is approximately delta·m1m2 + m1e2 + m2e1 + e1e2/delta. While the e1e2/delta term shrinks, the (m1e2 + m2e1) term remains and adds to the noise at each multiplicative step. This accumulation of noise across successive ciphertext-ciphertext multiplications is what ultimately limits the multiplicative depth CKKS can support before decryption becomes inaccurate."
+        "explanation": "After rescaling (dividing by delta), the result is approximately delta·m 1 m 2 + m 1 e 2 + m 2 e 1 + e 1 e 2 /delta. While the e 1 e 2 /delta term shrinks, the (m 1 e 2 + m 2 e 1 ) term remains and adds to the noise at each multiplicative step. This accumulation of noise across successive ciphertext-ciphertext multiplications is what ultimately limits the multiplicative depth CKKS can support before decryption becomes inaccurate."
       },
       {
         "id": "W4_Q6",
         "week": 4,
-        "header": "QUESTION 6 [MCQ]",
-        "question": "In CKKS bootstrapping, when a ciphertext at multiplicative level 0 (modulus q0) has its modulus forcibly changed to qL and is then decrypted with reduction modulo qL, the result is Delta.M + E + q0K mod qL. Why is the q0*K term problematic?",
+        "header": "Q6 — RNS Homomorphic Operations Efficiency",
+        "question": "In CKKS bootstrapping, when a ciphertext at multiplicative level 0 (modulus q 0 ) has its modulus forcibly changed to q L and is then decrypted with reduction modulo q L , the result is Delt",
         "options": [
           {
             "key": "a",
-            "text": "It is a garbage term arising from wrap-around modulo q0 that corrupts each coefficient, and it is no longer eliminated by reduction modulo q0"
+            "text": "M + E + q 0 K mod q L . Why is the q 0 *K term problematic? a. It is a garbage term arising from wrap-around modulo q 0 that corrupts each coefficient, and it is no longer eliminated by reduction modulo q 0"
           },
           {
             "key": "b",
@@ -1969,7 +1884,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "It makes the ciphertext modulus qL smaller than q0, causing overflow"
+            "text": "It makes the ciphertext modulus q L smaller than q 0 , causing overflow"
           },
           {
             "key": "d",
@@ -1979,13 +1894,13 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "The term q0K accounts for wrap-around modulo q0 values, where each coefficient of q0K is a multiple of q0. Since decryption is now done modulo the much larger qL instead of q0, this term is no longer reduced away, so each coefficient becomes Delta.mi + ei + q0.ki mod qL instead of the clean Delta.mi + ei mod qL. This garbage term must be eliminated (via an approximated sine function) to recover the pure plaintext coefficient."
+        "explanation": "The term q 0 K accounts for wrap-around modulo q 0 values, where each coefficient of q 0 K is a multiple of q 0 . Since decryption is now done modulo the much larger q L instead of q 0 , this term is no longer reduced away, so each coefficient becomes Delta. m i + e i + q 0 . k i mod q L instead of the clean Delta.m i + e i mod q L . This garbage term must be eliminated (via an approximated sine function) to recover the pure plaintext coefficient."
       },
       {
         "id": "W4_Q7",
         "week": 4,
-        "header": "QUESTION 7 [MCQ]",
-        "question": "In the key-switching procedure, the key-switching key is defined as swk = (a', -a'·s + e' + Ps') mod (P·qL), where P is a large integer. What is the purpose of choosing P to be large?",
+        "header": "Q7 — CKKS Bootstrapping Goal: Modulus Refreshing",
+        "question": "In the key-switching procedure, the key-switching key is defined as swk = (a', -a'·s + e' + Ps') mod (P·q L ), where P is a large integer. What is the purpose of choosing P to be large?",
         "options": [
           {
             "key": "a",
@@ -1997,7 +1912,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "It makes the induced error term floor(P-1 · c0 · e') small relative to the original noise, since P is chosen large relative to ||c0 · e'||"
+            "text": "It makes the induced error term floor(P -1 · c 0 · e') small relative to the original noise, since P is chosen large relative to ||c 0 · e'||"
           },
           {
             "key": "d",
@@ -2007,13 +1922,13 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "From the correctness derivation, <c', sk> = <c, sk'> + eks mod ql, where eks = floor(P-1 · c0 · e') + erounding. Because P is chosen large relative to ||c0 · e'||, dividing by P shrinks this error term down to a small value, ensuring the key-switched ciphertext remains accurate under the new secret key sk."
+        "explanation": "From the correctness derivation, <c', sk> = <c, sk'> + e ks mod q l , where e ks = floor(P -1 · c 0 · e') + e rounding . Because P is chosen large relative to ||c 0 · e'||, dividing by P shrinks this error term down to a small value, ensuring the key-switched ciphertext remains accurate under the new secret key sk."
       },
       {
         "id": "W4_Q8",
         "week": 4,
-        "header": "QUESTION 8 [MCQ]",
-        "question": "Why does CKKS need homomorphic rotation to compute a dot product between two encrypted vectors v1 and v2?",
+        "header": "Q8 — Modulus Reduction Modulo q₀ in CKKS Decryption",
+        "question": "Why does CKKS need homomorphic rotation to compute a dot product between two encrypted vectors v 1 and v 2 ?",
         "options": [
           {
             "key": "a",
@@ -2040,36 +1955,36 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q9",
         "week": 4,
-        "header": "QUESTION 9 [MCQ]",
-        "question": "In the matrix-vector multiplication technique using diagonal extraction, given A·x = u0 ⊙ ρ(x,0) + u1 ⊙ ρ(x,1) + ... + u(n-1) ⊙ ρ(x,n-1), what do the vectors ui represent, and what operation is ρ(x,h)?",
+        "header": "Q9 — Slots-to-Coeffs Linear Transformation",
+        "question": "In the matrix-vector multiplication technique using diagonal extraction, given A·x = u 0 ⊙ ρ( x,0) + u 1 ⊙ ρ( x,1) + ... + u (n-1) ⊙ ρ( x,n-1), what do the vectors u i represent, and what operation is ρ( x,h)?",
         "options": [
           {
             "key": "a",
-            "text": "ui are randomly sampled masking vectors, and ρ(x,h) encrypts x under a rotated secret key"
+            "text": "u i are randomly sampled masking vectors, and ρ( x,h) encrypts x under a rotated secret key"
           },
           {
             "key": "b",
-            "text": "ui are the rows of matrix A, and ρ(x,h) is the Hadamard product of x with itself h times"
+            "text": "u i are the rows of matrix A, and ρ( x,h) is the Hadamard product of x with itself h times"
           },
           {
             "key": "c",
-            "text": "ui are diagonal vectors extracted from matrix A, and ρ(x,h) is the rotation of vector x by h positions to the left"
+            "text": "u i are diagonal vectors extracted from matrix A, and ρ( x,h) is the rotation of vector x by h positions to the left"
           },
           {
             "key": "d",
-            "text": "ui are the columns of matrix A, and ρ(x,h) is the conjugate of vector x shifted by h"
+            "text": "u i are the columns of matrix A, and ρ( x,h) is the conjugate of vector x shifted by h"
           }
         ],
         "correct": [
           "c"
         ],
-        "explanation": "The n distinct diagonal vectors ui are extracted from matrix A as ui = {a(j mod m, (i+j) mod n)} for j = 0 to n-1. ρ(v,h) is defined as the rotation of v by h positions to the left. Multiplying each diagonal with its correspondingly rotated copy of x (via Hadamard product) and summing gives the matrix-vector product A·x."
+        "explanation": "The n distinct diagonal vectors u i are extracted from matrix A as u i = {a (j mod m, (i+j) mod n) } for j = 0 to n-1. ρ( v,h) is defined as the rotation of v by h positions to the left. Multiplying each diagonal with its correspondingly rotated copy of x (via Hadamard product) and summing gives the matrix-vector product A·x."
       },
       {
         "id": "W4_Q10",
         "week": 4,
-        "header": "QUESTION 10 [MCQ]",
-        "question": "Why does CKKS switch from decoding using the representatives ω, ω³, ..., ω(n-1) to using ω, ω⁵, ω⁹, ..., ω(2n-3) (the 5j mod 2n exponents) for homomorphic rotation to work correctly (for the parameterization used in the lecture)?",
+        "header": "Q10 — Homomorphic Slot-to-Coefficient Permutations",
+        "question": "Why does CKKS switch from decoding using the representatives ω, ω³, ..., ω (n-1) to using ω, ω ⁵ , ω ⁹ , ..., ω (2n-3) (the 5 j mod 2n exponents) for homomorphic rotation to work correctly (for the parameterization used in the lecture)?",
         "options": [
           {
             "key": "a",
@@ -2091,13 +2006,13 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "The original reverse-ordered Hermitian vector (where M(ωi) = M(ω(2n-i))) does not preserve conjugate symmetry under rotation. Rotating it can produce an invalid Hermitian vector unusable for CKKS encoding."
+        "explanation": "The original reverse-ordered Hermitian vector (where M( ω i ) = M( ω (2n-i) )) does not preserve conjugate symmetry under rotation. Rotating it can produce an invalid Hermitian vector unusable for CKKS encoding."
       },
       {
         "id": "W4_Q11",
         "week": 4,
-        "header": "QUESTION 11 [MCQ]",
-        "question": "Why does the sine function f(x) = (q0/2pi) * sin(2pi * x / q0) approximate a line function y = x when evaluated at x values near multiples of q0?",
+        "header": "Q11 — Sine Approximation for Modular Reduction y = x",
+        "question": "Why does the sine function f(x) = (q 0 /2 pi) * sin(2 pi * x / q 0 ) approximate a line function y = x when evaluated at x values near multiples of q0?",
         "options": [
           {
             "key": "a",
@@ -2105,31 +2020,31 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "Because the derivative dy/dx = cos(2pi.x/q0) approaches cos(2pi.k) = 1 as x approaches k.q0 for integer k, making the function locally behave like the identity line"
+            "text": "Because the derivative dy/dx = cos(2 pi. x/q 0 ) approaches cos(2 pi. k) = 1 as x approaches k. q 0 for integer k, making the function locally behave like the identity line"
           },
           {
             "key": "c",
-            "text": "Because q0 is chosen to be a prime number, which forces the sine function to linearize"
+            "text": "Because q 0 is chosen to be a prime number, which forces the sine function to linearize"
           },
           {
             "key": "d",
-            "text": "Because the amplitude q0/(2pi) cancels out the sine term entirely at those points"
+            "text": "Because the amplitude q 0 /(2 pi) cancels out the sine term entirely at those points"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "The slope of f(x) is dy/dx = (q0/2pi) * (2pi/q0) * cos(2pi.x/q0) = cos(2pi.x/q0). At x approaching k.q0 (for k = 0, 1, 2, ...), this becomes cos(2pi.k) = 1, meaning the function's slope matches that of the line y = x near these points."
+        "explanation": "The slope of f(x) is dy/dx = (q 0 /2pi) * (2pi/q 0 ) * cos(2 pi. x/q 0 ) = cos(2 pi. x/q 0 ). At x approaching k. q 0 (for k = 0, 1, 2, ...), this becomes cos(2 pi. k) = 1, meaning the function's slope matches that of the line y = x near these points."
       },
       {
         "id": "W4_Q12",
         "week": 4,
-        "header": "QUESTION 12",
-        "question": "Why does CKKS bootstrapping use the substitution ei.θ = cos(θ) + i.sin(θ) and iteratively square e(i . θ/2r) rather than directly using a high-degree Taylor series to approximate the sine function?",
+        "header": "Q12 — Iterative Squaring vs Taylor Approximation",
+        "question": "Why does CKKS bootstrapping use the substitution e i. θ = cos( θ) + i. sin( θ) and iteratively square e (i . θ/2 r) rather than directly using a high-degree Taylor series to approximate the sine function?",
         "options": [
           {
             "key": "a",
-            "text": "Because homomorphic evaluation of a polynomial increases exponentially with its degree, so approximating a smaller exponent e(i . θ/2r) with fewer Taylor terms and then squaring r times reduces the overall computational cost"
+            "text": "Because homomorphic evaluation of a polynomial increases exponentially with its degree, so approximating a smaller exponent e (i . θ/2 r) with fewer Taylor terms and then squaring r times reduces the overall computational cost"
           },
           {
             "key": "b",
@@ -2147,13 +2062,13 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "To avoid homomorphically evaluating a large degree polynomial in Taylor expansion, using a very large 2r lets e(i . θ/2r) be approximated with a much smaller-degree (and thus cheaper) Taylor expansion while still achieving good accuracy."
+        "explanation": "To avoid homomorphically evaluating a large degree polynomial in Taylor expansion, using a very large 2 r lets e (i . θ/2 r) be approximated with a much smaller-degree (and thus cheaper) Taylor expansion while still achieving good accuracy ."
       },
       {
         "id": "W4_Q13",
         "week": 4,
-        "header": "QUESTION 13 [MCQ]",
-        "question": "In deriving sin(θ) = -i/2 * (ei.θ - e-i.θ), what homomorphic operation is used to compute the e-i.θ term from e(2.i.pi.x)/q_0",
+        "header": "Q13 — Euler's Formula for Homomorphic Sine Evaluation",
+        "question": "In deriving sin( θ) = -i/2 * (e i. θ - e -i. θ ), what homomorphic operation is used to compute the e -i. θ term from e (2.i.pi.x)/q_0",
         "options": [
           {
             "key": "a",
@@ -2180,7 +2095,7 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q14",
         "week": 4,
-        "header": "QUESTION 14 [MCQ]",
+        "header": "Q14 — Double-Angle Formula & Chebyshev Polynomials",
         "question": "In the CoeffToSlot step of bootstrapping, what is the purpose of transforming the input into two polynomials p1' and p2'?",
         "options": [
           {
@@ -2189,7 +2104,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "To permanently discard the q0*K garbage term without needing the EvalMod step"
+            "text": "To permanently discard the q 0 *K garbage term without needing the EvalMod step"
           },
           {
             "key": "c",
@@ -2208,8 +2123,8 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q15",
         "week": 4,
-        "header": "QUESTION 15 [MCQ]",
-        "question": "In the worked bootstrapping example (R = Z[X]/(X4+1), n=4, Delta=4, q0=64), after ModRaise the decrypted value is M'(X) = 4 + 66X - 67X2 + 69X3, and it's expressed as M'(X) = M(X) + q0.K(X) with K(X) = X - X2 + X3. After applying the homomorphic sine evaluation f(x) = (32/pi) sin(pi . x/32), what does the output approximate?",
+        "header": "Q15 — Coeffs-to-Slots Transformation & Inversion",
+        "question": "In the worked bootstrapping example (R = Z[X]/(X 4 +1), n=4, Delta=4, q 0 =64), after ModRaise the decrypted value is M'(X) = 4 + 66X - 67X 2 + 69X 3 , and it's expressed as M'(X) = M(X) + q 0 . K(X) with K(X) = X - X 2 + X 3 . After applying the homomorphic sine evaluation f(x) = (32/pi) sin(pi . x/32), what does the output approximate?",
         "options": [
           {
             "key": "a",
@@ -2225,18 +2140,18 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Erroneous message with the garbage term q0 . ki approximated out"
+            "text": "Erroneous message with the garbage term q 0 . k i approximated out"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "Since sin is periodic with period 2pi, the 2pi.ki term vanishes, thereby eliminating the q0 . ki garbage term introduced by ModRaise."
+        "explanation": "Since sin is periodic with period 2pi, the 2pi.k i term vanishes, thereby eliminating the q 0 . k i garbage term introduced by ModRaise."
       },
       {
         "id": "W4_Q16",
         "week": 4,
-        "header": "Question 16 [MCQ]",
+        "header": "Q16 — CKKS Bootstrapping Pipeline Sequence",
         "question": "Why is CKKS generally faster than TFHE for many applications?",
         "options": [
           {
@@ -2264,7 +2179,7 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q17",
         "week": 4,
-        "header": "Question 17 [MCQ]",
+        "header": "Q17 — Homomorphic Rotation via Galois Automorphisms",
         "question": "Why do FHE compilers replace a data-dependent loop such as while x > 0 with a fixed number of iterations?",
         "options": [
           {
@@ -2292,7 +2207,7 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q18",
         "week": 4,
-        "header": "Question 18 [MCQ]",
+        "header": "Q18 — Galois Keys (Rotation Keys) in CKKS",
         "question": "When evaluating neural networks using CKKS, why are activation functions such as ReLU, sigmoid, and tanh replaced by low-degree polynomial approximations?",
         "options": [
           {
@@ -2320,7 +2235,7 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q19",
         "week": 4,
-        "header": "Question 19 [MCQ]",
+        "header": "Q19 — Baby-step Giant-step for Linear Transformations",
         "question": "What is the primary optimization introduced by the FAB FPGA accelerator for Fully Homomorphic Encryption?",
         "options": [
           {
@@ -2348,7 +2263,7 @@ window.QUIZ_DATA = [
       {
         "id": "W4_Q20",
         "week": 4,
-        "header": "Question 20 [MCQ]",
+        "header": "Q20 — Precision vs Modulus Consumption in CKKS",
         "question": "Why is the Fast Number Theoretic Transform (Fast NTT) preferred over direct NTT in modern FHE implementations?",
         "options": [
           {
@@ -2382,7 +2297,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q1",
         "week": 5,
-        "header": "QUESTION 1 [MCQ]",
+        "header": "Q1 — TFHE NOT Gate Bootstrapping Exemption",
         "question": "Why does the NOT gate in TFHE not require a bootstrapping operation, unlike AND, OR, or XOR?",
         "options": [
           {
@@ -2410,7 +2325,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q2",
         "week": 5,
-        "header": "QUESTION 2 [MCQ]",
+        "header": "Q2 — Noise Growth in Multi-Input Gates without Bootstrap",
         "question": "Why does chaining two 2-input AND gates (each sampling input noise from σ = 2⁻⁶) into a 3-input AND fail, even after a bootstrapping step is applied at the end?",
         "options": [
           {
@@ -2438,7 +2353,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q3",
         "week": 5,
-        "header": "QUESTION 3 [MCQ]",
+        "header": "Q3 — Fractional Scaling in 3-Input AND Gate Construction",
         "question": "When constructing a 3-input AND gate that should output (1/2)·(ct₁ + ct₂ + ct₃) with a division by 2, why can this division not be implemented directly on the Torus?",
         "options": [
           {
@@ -2466,7 +2381,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q4",
         "week": 5,
-        "header": "QUESTION 4 [MCQ]",
+        "header": "Q4 — Bristol Format Boolean Circuits",
         "question": "What is the purpose and scope of \"Bristol format\" circuits?",
         "options": [
           {
@@ -2494,7 +2409,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q5",
         "week": 5,
-        "header": "QUESTION 5 [MCQ]",
+        "header": "Q5 — Homomorphic AES-128 Latency & AND Bootstrapping",
         "question": "Approximately why does evaluating AES-128 homomorphically under TFHE take around 10 minutes?",
         "options": [
           {
@@ -2522,7 +2437,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q6",
         "week": 5,
-        "header": "QUESTION 6 [MCQ]",
+        "header": "Q6 — Auction Privacy: Bid Non-Malleability",
         "question": "What does the \"bid non-malleability\" security property specifically protect against?",
         "options": [
           {
@@ -2550,7 +2465,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q7",
         "week": 5,
-        "header": "QUESTION 7 [MCQ]",
+        "header": "Q7 — Client-Server Private ML Inference Requirements",
         "question": "In machine-learning inference, what are the two privacy requirements stated for the Client (holding input x) and Server (holding model M)?",
         "options": [
           {
@@ -2578,7 +2493,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q8",
         "week": 5,
-        "header": "QUESTION 8 [MCQ]",
+        "header": "Q8 — Multi-Party Computation (MPC) Privacy Goal",
         "question": "For a (t, n) secret sharing scheme, which statement correctly captures both the Correctness and Perfect Privacy properties?",
         "options": [
           {
@@ -2606,7 +2521,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q9",
         "week": 5,
-        "header": "QUESTION 9 [MCQ]",
+        "header": "Q9 — Shamir's Secret Sharing Reconstruction Condition",
         "question": "In the worked (3,5) secret-sharing example with secret S = 123, prime p = 251, and polynomial f(x) = 123 + 45x + 67x² (mod 251), participants holding shares (2,230), (3,108), and (5,15) reconstruct the secret via Lagrange interpolation at x = 0. What is the computed value of f(0), and does it match the original secret?",
         "options": [
           {
@@ -2634,7 +2549,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q10",
         "week": 5,
-        "header": "QUESTION 10 [MCQ]",
+        "header": "Q10 — Lagrange Interpolation for Secret Recovery",
         "question": "How does the \"Malicious Security\" model for MPC differ from the \"Semi-Honest (Passive) Security\" model?",
         "options": [
           {
@@ -2662,7 +2577,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q11",
         "week": 5,
-        "header": "QUESTION 11 [MCQ]",
+        "header": "Q11 — Arithmetic Circuit Representation (+, × Gates)",
         "question": "In the additive (n, n) secret sharing scheme where x = x₁ + x₂ + ⋯ + xₙ (mod p), how many shares are required to reveal any information about the secret?",
         "options": [
           {
@@ -2690,7 +2605,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q12",
         "week": 5,
-        "header": "QUESTION 12 [MCQ]",
+        "header": "Q12 — MPC Homomorphic Secret Sharing Addition",
         "question": "Why must Party P₁ randomly permute the encrypted lookup table before sending it to P₂ in Yao's Garbled Circuits?",
         "options": [
           {
@@ -2718,7 +2633,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q13",
         "week": 5,
-        "header": "QUESTION 13 [MCQ]",
+        "header": "Q13 — Yao's Garbled Circuits Principle",
         "question": "In the Oblivious Transfer (OT) protocol used within Yao's Garbled Circuits, what does the OT primitive guarantee?",
         "options": [
           {
@@ -2746,7 +2661,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q14",
         "week": 5,
-        "header": "QUESTION 14 [MCQ]",
+        "header": "Q14 — Beaver's Point-and-Permute Technique",
         "question": "What technical problem does Beaver's point-and-permute technique solve in Yao's Garbled Circuits?",
         "options": [
           {
@@ -2774,7 +2689,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q15",
         "week": 5,
-        "header": "QUESTION 15 [MCQ]",
+        "header": "Q15 — Oblivious Transfer in Garbled Circuits",
         "question": "What happens if a garbled circuit's tables are reused for multiple evaluations?",
         "options": [
           {
@@ -2802,7 +2717,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q16",
         "week": 5,
-        "header": "QUESTION 16 [MCQ]",
+        "header": "Q16 — Shamir Secret Sharing Polynomial Degree",
         "question": "In the secret-sharing step of the arithmetic-circuit MPC protocol, what polynomial does each party construct for its private input xi ?",
         "options": [
           {
@@ -2830,7 +2745,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q17",
         "week": 5,
-        "header": "QUESTION 17 [MCQ]",
+        "header": "Q17 — Passive (Semi-Honest) vs Active (Malicious) Adversary",
         "question": "In the 3-party example, the parties use the following polynomials: p1​(x)=x1​+12x, p2​(x)=x2​+53x, p3​(x)=x3​+42x. What polynomial is obtained by adding these three sharing polynomials?",
         "options": [
           {
@@ -2847,7 +2762,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "x1 ​ x2 ​x3​    + 107 x2"
+            "text": "x1 ​ x2 ​x3​ + 107 x2"
           }
         ],
         "correct": [
@@ -2858,7 +2773,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q18",
         "week": 5,
-        "header": "QUESTION 18 [MCQ]",
+        "header": "Q18 — MPC Communication Complexity of Multiplication Gates",
         "question": "Why can any two parties reconstruct x1​ + x2​ + x3​ in the 3-party example?",
         "options": [
           {
@@ -2886,7 +2801,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q19",
         "week": 5,
-        "header": "QUESTION 19 [MCQ]",
+        "header": "Q19 — Secret Sharing Share Distribution",
         "question": "What problem arises when the parties locally multiply their shares while evaluating a multiplication gate?",
         "options": [
           {
@@ -2914,7 +2829,7 @@ window.QUIZ_DATA = [
       {
         "id": "W5_Q20",
         "week": 5,
-        "header": "QUESTION 20 [MCQ]",
+        "header": "Q20 — Security Threshold in Honest-Majority MPC",
         "question": "Why is an additional degree-reduction step required after multiplication in the MPC protocol without preprocessing?",
         "options": [
           {
@@ -2931,7 +2846,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "To transform multiplication gates into addition gate."
+            "text": "To transform multiplication gates into addition gates"
           }
         ],
         "correct": [
@@ -2948,7 +2863,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q1",
         "week": 6,
-        "header": "QUESTION 1 [MCQ]",
+        "header": "Q1 — Beaver Triples for Multi-Party Multiplication",
         "question": "Why is a Beaver triple ([a], [b], [c]) essential for evaluating multiplication gates in MPC over arithmetic circuits?",
         "options": [
           {
@@ -2976,7 +2891,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q2",
         "week": 6,
-        "header": "QUESTION 2 [MCQ]",
+        "header": "Q2 — Beaver Multiplication Communication Overhead",
         "question": "In the Beaver triple protocol, why is it safe for the parties to publicly reconstruct (x − a) and (y − b)?",
         "options": [
           {
@@ -3004,7 +2919,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q3",
         "week": 6,
-        "header": "QUESTION 3 [MCQ]",
+        "header": "Q3 — Preprocessing Phase in Beaver Triples Generation",
         "question": "Why can a single Beaver triple not be reused across multiple multiplication gates?",
         "options": [
           {
@@ -3032,7 +2947,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q4",
         "week": 6,
-        "header": "QUESTION 4 [MCQ]",
+        "header": "Q4 — Triples Reconstruction & Privacy Analysis",
         "question": "What property must the secret-sharing scheme used to generate Beaver triples satisfy, and why?",
         "options": [
           {
@@ -3060,7 +2975,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q5",
         "week": 6,
-        "header": "QUESTION 5 [MCQ]",
+        "header": "Q5 — Semi-Honest Security in Beaver Protocol",
         "question": "After all parties compute [c] + (x−a)·[b] + (y−b)·[a] + (x−a)·(y−b) and recombine, the result simplifies to c − a·b + x·y. Why does this correctly give the desired product z = x·y?",
         "options": [
           {
@@ -3088,12 +3003,12 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q6",
         "week": 6,
-        "header": "QUESTION 6 [MCQ]",
-        "question": "Why can additive secret sharing over 𝔽q (or ℤq) fail to provide privacy when uniform sampling is not possible, as illustrated by the n=2, 𝔽2 example where r=0 with probability 0.8 and r=1 with probability 0.2?",
+        "header": "Q6 — BGW Protocol vs BMR Protocol",
+        "question": "Why can additive secret sharing over 𝔽 q (or ℤ q ) fail to provide privacy when uniform sampling is not possible, as illustrated by the n=2, 𝔽 2 example where r=0 with probability 0.8 and r=1 with probability 0.2?",
         "options": [
           {
             "key": "a",
-            "text": "Because 𝔽2 does not support additive sharing"
+            "text": "Because 𝔽 2 does not support additive sharing"
           },
           {
             "key": "b",
@@ -3105,7 +3020,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Because the secret x must always be even in 𝔽2"
+            "text": "Because the secret x must always be even in 𝔽 2"
           }
         ],
         "correct": [
@@ -3116,7 +3031,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q7",
         "week": 6,
-        "header": "QUESTION 7 [MCQ]",
+        "header": "Q7 — Honest Majority vs Dishonest Majority in MPC",
         "question": "What is the issue with using IEEE-754 floating point numbers directly for additive secret sharing over the reals (e.g., x = x1 + x2 + x3)?",
         "options": [
           {
@@ -3139,12 +3054,12 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "Because floating point numbers have limited precision, arithmetic operations like addition can introduce small representation errors. As shown in the example, x1 + x2 + x3 does not exactly reconstruct x = 10.4, but instead yields 10.4000000000000003552713678800500929355621337890625, undermining the correctness of the secret sharing scheme."
+        "explanation": "Because floating point numbers have limited precision, arithmetic operations like addition can introduce small representation errors. As shown in the example, x 1 + x 2 + x 3 does not exactly reconstruct x = 10.4, but instead yields 10.4000000000000003552713678800500929355621337890625, undermining the correctness of the secret sharing scheme."
       },
       {
         "id": "W6_Q8",
         "week": 6,
-        "header": "QUESTION 8 [MCQ]",
+        "header": "Q8 — Information-Theoretic vs Computational Security in MPC",
         "question": "How is the issue of correctness under limited precision?",
         "options": [
           {
@@ -3161,18 +3076,18 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "By employing additive secret sharing over 𝔽2 instead of arithmetic addition over the reals"
+            "text": "By employing additive secret sharing over 𝔽 2 instead of arithmetic addition over the reals"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "Since XOR (⊕) is bitwise and exactly invertible on the fixed-width bit representation of a floating point number, sharing via x1 = r and x2 = x ⊕ r (and reconstructing via XOR) avoids any rounding or precision loss: unlike arithmetic addition/subtraction over real-valued floating point numbers."
+        "explanation": "Since XOR ( ⊕ ) is bitwise and exactly invertible on the fixed-width bit representation of a floating point number, sharing via x 1 = r and x 2 = x ⊕ r (and reconstructing via XOR) avoids any rounding or precision loss: unlike arithmetic addition/subtraction over real-valued floating point numbers."
       },
       {
         "id": "W6_Q9",
         "week": 6,
-        "header": "QUESTION 9 [MCQ]",
+        "header": "Q9 — Homomorphic Division using Inversion & Multiplication",
         "question": "Why does uniformly sampling IEEE-754 bit patterns NOT produce a distribution that is uniform with respect to the real-number magnitude/range?",
         "options": [
           {
@@ -3195,12 +3110,12 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "For a fixed number of mantissa bits, each exponent value contributes 223 (or 252) representable numbers, but as the exponent decreases, this same count of representable numbers is packed into a range that is roughly half as wide as the previous exponent's range. So uniformly sampling exponent bits over-represents the density of smaller-magnitude numbers relative to a truly uniform distribution over the real number line."
+        "explanation": "For a fixed number of mantissa bits, each exponent value contributes 2 23 (or 2 52 ) representable numbers, but as the exponent decreases, this same count of representable numbers is packed into a range that is roughly half as wide as the previous exponent's range. So uniformly sampling exponent bits over-represents the density of smaller-magnitude numbers relative to a truly uniform distribution over the real number line."
       },
       {
         "id": "W6_Q10",
         "week": 6,
-        "header": "QUESTION 10 [MCQ]",
+        "header": "Q10 — Goldschmidt's Division Algorithm in MPC",
         "question": "How do we ensure the resultant distribution over floating point numbers is uniform?",
         "options": [
           {
@@ -3228,7 +3143,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q11",
         "week": 6,
-        "header": "QUESTION 11 [MCQ]",
+        "header": "Q11 — Newton-Raphson Inversion Approximation in MPC",
         "question": "In the MPC division protocol, what is the primary reason each fraction of the form yᵢ/xᵢ can be computed locally by party Pᵢ without any communication?",
         "options": [
           {
@@ -3256,8 +3171,8 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q12",
         "week": 6,
-        "header": "QUESTION 12 [MCQ]",
-        "question": "Why can't Pᵢ simply compute 1/xᵢ and multiply it directly with yⱼ (held by another party Pⱼ) in plaintext to get yⱼ/xᵢ?",
+        "header": "Q12 — Bit-Decomposition in Arithmetic MPC",
+        "question": "Why can't Pᵢ simply compute 1/xᵢ and multiply it directly with y\u0000 (held by another party P\u0000) in plaintext to get y\u0000/xᵢ?",
         "options": [
           {
             "key": "a",
@@ -3265,7 +3180,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "Because yⱼ/xᵢ is not needed for the final reconstruction"
+            "text": "Because y\u0000/xᵢ is not needed for the final reconstruction"
           },
           {
             "key": "c",
@@ -3273,23 +3188,23 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Because doing so would leak yⱼ (or xᵢ) to the other party, violating privacy"
+            "text": "Because doing so would leak y\u0000 (or xᵢ) to the other party, violating privacy"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "If Pᵢ directly received yⱼ in the clear to multiply with its local 1/xᵢ, this would leak yⱼ to party Pᵢ."
+        "explanation": "If Pᵢ directly received y\u0000 in the clear to multiply with its local 1/xᵢ, this would leak y\u0000 to party Pᵢ."
       },
       {
         "id": "W6_Q13",
         "week": 6,
-        "header": "QUESTION 13 [MCQ]",
-        "question": "Why are the individual terms like (y₂/x₁)₁ still called valid \"shares of y/x₁\" even though each one individually is only a share of y₂ or y₃ (not the full y)?",
+        "header": "Q13 — Secure Comparison Protocol (Millionaires' Problem)",
+        "question": "Why are the individual terms like (y ₂ /x ₁ ) ₁ still called valid \"shares of y/x ₁ \" even though each one individually is only a share of y ₂ or y ₃ (not the full y)?",
         "options": [
           {
             "key": "a",
-            "text": "Because they eventually combine via recombination (XOR/addition) to correctly reconstruct y/x₁"
+            "text": "Because they eventually combine via recombination (XOR/addition) to correctly reconstruct y/x ₁"
           },
           {
             "key": "b",
@@ -3297,39 +3212,39 @@ window.QUIZ_DATA = [
           },
           {
             "key": "c",
-            "text": "Because y₂ and y₃ are mathematically equal to y in this protocol"
+            "text": "Because y ₂ and y ₃ are mathematically equal to y in this protocol"
           },
           {
             "key": "d",
-            "text": "Because only party P₁ is allowed to use them"
+            "text": "Because only party P ₁ is allowed to use them"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "These terms are notated as shares of y/x₁ because they allow the final recombination to reconstruct y/x₁, even though individually each one only constitutes a share of y₂ or y₃. The validity of calling them shares of y/x₁ comes from how they behave under the final XOR/addition-based reconstruction, not from what each term looks like in isolation."
+        "explanation": "These terms are notated as shares of y/x ₁ because they allow the final recombination to reconstruct y/x ₁ , even though individually each one only constitutes a share of y ₂ or y ₃ . The validity of calling them shares of y/x ₁ comes from how they behave under the final XOR/addition-based reconstruction, not from what each term looks like in isolation."
       },
       {
         "id": "W6_Q14",
         "week": 6,
-        "header": "QUESTION 14 [MCQ]",
-        "question": "In the MPC division protocol with three parties P₁, P₂, P₃, why does reconstructing y/x₁ (e.g., by party P₂) not reveal y or x₁ individually?",
+        "header": "Q14 — Garbled Circuits vs Secret Sharing for Non-Linear Ops",
+        "question": "In the MPC division protocol with three parties P ₁ , P ₂ , P ₃ , why does reconstructing y/x ₁ (e.g., by party P ₂ ) not reveal y or x ₁ individually?",
         "options": [
           {
             "key": "a",
-            "text": "Because P₂ only receives 2 out of the required 3 shares needed to reveal the input, since the secret sharing scheme is (n, n)"
+            "text": "Because P ₂ only receives 2 out of the required 3 shares needed to reveal the input, since the secret sharing scheme is (n, n)"
           },
           {
             "key": "b",
-            "text": "Because y/x₁ is always equal to 1 regardless of the inputs"
+            "text": "Because y/x ₁ is always equal to 1 regardless of the inputs"
           },
           {
             "key": "c",
-            "text": "Because P₂ discards the shares immediately after computing y/x₁"
+            "text": "Because P ₂ discards the shares immediately after computing y/x ₁"
           },
           {
             "key": "d",
-            "text": "Because x₁ is a public constant known in advance"
+            "text": "Because x ₁ is a public constant known in advance"
           }
         ],
         "correct": [
@@ -3340,7 +3255,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q15",
         "week": 6,
-        "header": "QUESTION 15 [MCQ]",
+        "header": "Q15 — Mixed-Mode MPC (ABY Framework: Arithmetic, Boolean, Yao)",
         "question": "What real-world privacy problem in smart grids does the \"Privacy Preserving Real-Time Pricing (RTP)\" application address using the MPC division protocol?",
         "options": [
           {
@@ -3368,7 +3283,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q16",
         "week": 6,
-        "header": "QUESTION 16 [MCQ]",
+        "header": "Q16 — Beaver Triple Verification for Malicious Security",
         "question": "In the MPC division procedure described in the lecture, why are the partial products between the parties computed first?",
         "options": [
           {
@@ -3396,7 +3311,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q17",
         "week": 6,
-        "header": "QUESTION 17 [MCQ]",
+        "header": "Q17 — SPDZ Protocol & MAC Authenticated Shares",
         "question": "In the three-party MPC division protocol, why can a party not recover the original input from the shares it receives during the message-passing phase?",
         "options": [
           {
@@ -3424,7 +3339,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q18",
         "week": 6,
-        "header": "QUESTION 18 [MCQ]",
+        "header": "Q18 — Cut-and-Choose in Malicious Garbled Circuits",
         "question": "What is the purpose of combining the partial products in the MPC division protocol?",
         "options": [
           {
@@ -3452,7 +3367,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q19",
         "week": 6,
-        "header": "QUESTION 19 [MCQ]",
+        "header": "Q19 — Round Complexity in Multi-Party Computation",
         "question": "At the final stage of the MPC division procedure, what is done with the quantities obtained from the earlier computation?",
         "options": [
           {
@@ -3480,7 +3395,7 @@ window.QUIZ_DATA = [
       {
         "id": "W6_Q20",
         "week": 6,
-        "header": "QUESTION 20 [MCQ]",
+        "header": "Q20 — Communication vs Computation Bottlenecks in MPC",
         "question": "Who performs the final reconstruction in the MPC division procedure described in the lecture?",
         "options": [
           {
@@ -3514,20 +3429,20 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q1",
         "week": 7,
-        "header": "QUESTION 1 [MCQ]",
-        "question": "In the 1-out-of-2 Oblivious Transfer objective, sender S holds secrets {s0, s1} and receiver R holds a bit b. Which of the following correctly states BOTH security requirements of OT?",
+        "header": "Q1 — 1-out-of-2 Oblivious Transfer (1-2 OT) Definition",
+        "question": "In the 1-out-of-2 Oblivious Transfer objective, sender S holds secrets {s 0 , s 1 } and receiver R holds a bit b. Which of the following correctly states BOTH security requirements of OT?",
         "options": [
           {
             "key": "a",
-            "text": "R does not learn b; S does not learn s(1-b)"
+            "text": "R does not learn b; S does not learn s (1-b)"
           },
           {
             "key": "b",
-            "text": "R does not learn s(1-b); S does not learn b"
+            "text": "R does not learn s (1-b) ; S does not learn b"
           },
           {
             "key": "c",
-            "text": "R learns both s0 and s1; S learns b"
+            "text": "R learns both s 0 and s 1 ; S learns b"
           },
           {
             "key": "d",
@@ -3542,8 +3457,8 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q2",
         "week": 7,
-        "header": "QUESTION 2 [MCQ]",
-        "question": "In the OT-from-public-key-encryption construction (Even–Goldreich–Lempel scheme), the receiver generates (pkb, skb) ← Gen(1κ; rb) using its chosen bit b, and sets pk(1-b) to a random string. What does this rely on?",
+        "header": "Q2 — OT Sender & Receiver Privacy Guarantees",
+        "question": "In the OT-from-public-key-encryption construction (Even–Goldreich–Lempel scheme), the receiver generates (pk b , sk b ) ← Gen(1 κ ; r b ) using its chosen bit b, and sets pk (1-b) to a random string. What does this rely on?",
         "options": [
           {
             "key": "a",
@@ -3551,7 +3466,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "The sender knowing skb in advance"
+            "text": "The sender knowing sk b in advance"
           },
           {
             "key": "c",
@@ -3570,36 +3485,36 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q3",
         "week": 7,
-        "header": "QUESTION 3 [MCQ]",
-        "question": "In the OT-from-PKE protocol, why does the receiver R fail to learn s(1-b), the secret it did not request?",
+        "header": "Q3 — Bellare-Micali OT Protocol using Diffie-Hellman",
+        "question": "In the OT-from-PKE protocol, why does the receiver R fail to learn s (1-b) , the secret it did not request?",
         "options": [
           {
             "key": "a",
-            "text": "Because the sender deletes s(1-b) before sending anything"
+            "text": "Because the sender deletes s (1-b) before sending anything"
           },
           {
             "key": "b",
-            "text": "Because R never receives c(1-b) at all"
+            "text": "Because R never receives c (1-b) at all"
           },
           {
             "key": "c",
-            "text": "Because pk(1-b) is always invalid and rejected by Enc"
+            "text": "Because pk (1-b) is always invalid and rejected by Enc"
           },
           {
             "key": "d",
-            "text": "Because R does not know sk(1-b), and by the CPA security of Enc"
+            "text": "Because R does not know sk (1-b) , and by the CPA security of Enc"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "R receives both c0 and c1, but since pk(1-b) was sampled obliviously (without a matching secret key), R cannot decrypt c(1-b). CPA security means R (or any poly-time adversary) cannot distinguish which plaintext c(1-b) corresponds to, so s(1-b) stays hidden."
+        "explanation": "R receives both c 0 and c 1 , but since pk (1-b) was sampled obliviously (without a matching secret key), R cannot decrypt c (1-b) . CPA security means R (or any poly-time adversary) cannot distinguish which plaintext c (1-b) corresponds to, so s (1-b) stays hidden."
       },
       {
         "id": "W7_Q4",
         "week": 7,
-        "header": "QUESTION 4 [MCQ]",
-        "question": "In the 1-out-of-4 OT construction, the sender generates 4 PRF keys k0, k1, k0', k1' and computes ciphertexts such as c0 = c00 = s0 ⊕ Fk0(00) ⊕ Fk0'(00). How does the receiver, holding b = b1b2, ultimately recover sb?",
+        "header": "Q4 — Even-Goldreich-Lempel OT Construction",
+        "question": "In the 1-out-of-4 OT construction, the sender generates 4 PRF keys k 0 , k 1 , k 0 ', k 1 ' and computes ciphertexts such as c 0 = c 00 = s 0 ⊕ F k0 (00) ⊕ F k0' (00). How does the receiver, holding b = b 1 b 2 , ultimately recover s b ?",
         "options": [
           {
             "key": "a",
@@ -3607,11 +3522,11 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "By XORing all four ciphertexts c0, c1, c2, c3 together"
+            "text": "By XORing all four ciphertexts c 0 , c 1 , c 2 , c 3 together"
           },
           {
             "key": "c",
-            "text": "By running two 1-out-of-2 OTs to obtain kb1 and k'b2"
+            "text": "By running two 1-out-of-2 OTs to obtain k b1 and k' b2"
           },
           {
             "key": "d",
@@ -3621,13 +3536,13 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "The construction reduces 1-out-of-4 OT to two invocations of 1-out-of-2 OT: one to obliviously fetch the key corresponding to bit b1, and one for bit b2. The receiver then strips off the two PRF pads from cb to recover sb, without learning anything about the other three secrets."
+        "explanation": "The construction reduces 1-out-of-4 OT to two invocations of 1-out-of-2 OT: one to obliviously fetch the key corresponding to bit b 1 , and one for bit b 2 . The receiver then strips off the two PRF pads from c b to recover s b , without learning anything about the other three secrets."
       },
       {
         "id": "W7_Q5",
         "week": 7,
-        "header": "QUESTION 5 [MCQ]",
-        "question": "In generalization of 1-out-of-4 OT to 1-out-of-N OT, where S holds n secrets {s0, ..., s(n-1)} and R holds a bitstring in {0,1}(log n). How many PRF keys does S generate, and how are they used?",
+        "header": "Q5 — OT Extension: Beaver-Micali-Rogaway Technique",
+        "question": "In generalization of 1-out-of-4 OT to 1-out-of-N OT, where S holds n secrets {s 0 , ..., s (n-1) } and R holds a bitstring in {0,1} (log n) . How many PRF keys does S generate, and how are they used?",
         "options": [
           {
             "key": "a",
@@ -3649,12 +3564,12 @@ window.QUIZ_DATA = [
         "correct": [
           "d"
         ],
-        "explanation": "S generates 2 x log n PRF keys, two for each bit position of b (one for '0', one for '1'). For each bit bi, R engages in a 1-out-of-2 OT to obliviously obtain the correct key. S then XOR-masks each of the n secrets with PRF outputs under the appropriate key combination, and R reconstructs sb by XORing with the same PRF outputs using the keys it obtained."
+        "explanation": "S generates 2 x log n PRF keys, two for each bit position of b (one for '0', one for '1'). For each bit b i , R engages in a 1-out-of-2 OT to obliviously obtain the correct key. S then XOR-masks each of the n secrets with PRF outputs under the appropriate key combination, and R reconstructs sb by XORing with the same PRF outputs using the keys it obtained."
       },
       {
         "id": "W7_Q6",
         "week": 7,
-        "header": "QUESTION 6 [MCQ]",
+        "header": "Q6 — IKNP OT Extension Protocol (1000s of OTs from Base OTs)",
         "question": "In a variant of OT-from-PKE construction, the sender S generates only a single key pair (pk, sk) and sends pk to R (instead of R generating keys as in the Even–Goldreich–Lempel scheme). How does R then hide which secret it is requesting?",
         "options": [
           {
@@ -3663,7 +3578,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "R sets cb = Encpk(wb) using the real public key, and samples c(1-b) via the Samp"
+            "text": "R sets c b = Enc pk (w b ) using the real public key, and samples c (1-b) via the Samp"
           },
           {
             "key": "c",
@@ -3677,96 +3592,96 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "This variant relies on the PKE scheme having a Samp algorithm that produces ciphertexts indistinguishable from real ones. R encrypts a random bit wb under the real key for the position it wants (cb ← Encpk(wb)) and uses Samp to produce c(1-b), which looks valid but isn't a genuine encryption."
+        "explanation": "This variant relies on the PKE scheme having a Samp algorithm that produces ciphertexts indistinguishable from real ones. R encrypts a random bit w b under the real key for the position it wants (c b ← Enc pk (w b )) and uses Samp to produce c (1-b) , which looks valid but isn't a genuine encryption."
       },
       {
         "id": "W7_Q7",
         "week": 7,
-        "header": "QUESTION 7 [MCQ]",
-        "question": "After S decrypts both ciphertexts to get w0 and w1, and sends back (w0 ⊕ s0, w1 ⊕ s1), how does R finally recover sb?",
+        "header": "Q7 — GMW (Goldreich-Micali-Wigderson) Protocol Overview",
+        "question": "After S decrypts both ciphertexts to get w 0 and w 1 , and sends back (w 0 ⊕ s 0 , w 1 ⊕ s 1 ), how does R finally recover s b ?",
         "options": [
           {
             "key": "a",
-            "text": "R computes sb = wb ⊕ (wb ⊕ sb), using the wb it already knows"
+            "text": "R computes s b = w b ⊕ (w b ⊕ s b ), using the w b it already knows"
           },
           {
             "key": "b",
-            "text": "R asks S directly for sb over a separate authenticated channel"
+            "text": "R asks S directly for s b over a separate authenticated channel"
           },
           {
             "key": "c",
-            "text": "R XORs both received values together to isolate sb"
+            "text": "R XORs both received values together to isolate s b"
           },
           {
             "key": "d",
-            "text": "R decrypts (w0 ⊕ s0, w1 ⊕ s1) using sk, which it possesses"
+            "text": "R decrypts (w 0 ⊕ s 0 , w 1 ⊕ s 1 ) using sk, which it possesses"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "R already knows wb since it chose it when computing cb = Encpk(wb). It never learns w(1-b) reliably, since c(1-b) came from Samp rather than genuine encryption. So R simply unmasks the b-th component: sb = wb ⊕ (wb ⊕ sb)."
+        "explanation": "R already knows w b since it chose it when computing c b = Enc pk (w b ). It never learns w (1-b) reliably, since c (1-b) came from Samp rather than genuine encryption. So R simply unmasks the b-th component: s b = w b ⊕ (w b ⊕ s b )."
       },
       {
         "id": "W7_Q8",
         "week": 7,
-        "header": "QUESTION 8 [MCQ]",
-        "question": "In the DDH-based OT construction, the receiver R holds bit b and computes h0 = g0r for both cases, but sets h1 = g1r when b = 0 and h1 = g1(r+1) when b = 1. What is the purpose of this construction?",
+        "header": "Q8 — GMW Multiplication via 1-out-of-4 OT",
+        "question": "In the DDH-based OT construction, the receiver R holds bit b and computes h 0 = g 0 r for both cases, but sets h 1 = g 1 r when b = 0 and h 1 = g 1 (r+1) when b = 1. What is the purpose of this construction?",
         "options": [
           {
             "key": "a",
-            "text": "It ensures h0 and h1 form a valid DDH tuple wrt. exponent r for exactly one of g0/g1"
+            "text": "It ensures h 0 and h 1 form a valid DDH tuple wrt. exponent r for exactly one of g 0 /g 1"
           },
           {
             "key": "b",
-            "text": "It allows R to directly compute both secrets s0 and s1 without any interaction"
+            "text": "It allows R to directly compute both secrets s 0 and s 1 without any interaction"
           },
           {
             "key": "c",
-            "text": "It ensures h0 = h1 always, so S cannot distinguish between them"
+            "text": "It ensures h 0 = h 1 always, so S cannot distinguish between them"
           },
           {
             "key": "d",
-            "text": "It lets S compute r directly from h0 and h1"
+            "text": "It lets S compute r directly from h 0 and h 1"
           }
         ],
         "correct": [
           "a"
         ],
-        "explanation": "By shifting the exponent for g1 depending on b, R creates a pair (h0, h1) where exactly one of the two \"sub-tuples\" (g0, g0r) / (g1, h1) is a genuine DDH tuple and the other looks random, by the DDH assumption."
+        "explanation": "By shifting the exponent for g 1 depending on b, R creates a pair (h 0 , h 1 ) where exactly one of the two \"sub-tuples\" (g 0 , g 0 r ) / (g 1 , h 1 ) is a genuine DDH tuple and the other looks random, by the DDH assumption."
       },
       {
         "id": "W7_Q9",
         "week": 7,
-        "header": "QUESTION 9 [MCQ]",
-        "question": "In the GMW protocol's AND-gate sharing, P1 holds shares (x1, y1) and P2 holds (x2, y2), with x = x1⊕x2 and y = y1⊕y2. P1 randomly samples a bit z1 and computes four ciphertexts c0, c1, c2, c3 (one for each combination of P2's possible share values), masked with PRF outputs. How does P2 recover its share z2 of the AND output z = x·y?",
+        "header": "Q9 — GMW vs Yao's Garbled Circuits Comparison",
+        "question": "In the GMW protocol's AND-gate sharing, P 1 holds shares (x 1 , y 1 ) and P 2 holds (x 2 , y 2 ), with x = x 1 ⊕ x 2 and y = y 1 ⊕ y 2 . P 1 randomly samples a bit z 1 and computes four ciphertexts c 0 , c 1 , c 2 , c 3 (one for each combination of P 2 's possible share values), masked with PRF outputs. How does P 2 recover its share z 2 of the AND output z = x·y?",
         "options": [
           {
             "key": "a",
-            "text": "P2 computes z2 by running the AND gate locally on (x1, y1)"
+            "text": "P 2 computes z 2 by running the AND gate locally on (x 1 , y 1 )"
           },
           {
             "key": "b",
-            "text": "P2 uses a 1-out-of-4 OT to obtain exactly the ciphertext c(x2y2) corresponding to its own shares, and unmasks it"
+            "text": "P 2 uses a 1-out-of-4 OT to obtain exactly the ciphertext c (x2y2) corresponding to its own shares, and unmasks it"
           },
           {
             "key": "c",
-            "text": "P2 broadcasts x2 and y2 to P1, who then computes z2 directly"
+            "text": "P 2 broadcasts x 2 and y 2 to P 1 , who then computes z 2 directly"
           },
           {
             "key": "d",
-            "text": "P2 XORs all four ciphertexts c0, c1, c2, c3 together to get z2"
+            "text": "P 2 XORs all four ciphertexts c 0 , c 1 , c 2 , c 3 together to get z 2"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "P1 precomputes all four possible outcomes masked with z1 and PRF pads. P2, without revealing (x2, y2) to P1, uses 1-out-of-4 OT (built from two 1-out-of-2 OTs) to retrieve only the entry matching its actual shares, then removes the PRF masks to recover z2 = (x1⊕x2)·(y1⊕y2) ⊕ z1 ."
+        "explanation": "P 1 precomputes all four possible outcomes masked with z 1 and PRF pads. P 2 , without revealing (x 2 , y 2 ) to P 1 , uses 1-out-of-4 OT (built from two 1-out-of-2 OTs) to retrieve only the entry matching its actual shares, then removes the PRF masks to recover z 2 = (x 1 ⊕ x 2 )·(y 1 ⊕ y 2 ) ⊕ z 1 ."
       },
       {
         "id": "W7_Q10",
         "week": 7,
-        "header": "QUESTION 10 [MCQ]",
+        "header": "Q10 — OT-based Garbled Circuit Input Evaluation",
         "question": "Why is a 1-out-of-4 (rather than 1-out-of-2) OT specifically needed for the AND gate in the GMW protocol, whereas XOR gates require no OT at all?",
         "options": [
           {
@@ -3775,7 +3690,7 @@ window.QUIZ_DATA = [
           },
           {
             "key": "b",
-            "text": "Because AND is non-linear: z = (x1⊕x2)·(y1⊕y2) involving cross-products"
+            "text": "Because AND is non-linear: z = (x 1 ⊕ x 2 )·(y 1 ⊕ y 2 ) involving cross-products"
           },
           {
             "key": "c",
@@ -3783,18 +3698,18 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "Because P2 has 4 different secrets s0, s1, s2, s3 unrelated to its shares"
+            "text": "Because P 2 has 4 different secrets s 0 , s 1 , s 2 , s 3 unrelated to its shares"
           }
         ],
         "correct": [
           "b"
         ],
-        "explanation": "XOR gates are linear (z1⊕z2 = (x1⊕y1)⊕(x2⊕y2)), so each party can compute its share of the output purely from its own shares. AND is a nonlinear (multiplicative) function of both parties' shares, so P1 must encode 4 possible masked results (one per combination of P2's 2 bits) and P2 must obliviously select the correct one without revealing (x2, y2)."
+        "explanation": "XOR gates are linear (z 1 ⊕ z 2 = (x 1 ⊕ y 1 ) ⊕ (x 2 ⊕ y 2 )), so each party can compute its share of the output purely from its own shares. AND is a nonlinear (multiplicative) function of both parties' shares, so P 1 must encode 4 possible masked results (one per combination of P 2 's 2 bits) and P 2 must obliviously select the correct one without revealing (x 2 , y 2 )."
       },
       {
         "id": "W7_Q11",
         "week": 7,
-        "header": "QUESTION 11 [MCQ]",
+        "header": "Q11 — Correlated OT (COT) and Random OT (ROT)",
         "question": "What is the key difference between the semi-honest and malicious security models in MPC?",
         "options": [
           {
@@ -3822,7 +3737,7 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q12",
         "week": 7,
-        "header": "QUESTION 12 [MCQ]",
+        "header": "Q12 — Malicious Security in OT Extension (KOS Protocol)",
         "question": "What security property of a Message Authentication Code (MAC) prevents an adversary from replacing a valid message with a different message and generating a corresponding valid tag?",
         "options": [
           {
@@ -3845,12 +3760,12 @@ window.QUIZ_DATA = [
         "correct": [
           "c"
         ],
-        "explanation": "A MAC provides authentication by associating a message with a tag generated using a secret key. The relevant security property is unforgeability: even if an adversary has valid MAC tags for certain messages, it should not be able to generate a valid tag for a new, different message."
+        "explanation": "A MAC provides authentication by associating a message with a tag generated using a secret key. The relevant security property is unforgeability : even if an adversary has valid MAC tags for certain messages, it should not be able to generate a valid tag for a new, different message."
       },
       {
         "id": "W7_Q13",
         "week": 7,
-        "header": "QUESTION 13 [MCQ]",
+        "header": "Q13 — Silent OT Extension using PCGs (Pseudorandom Correlation)",
         "question": "Why can linear functions of shared values be evaluated locally in the MPC schemes discussed in the lecture?",
         "options": [
           {
@@ -3873,12 +3788,12 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "We use a Linear Secret Sharing Scheme, which allows parties to locally compute linear functions of shared values. For example, if values are shared, a linear combination of their shares corresponds to a share of the same linear combination of the underlying values. This is why addition and multiplication by public constants can be performed locally without reconstructing the underlying secrets."
+        "explanation": "We use a Linear Secret Sharing Scheme , which allows parties to locally compute linear functions of shared values. For example, if values are shared, a linear combination of their shares corresponds to a share of the same linear combination of the underlying values. This is why addition and multiplication by public constants can be performed locally without reconstructing the underlying secrets."
       },
       {
         "id": "W7_Q14",
         "week": 7,
-        "header": "QUESTION 14 [MCQ]",
+        "header": "Q14 — Private Set Intersection (PSI) using OT",
         "question": "What is the purpose of Beaver's triple in preprocessing-based MPC over arithmetic circuits?",
         "options": [
           {
@@ -3906,7 +3821,7 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q15",
         "week": 7,
-        "header": "QUESTION 15 [MCQ]",
+        "header": "Q15 — KKRT PSI Protocol (Batched OPRFs from OT)",
         "question": "In the malicious-party setting, why does each party additionally hold a MAC share associated with its secret share?",
         "options": [
           {
@@ -3934,7 +3849,7 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q16",
         "week": 7,
-        "header": "QUESTION 16 [MCQ]",
+        "header": "Q16 — Vector OLE (VOLE) from OT Extensions",
         "question": "At the end of an MPC computation with malicious parties, why are the MAC values interactively checked?",
         "options": [
           {
@@ -3962,7 +3877,7 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q17",
         "week": 7,
-        "header": "QUESTION 17 [MCQ]",
+        "header": "Q17 — Communication Cost of OT Extension",
         "question": "What type of FHE circuit is sufficient for the naive preprocessing approach to generate Beaver triples?",
         "options": [
           {
@@ -3990,7 +3905,7 @@ window.QUIZ_DATA = [
       {
         "id": "W7_Q18",
         "week": 7,
-        "header": "QUESTION 18 [MCQ]",
+        "header": "Q18 — Base OT Computational Bottleneck",
         "question": "What additional property of the FHE scheme is assumed when using a shared FHE public key for the preprocessing procedure?",
         "options": [
           {
@@ -4013,12 +3928,12 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "We assume a shared FHE public key, where each party holds a share of the corresponding secret key. Decryption is then performed collaboratively rather than by a single party holding the complete secret key."
+        "explanation": "We assume a shared FHE public key , where each party holds a share of the corresponding secret key. Decryption is then performed collaboratively rather than by a single party holding the complete secret key."
       },
       {
         "id": "W7_Q19",
         "week": 7,
-        "header": "QUESTION 19 [MCQ]",
+        "header": "Q19 — OT for Boolean Gate Evaluation in MPC",
         "question": "In the resharing procedure for MPC using Beaver’s triples, why are fresh random values introduced?",
         "options": [
           {
@@ -4041,12 +3956,12 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "The resharing procedure introduces fresh randomness and uses it to produce a new sharing. Because the random values are fresh, the operation amounts to a reshare, while preserving correctness in the plaintext domain."
+        "explanation": "The resharing procedure introduces fresh randomness and uses it to produce a new sharing. Because the random values are fresh, the operation amounts to a reshare , while preserving correctness in the plaintext domain."
       },
       {
         "id": "W7_Q20",
         "week": 7,
-        "header": "QUESTION 20 [MCQ]",
+        "header": "Q20 — Applications of Oblivious Transfer in Privacy",
         "question": "Why is homomorphic multiplication used when generating Beaver triples in the FHE-based preprocessing approach?",
         "options": [
           {
@@ -4080,8 +3995,8 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q1",
         "week": 8,
-        "header": "QUESTION 1 [MCQ]",
-        "question": "In the MPC protocol for computing a linear function f(x1,...,xn) = c1·x1 + ... + cn·xn, what condition is placed on the number of corrupted parties t relative to the total number of parties n?",
+        "header": "Q1 — MPC Protocol Communication Rounds & Latency",
+        "question": "In the MPC protocol for computing a linear function f(x 1 ,...,x n ) = c 1 ·x 1 + ... + c n ·x n , what condition is placed on the number of corrupted parties t relative to the total number of parties n?",
         "options": [
           {
             "key": "a",
@@ -4108,7 +4023,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q2",
         "week": 8,
-        "header": "QUESTION 2 [MCQ]",
+        "header": "Q2 — Secret Sharing vs Garbled Circuits Trade-offs",
         "question": "In Shamir's (t, n) secret sharing scheme, what degree polynomial is used to construct the shares?",
         "options": [
           {
@@ -4136,7 +4051,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q3",
         "week": 8,
-        "header": "QUESTION 3 [MCQ]",
+        "header": "Q3 — Shamir Threshold Scheme for General Access Structures",
         "question": "In the (3,5) Shamir secret sharing example with secret S = 123 and prime p = 251, why do 2 shares fail to reveal the secret?",
         "options": [
           {
@@ -4164,36 +4079,36 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q4",
         "week": 8,
-        "header": "QUESTION 4 [MCQ]",
+        "header": "Q4 — Linear Secret Sharing Schemes (LSSS)",
         "question": "Which equation defines the practical (n, n) additive secret sharing scheme used in the lecture, denoted [x]?",
         "options": [
           {
             "key": "a",
-            "text": "x = x1 · x2 · ... · xn (mod p)"
+            "text": "x = x 1 · x 2 · ... · x n (mod p)"
           },
           {
             "key": "b",
-            "text": "x = max(x1, x2, ..., xn) (mod p)"
+            "text": "x = max(x 1 , x 2 , ..., x n ) (mod p)"
           },
           {
             "key": "c",
-            "text": "x = x1 − x2 − ... − xn (mod p)"
+            "text": "x = x 1 − x 2 − ... − x n (mod p)"
           },
           {
             "key": "d",
-            "text": "x = x1 + x2 + ... + xn (mod p)"
+            "text": "x = x 1 + x 2 + ... + x n (mod p)"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "Additive secret sharing wrt. a prime modulo p is defined as x = x1 + x2 + ⋯ + xn (mod p), with such a sharing denoted [x]."
+        "explanation": "Additive secret sharing wrt. a prime modulo p is defined as x = x 1 + x 2 + ⋯ + x n (mod p), with such a sharing denoted [x]."
       },
       {
         "id": "W8_Q5",
         "week": 8,
-        "header": "QUESTION 5 [MCQ]",
-        "question": "In the BGW worked example (4 parties, t = 2, y = x1+x2+x3+x4 over 𝔽5, with x1=2, x2=1, x3=1, x4=0), the adversary corrupts P1 and P4 and knows y. What does the adversary conclude about the unknown pair (x2, x3)?",
+        "header": "Q5 — Searchable Symmetric Encryption (SSE) Motivation",
+        "question": "In the BGW worked example (4 parties, t = 2, y = x 1 +x 2 +x 3 +x 4 over 𝔽 5 , with x 1 =2, x 2 =1, x 3 =1, x 4 =0), the adversary corrupts P1 and P4 and knows y. What does the adversary conclude about the unknown pair (x2, x3)?",
         "options": [
           {
             "key": "a",
@@ -4215,12 +4130,12 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "The adversary can list candidate guesses (x2,x3) = (0,2), (1,1), (2,0), (3,4), (4,3), and for every guess there exist consistent polynomials B(Z) and C(Z) matching the corrupted parties' views. So no guess can be ruled out."
+        "explanation": "The adversary can list candidate guesses (x 2 ,x 3 ) = (0,2), (1,1), (2,0), (3,4), (4,3), and for every guess there exist consistent polynomials B(Z) and C(Z) matching the corrupted parties' views. So no guess can be ruled out."
       },
       {
         "id": "W8_Q6",
         "week": 8,
-        "header": "QUESTION 6 [MCQ]",
+        "header": "Q6 — SSE Server Untrusted Storage & Search Trapdoors",
         "question": "In the real vs. ideal paradigm used to prove MPC security, what must the \"ideal protocol execution\" be able to do?",
         "options": [
           {
@@ -4248,7 +4163,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q7",
         "week": 8,
-        "header": "QUESTION 7 [MCQ]",
+        "header": "Q7 — Song-Wagner-Perrig (SWP) SSE Scheme",
         "question": "What is the fundamental efficiency-vs-security trade-off that defines Searchable Symmetric Encryption (SSE)?",
         "options": [
           {
@@ -4276,8 +4191,8 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q8",
         "week": 8,
-        "header": "QUESTION 8 [MCQ]",
-        "question": "In a landscape diagram, which pair of techniques are positioned as maximizing security at the cost of efficiency?",
+        "header": "Q8 — Curtmola et al. Inverted Index SSE (SSE-2)",
+        "question": "In landscape diagram, which pair of techniques are positioned as maximizing security at the cost of efficiency?",
         "options": [
           {
             "key": "a",
@@ -4304,7 +4219,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q9",
         "week": 8,
-        "header": "QUESTION 9 [MCQ]",
+        "header": "Q9 — Search Pattern vs Access Pattern Leakage",
         "question": "Which three protocols make up the SSE client-server scheme described in the lecture?",
         "options": [
           {
@@ -4332,7 +4247,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q10",
         "week": 8,
-        "header": "QUESTION 10 [MCQ] In the SSE search index, what does the \"inverted index\" map, as opposed to the \"forward index\"?",
+        "header": "Q10 — IND-CKA1 and IND-CKA2 Security Games for SSE",
         "question": "In the SSE search index, what does the \"inverted index\" map, as opposed to the \"forward index\"?",
         "options": [
           {
@@ -4360,7 +4275,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q11",
         "week": 8,
-        "header": "QUESTION 11 [MCQ]",
+        "header": "Q11 — Dynamic SSE (Insertions and Deletions)",
         "question": "In the simple SSE construction (Design 1), what does the server learn during the Setup phase?",
         "options": [
           {
@@ -4388,8 +4303,8 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q12",
         "week": 8,
-        "header": "QUESTION 12 [MCQ]",
-        "question": "Which of the following is NOT listed as part of the \"Search phase\" leakage (ℒSearch) in the formal leakage function?",
+        "header": "Q12 — Forward Privacy in Dynamic SSE",
+        "question": "Which of the following is NOT listed as part of the \"Search phase\" leakage ( ℒ Search ) in the formal leakage function?",
         "options": [
           {
             "key": "a",
@@ -4411,12 +4326,12 @@ window.QUIZ_DATA = [
         "correct": [
           "d"
         ],
-        "explanation": "ℒSearch consists of the result pattern (which documents appear in the result), query equality pattern (which queries correspond to the same keyword), and query intersection pattern (which documents appear across multiple queries). Frequency of each keyword is part of ℒSetup, not ℒSearch."
+        "explanation": "ℒ Search consists of the result pattern (which documents appear in the result), query equality pattern (which queries correspond to the same keyword), and query intersection pattern (which documents appear across multiple queries). Frequency of each keyword is part of ℒ Setup , not ℒ Search ."
       },
       {
         "id": "W8_Q13",
         "week": 8,
-        "header": "QUESTION 13 [MCQ]",
+        "header": "Q13 — Backward Privacy in Dynamic SSE",
         "question": "In SSE Design 2, how does the client compute the search index for a keyword w during Setup?",
         "options": [
           {
@@ -4433,18 +4348,18 @@ window.QUIZ_DATA = [
           },
           {
             "key": "d",
-            "text": "It splits the PRF output into k1‖k2, uses k1 to generate per-document tags F(k1, c), and encrypts document ids with k2"
+            "text": "It splits the PRF output into k1ǁk2, uses k1 to generate per-document tags F(k1, c), and encrypts document ids with k2"
           }
         ],
         "correct": [
           "d"
         ],
-        "explanation": "Design 2's setup computes k1‖k2 = Fk(w) for each keyword, generates a tag for the c-th document as F(k1, c), and encrypts the corresponding document id as Enc(k2, id), incrementing c."
+        "explanation": "Design 2's setup computes k1ǁk2 = F k(w) for each keyword, generates a tag for the c-th document as F(k 1 , c), and encrypts the corresponding document id as Enc(k 2 , id), incrementing c."
       },
       {
         "id": "W8_Q14",
         "week": 8,
-        "header": "QUESTION 14 [MCQ]",
+        "header": "Q14 — File-Injection Attacks on SSE",
         "question": "Compared to Design 1, what does an adversary observing a snapshot of the Design 2 encrypted database (before any queries) learn?",
         "options": [
           {
@@ -4472,7 +4387,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q15",
         "week": 8,
-        "header": "QUESTION 15 [MCQ]",
+        "header": "Q15 — Oblivious RAM (ORAM) vs SSE Comparison",
         "question": "Why does Design 2 sort the encrypted search index by pseudorandom labels rather than storing entries in their natural database order?",
         "options": [
           {
@@ -4500,7 +4415,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q16",
         "week": 8,
-        "header": "QUESTION 16 [MCQ]",
+        "header": "Q16 — Path ORAM Architecture & Stash",
         "question": "In the code-based game-playing proof methodology, what determines the output of a game G when adversary A halts?",
         "options": [
           {
@@ -4528,7 +4443,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q17",
         "week": 8,
-        "header": "QUESTION 17 [MCQ]",
+        "header": "Q17 — ORAM Bandwidth Overhead & Security",
         "question": "In the PRF security game (PRF-Real vs. PRF-Ideal), what is the key difference between the two worlds?",
         "options": [
           {
@@ -4556,7 +4471,7 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q18",
         "week": 8,
-        "header": "QUESTION 18 [MCQ]",
+        "header": "Q18 — SSE Range Queries using B-Trees / Best-Match",
         "question": "In the IND-CPA game for symmetric-key encryption, what does the adversary submit to the challenger, and what must it guess?",
         "options": [
           {
@@ -4584,12 +4499,12 @@ window.QUIZ_DATA = [
       {
         "id": "W8_Q19",
         "week": 8,
-        "header": "QUESTION 19 [MCQ]",
+        "header": "Q19 — Differential Privacy in Searchable Encryption",
         "question": "What is the overall goal of the \"proof by hybrids\" (G0 → G1 → G2 → G3) used in the SSE security proof?",
         "options": [
           {
             "key": "a",
-            "text": "To show RealΠ is identical (not just indistinguishable) to IdealL,SIM"
+            "text": "To show Real Π is identical (not just indistinguishable) to Ideal L,SIM"
           },
           {
             "key": "b",
@@ -4607,17 +4522,17 @@ window.QUIZ_DATA = [
         "correct": [
           "b"
         ],
-        "explanation": "The proof structure is RealΠ ≃c G0 ≃c G1 ≃c G2 ≃c G3 ≃c IdealL,SIM . Each hybrid step is shown indistinguishable from the previous one, chaining to show Real ≃c Ideal overall."
+        "explanation": "The proof structure is Real Π ≃ c G 0 ≃ c G 1 ≃ c G 2 ≃ c G 3 ≃ c Ideal L,SIM . Each hybrid step is shown indistinguishable from the previous one, chaining to show Real ≃ c Ideal overall."
       },
       {
         "id": "W8_Q20",
         "week": 8,
-        "header": "QUESTION 20 [MCQ]",
+        "header": "Q20 — Security vs Efficiency Trade-offs in Cloud PETs",
         "question": "What information does the leakage algorithm L provide to the Simulator (SIM) in the basic SSE security definition?",
         "options": [
           {
             "key": "a",
-            "text": "α = (N, V1, ..., Vq), where N is the total number of (w, id) pairs and each Vi is the set of document ids matching the i-th searched keyword"
+            "text": "α = (N, V 1 , ..., V q ), where N is the total number of (w, id) pairs and each V i is the set of document ids matching the i-th searched keyword"
           },
           {
             "key": "b",
@@ -4635,7 +4550,1139 @@ window.QUIZ_DATA = [
         "correct": [
           "a"
         ],
-        "explanation": "The simplified leakage for the basic SSE scheme is as α = (N, V1, …, Vq), where N is the total number of (w, id) pairs in the database and each Vi = DB(wi), the identifiers matching the i-th search keyword."
+        "explanation": "The simplified leakage for the basic SSE scheme is as α = (N, V 1 , …, V q ), where N is the total number of (w, id) pairs in the database and each V i = DB(w i ), the identifiers matching the i-th search keyword."
+      }
+    ]
+  },
+  {
+    "week": 9,
+    "count": 20,
+    "questions": [
+      {
+        "id": "W9_Q1",
+        "week": 9,
+        "header": "Q1 — SSE Core Architecture & Untrusted Server",
+        "question": "What is the main purpose of Searchable Symmetric Encryption (SSE)?",
+        "options": [
+          {
+            "key": "a",
+            "text": "To allow a client to search encrypted data stored on an untrusted server"
+          },
+          {
+            "key": "b",
+            "text": "To replace all symmetric-key encryption with public-key encryption"
+          },
+          {
+            "key": "c",
+            "text": "To make the server learn the plaintext database before performing a search"
+          },
+          {
+            "key": "d",
+            "text": "To eliminate the need for a client in a database system"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "SSE allows a client to store encrypted data on a server and later search the encrypted database without revealing the plaintext database to the server."
+      },
+      {
+        "id": "W9_Q2",
+        "week": 9,
+        "header": "Q2 — Forward Privacy Protection against Injection Attacks",
+        "question": "In a basic SSE client-server protocol, which party typically holds the secret keys used to generate search tokens?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The server"
+          },
+          {
+            "key": "b",
+            "text": "The client"
+          },
+          {
+            "key": "c",
+            "text": "Both parties must publish the same secret key"
+          },
+          {
+            "key": "d",
+            "text": "A third-party auditor"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The client is the data owner and holds the secret keys. During a search, the client uses these keys to generate the appropriate search information or tokens that are sent to the server."
+      },
+      {
+        "id": "W9_Q3",
+        "week": 9,
+        "header": "Q3 — Search Pattern Leakage Definition",
+        "question": "What does DB(w) represent in the SSE examples?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The set of all keywords in the database"
+          },
+          {
+            "key": "b",
+            "text": "The set of documents in which keyword w is present"
+          },
+          {
+            "key": "c",
+            "text": "The encrypted version of keyword w"
+          },
+          {
+            "key": "d",
+            "text": "The number of queries containing w"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "DB(w) are the documents in which the keyword w is present. For example, if Apple occurs in documents 1, 3, and 5, then DB(Apple) = {1, 3, 5}."
+      },
+      {
+        "id": "W9_Q4",
+        "week": 9,
+        "header": "Q4 — Access Pattern vs Search Pattern in SSE",
+        "question": "What is meant by the index-only setting in SSE?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Only the search index is protected, while the database files are ignored"
+          },
+          {
+            "key": "b",
+            "text": "Security is considered only for the encrypted search index, rather than the entire system"
+          },
+          {
+            "key": "c",
+            "text": "The server is allowed to decrypt all database files"
+          },
+          {
+            "key": "d",
+            "text": "The client does not use an encrypted index"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "In the index-only setting, the security analysis focuses on the encrypted search index, whereas system-wide security considers the broader interaction with the stored data and search process."
+      },
+      {
+        "id": "W9_Q5",
+        "week": 9,
+        "header": "Q5 — Curtmola Inverted Index Lookup Complexity",
+        "question": "Consider a conjunctive query q = Apple ∧ Cat ∧ Elephant. In a naive SSE approach, what determines the search work?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Only the number of keywords in the database"
+          },
+          {
+            "key": "b",
+            "text": "The sum of the numbers of matching document IDs for the queried keywords"
+          },
+          {
+            "key": "c",
+            "text": "Only the number of documents in the database, regardless of the query"
+          },
+          {
+            "key": "d",
+            "text": "Only the number of documents matching all three keywords"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "A naive conjunctive-search complexity is proportional to |DB(Apple)| + |DB(Cat)| + |DB(Elephant)|. Thus, the work depends on the matching-document lists for the individual query terms."
+      },
+      {
+        "id": "W9_Q6",
+        "week": 9,
+        "header": "Q6 — Dynamic SSE with Append-Only Encrypted Indices",
+        "question": "In the Basic Cross-Tags (BXT) protocol, which keyword is normally chosen as the s-term?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The most frequent keyword in the query"
+          },
+          {
+            "key": "b",
+            "text": "The first keyword alphabetically"
+          },
+          {
+            "key": "c",
+            "text": "The least frequent keyword in the query"
+          },
+          {
+            "key": "d",
+            "text": "A keyword chosen randomly by the server"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "BXT chooses the least frequent term in the conjunction as the s-term. The remaining keywords are treated as x-terms. This allows the server to start from a smaller candidate set."
+      },
+      {
+        "id": "W9_Q7",
+        "week": 9,
+        "header": "Q7 — Backward Privacy: Leakage on Deletion",
+        "question": "Why does BXT improve the search complexity for a conjunctive query?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It searches only the documents matching the least frequent term and checks the other terms"
+          },
+          {
+            "key": "b",
+            "text": "It decrypts the complete database before every query"
+          },
+          {
+            "key": "c",
+            "text": "It removes all keywords from the query except one"
+          },
+          {
+            "key": "d",
+            "text": "It requires the client to send every document ID to the server"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "BXT begins with the least frequent term, so the candidate set is DB(w_1), where w_1 is the s-term. The server work scales as n x |DB(w_1)|, improving over the naive sum of the sizes of all matching lists when one term is much more frequent than the others."
+      },
+      {
+        "id": "W9_Q8",
+        "week": 9,
+        "header": "Q8 — File-Injection / Query-Recovery Attacks",
+        "question": "Suppose a query has three keywords and the least frequent keyword occurs in 4 documents. According to the BXT performance analysis, approximately how does the server's work scale?",
+        "options": [
+          {
+            "key": "a",
+            "text": "4"
+          },
+          {
+            "key": "b",
+            "text": "7"
+          },
+          {
+            "key": "c",
+            "text": "12"
+          },
+          {
+            "key": "d",
+            "text": "64"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "For a conjunctive query with n keywords, the BXT server work scales as n x|DB(w_1)|, where w_1 is the least frequent term. Here n = 3 and |DB(w_1)| = 4, giving 3 × 4 = 12."
+      },
+      {
+        "id": "W9_Q9",
+        "week": 9,
+        "header": "Q9 — Hierarchical Range Queries in SSE",
+        "question": "Which information is leaked in BXT because the server receives the document IDs for the s-term?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The plaintext value of the encryption key"
+          },
+          {
+            "key": "b",
+            "text": "The set DB(w_1) for the least frequent term"
+          },
+          {
+            "key": "c",
+            "text": "Every keyword in the database"
+          },
+          {
+            "key": "d",
+            "text": "The client's entire plaintext database"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The BXT leakage analysis states that the document IDs for the least frequent term, DB(w_1), are leaked to the server. This is less leakage than the naive solution, but it is still information about the queried keyword."
+      },
+      {
+        "id": "W9_Q10",
+        "week": 9,
+        "header": "Q10 — Order-Preserving Encryption (OPE) vs SSE Range Search",
+        "question": "Why can BXT suffer from inter-query leakage?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The server receives xtrap values that it can save and reuse across queries"
+          },
+          {
+            "key": "b",
+            "text": "The server never receives any information during a search"
+          },
+          {
+            "key": "c",
+            "text": "Every query uses a completely fresh database"
+          },
+          {
+            "key": "d",
+            "text": "BXT requires the client to reveal the plaintext query"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "The server receives xtrap values for the x-terms. Because these values enable the server to compute f(xtrap, ind), the server can save them and use them later to test previously observed document IDs, causing inter-query leakage."
+      },
+      {
+        "id": "W9_Q11",
+        "week": 9,
+        "header": "Q11 — Order-Revealing Encryption (ORE) Comparison",
+        "question": "What is the main idea behind the Oblivious Cross-Tags (OXT) protocol?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Replace the xtrap-based computation with an oblivious shared computation between client and server"
+          },
+          {
+            "key": "b",
+            "text": "Remove the encrypted search index completely"
+          },
+          {
+            "key": "c",
+            "text": "Send all xtrap values in plaintext to make the search faster"
+          },
+          {
+            "key": "d",
+            "text": "Perform every search by downloading the complete database"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "OXT replaces the function f(xtrap, .) with a form of oblivious shared computation between the client and server. The goal is to reduce the leakage caused by directly giving the server the xtrap values."
+      },
+      {
+        "id": "W9_Q12",
+        "week": 9,
+        "header": "Q12 — SSE Multi-Keyword Boolean Queries (Conjunctive / Disjunctive)",
+        "question": "In the OXT leakage analysis, what does the keyword-pair result pattern (KPRP) reveal?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The secret keys used by the client"
+          },
+          {
+            "key": "b",
+            "text": "The document indices matching the s-term together with each x-term"
+          },
+          {
+            "key": "c",
+            "text": "The plaintext contents of every document"
+          },
+          {
+            "key": "d",
+            "text": "Only the total number of keywords in the universe"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "For q = w_1 ∧ ... ∧ w_n, with w_1 as the s-term, KPRP records the document intersections DB(w_1) ∩ DB(w_i) for the x-terms. Note that this pattern is revealed because the server can observe the file access pattern."
+      },
+      {
+        "id": "W9_Q13",
+        "week": 9,
+        "header": "Q13 — Cryptographic Trapdoors Generation using PRFs",
+        "question": "Which of the following is listed as a leakage of OXT?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Equality pattern of s-terms across queries"
+          },
+          {
+            "key": "b",
+            "text": "The client's secret key"
+          },
+          {
+            "key": "c",
+            "text": "The plaintext value of every queried keyword"
+          },
+          {
+            "key": "d",
+            "text": "The private randomness used during setup"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "The OXT leakage analysis includes the equality pattern, which indicates which queries have equal s-terms. Size pattern, conditional intersection pattern, keyword-pair result pattern, and total keyword appearances are the leakage components."
+      },
+      {
+        "id": "W9_Q14",
+        "week": 9,
+        "header": "Q14 — Token / Trapdoor Replay Detection in SSE",
+        "question": "What is the size pattern in the OXT leakage description?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The number of keywords in the entire keyword universe"
+          },
+          {
+            "key": "b",
+            "text": "The number of documents matching the first keyword (the s-term) in each query"
+          },
+          {
+            "key": "c",
+            "text": "The size of the client's secret key"
+          },
+          {
+            "key": "d",
+            "text": "The size of every encrypted document"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Size pattern is the number of documents matching the first keyword in each query, written as |DB(w_1)| when w_1 is the s-term."
+      },
+      {
+        "id": "W9_Q15",
+        "week": 9,
+        "header": "Q15 — ORAM for Zero-Leakage Oblivious Access",
+        "question": "Why is KPRP leakage considered important in OXT?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It can reveal which document IDs satisfy the s-term together with particular x-terms"
+          },
+          {
+            "key": "b",
+            "text": "It makes encryption mathematically impossible"
+          },
+          {
+            "key": "c",
+            "text": "It prevents the server from performing any search"
+          },
+          {
+            "key": "d",
+            "text": "It reveals the client's secret key directly"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "KPRP gives the server information about document intersections between the s-term and x-terms. This result-pattern leakage can reveal useful relationships between queried keywords and documents even when the keywords themselves are encrypted."
+      },
+      {
+        "id": "W9_Q16",
+        "week": 9,
+        "header": "Q16 — Path ORAM Binary Tree & Position Map",
+        "question": "What is the basic idea of Hidden Vector Encryption (HVE) in the SSE discussion?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It hides attributes while allowing a suitable predicate to be evaluated"
+          },
+          {
+            "key": "b",
+            "text": "It reveals all attributes but hides only the message length"
+          },
+          {
+            "key": "c",
+            "text": "It is used only to encrypt symmetric keys"
+          },
+          {
+            "key": "d",
+            "text": "It removes the need for predicates in encrypted search"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "HVE is a predicate-encryption technique in which the attributes are hidden while a key for a predicate can reveal whether the predicate matches. This provides a way to support conjunctive predicates without exposing the underlying attributes."
+      },
+      {
+        "id": "W9_Q17",
+        "week": 9,
+        "header": "Q17 — Path ORAM ReadAndRemove / WriteBack Logic",
+        "question": "In the conjunctive file-injection attack against a 2-keyword query q=w_1^* ∧ w_2^*, why does the attacker include all keywords from W_{i,2} in every injected file when w_1^* ∈ W_{i,1} and w_2^* ∈ W_{i,2}?",
+        "options": [
+          {
+            "key": "a",
+            "text": "To ensure that w_1^* is never present in the injected files"
+          },
+          {
+            "key": "b",
+            "text": "To make w_2^* always match, so the query results reveal the same information as searching for w_1^* alone"
+          },
+          {
+            "key": "c",
+            "text": "To prevent the server from observing the file access pattern"
+          },
+          {
+            "key": "d",
+            "text": "To increase the number of possible keywords in the keyword universe"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Since every injected file contains all keywords from W_{i,2}, the keyword w_2^* always matches in these files. Therefore, the conjunctive query w_1^* ∧ w_ 2^* returns an injected file exactly when that file contains w_1^*. This allows the attacker to apply the binary-search attack to recover w_1^*."
+      },
+      {
+        "id": "W9_Q18",
+        "week": 9,
+        "header": "Q18 — ORAM Stash Overflow Probability & Bounds",
+        "question": "What is the role of HXT in the discussed SSE construction?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It uses SHVE to hide the cross-tag set and thereby prevents KPRP leakage"
+          },
+          {
+            "key": "b",
+            "text": "It replaces SSE with ordinary plaintext database search"
+          },
+          {
+            "key": "c",
+            "text": "It intentionally exposes the X-Set to the server"
+          },
+          {
+            "key": "d",
+            "text": "It is a file-injection attack against SSE"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "HXT is an SSE construction using SHVE that hides the KPRP leakage. The intuition is to treat the membership tests in OXT as attributes of HVE and perform them without exposing the individual (x-token, ind) pairs."
+      },
+      {
+        "id": "W9_Q19",
+        "week": 9,
+        "header": "Q19 — Hardware Enclaves (SGX) for Searchable Encryption",
+        "question": "In a file-injection attack on SSE, what capability is assumed for the semi-honest server?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The server can inject specially constructed files containing keywords of its choice before searches occur"
+          },
+          {
+            "key": "b",
+            "text": "The server can directly obtain the client's secret key"
+          },
+          {
+            "key": "c",
+            "text": "The server can decrypt every encrypted file automatically"
+          },
+          {
+            "key": "d",
+            "text": "The server can change the client's search query in plaintext"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "The attack model assumes that a semi-honest server can inject maliciously generated files containing selected keywords from the keyword universe before the client performs a search. These files are handled like normal documents and can be used to learn information from the resulting access pattern."
+      },
+      {
+        "id": "W9_Q20",
+        "week": 9,
+        "header": "Q20 — Practical SSE Deployment Considerations",
+        "question": "For a keyword universe W, how many injected files are needed in the binary-search attack to identify a single queried keyword?",
+        "options": [
+          {
+            "key": "a",
+            "text": "|W| files"
+          },
+          {
+            "key": "b",
+            "text": "|W|^2 files"
+          },
+          {
+            "key": "c",
+            "text": "[log |W|] files"
+          },
+          {
+            "key": "d",
+            "text": "Exactly two files for every possible keyword"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "A non-adaptive binary-search attack using successive partitions of W. By using one partition for each bit position, the server can identify the keyword using [log |W|] injected files."
+      }
+    ]
+  },
+  {
+    "week": 10,
+    "count": 20,
+    "questions": [
+      {
+        "id": "W10_Q1",
+        "week": 10,
+        "header": "Q1 — Symmetric-key Hidden Vector Encryption (SHVE)",
+        "question": "What does Symmetric-key Hidden Vector Encryption (SHVE) avoid using, unlike public-key HVE constructions?",
+        "options": [
+          {
+            "key": "a",
+            "text": "PRFs"
+          },
+          {
+            "key": "b",
+            "text": "Symmetric-key encryption"
+          },
+          {
+            "key": "c",
+            "text": "Bilinear maps"
+          },
+          {
+            "key": "d",
+            "text": "Block ciphers"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "SHVE achieves HVE functionality using PRFs and CPA-secure SKE, avoiding the bilinear-map-based constructions (which proved too inefficient for SSE)."
+      },
+      {
+        "id": "W10_Q2",
+        "week": 10,
+        "header": "Q2 — SHVE without Bilinear Pairings (PRFs & SKE)",
+        "question": "In SHVE, what does the Setup( λ) algorithm (run by the client) output?",
+        "options": [
+          {
+            "key": "a",
+            "text": "A master secret key msk ← {0,1}^λ"
+          },
+          {
+            "key": "b",
+            "text": "A pair of public/private RSA keys"
+          },
+          {
+            "key": "c",
+            "text": "A bilinear map parameter set"
+          },
+          {
+            "key": "d",
+            "text": "A Bloom filter structure"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "Setup( λ) simply samples msk uniformly at random from {0,1}^λ for security parameter λ."
+      },
+      {
+        "id": "W10_Q3",
+        "week": 10,
+        "header": "Q3 — Hidden Vector Encryption (HVE) Predicates & Wildcards",
+        "question": "In SHVE encryption, each ciphertext component is computed as:",
+        "options": [
+          {
+            "key": "a",
+            "text": "c i = SKE.Enc(msk, x i )"
+          },
+          {
+            "key": "b",
+            "text": "c i = F(msk, x i ∥ i)"
+          },
+          {
+            "key": "c",
+            "text": "c i = x i ⊕ msk"
+          },
+          {
+            "key": "d",
+            "text": "c i = H(x i ∥ i)"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The keyed PRF F is applied to the concatenation of the bit xi and its position i, so plaintext bits remain indistinguishable under PRF security."
+      },
+      {
+        "id": "W10_Q4",
+        "week": 10,
+        "header": "Q4 — SHVE Range Query Mapping via Binary Decompositions",
+        "question": "In SHVE.Keygen, the set S is defined as:",
+        "options": [
+          {
+            "key": "a",
+            "text": "All positions in the predicate vector v"
+          },
+          {
+            "key": "b",
+            "text": "Positions where the ciphertext bit is 1"
+          },
+          {
+            "key": "c",
+            "text": "Random positions chosen independently of v"
+          },
+          {
+            "key": "d",
+            "text": "Positions where the predicate v does NOT have a wildcard"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "S captures exactly the positions that must be checked for equality; wildcard positions are skipped."
+      },
+      {
+        "id": "W10_Q5",
+        "week": 10,
+        "header": "Q5 — Range-to-Prefix / Wildcard Encoding in SHVE",
+        "question": "In the SHVE Query algorithm, a \"match\" is declared when:",
+        "options": [
+          {
+            "key": "a",
+            "text": "Sym.Dec(K′, d1) = μ = 0"
+          },
+          {
+            "key": "b",
+            "text": "K′ is not derivable from the ciphertext"
+          },
+          {
+            "key": "c",
+            "text": "All ciphertext bits equal 1"
+          },
+          {
+            "key": "d",
+            "text": "The XOR of all ciphertext bits equals zero"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "If the predicate is satisfied, XORing the relevant ciphertext bits with d0 recovers K, so decrypting d1 with K′ = K yields μ = 0."
+      },
+      {
+        "id": "W10_Q6",
+        "week": 10,
+        "header": "Q6 — SHVE Multi-Dimensional Queries & Conjunctions",
+        "question": "What is the primary purpose of HXT's H-tag oracle compared to OXT's X-tag test?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It reveals the exact matching document IDs to the server"
+          },
+          {
+            "key": "b",
+            "text": "It answers only match/no-match for the whole conjunction, hiding per-pair results"
+          },
+          {
+            "key": "c",
+            "text": "It replaces the PRF with a hash function for speed"
+          },
+          {
+            "key": "d",
+            "text": "It eliminates the need for a cross-tag set entirely"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "OXT leaks every per-pair test result to the server; HXT hides this by only revealing a single match/no-match outcome per conjunctive query."
+      },
+      {
+        "id": "W10_Q7",
+        "week": 10,
+        "header": "Q7 — Predicate Encryption vs Attribute-Based Encryption",
+        "question": "In HXT, how is the SHVE-encrypted cross-tag (X-Set) information organized?",
+        "options": [
+          {
+            "key": "a",
+            "text": "As a sorted linked list of tags"
+          },
+          {
+            "key": "b",
+            "text": "As a hash table indexed by keyword"
+          },
+          {
+            "key": "c",
+            "text": "Packed into a bit-vector via a Bloom filter for membership queries"
+          },
+          {
+            "key": "d",
+            "text": "As a balanced binary search tree"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "X-Set membership is packed into a bit-vector (Bloom filter), and this vector is then encrypted using SHVE to form the H-Set."
+      },
+      {
+        "id": "W10_Q8",
+        "week": 10,
+        "header": "Q8 — Leakage Profile of SHVE Range Queries",
+        "question": "The naive approach to answering a disjunctive query q = w 1 ∨ w 2 ∨ ... ∨ wn transforms it into:",
+        "options": [
+          {
+            "key": "a",
+            "text": "A single conjunctive query on the union of all documents"
+          },
+          {
+            "key": "b",
+            "text": "A random sampling of the document set"
+          },
+          {
+            "key": "c",
+            "text": "q' = w 1 ∧ w 2 ∧ ... ∧ w n"
+          },
+          {
+            "key": "d",
+            "text": "q' = NOT(w 1 ) ∧ NOT(w 2 ) ∧ ... ∧ NOT(w n ), then D − result"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "By De Morgan's law, an OR query is rewritten as an AND of negated terms, and the final answer is obtained by subtracting the intersection from the full document set D."
+      },
+      {
+        "id": "W10_Q9",
+        "week": 10,
+        "header": "Q9 — SHVE Token Construction for Subsets",
+        "question": "Which of the following is NOT listed as a desirable property when constructing metakeywords for disjunctive queries?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Coverage : an O(N)-sized set covering all O(2^N) possible disjunctions"
+          },
+          {
+            "key": "b",
+            "text": "Compression : reducing the alphabet size of keywords"
+          },
+          {
+            "key": "c",
+            "text": "Efficiency : minimizing false positives"
+          },
+          {
+            "key": "d",
+            "text": "Security : revealing as little information as possible about the queried keyword"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Coverage, Efficiency, and Security are the desired properties; Compression is not one of them."
+      },
+      {
+        "id": "W10_Q10",
+        "week": 10,
+        "header": "Q10 — SHVE Ciphertext Structure & PRF Masks",
+        "question": "A metakeyword mkw i,j is formally defined as a bitstring where:",
+        "options": [
+          {
+            "key": "a",
+            "text": "Bit positions in the interval [i,j] are 0 and all other positions are 1"
+          },
+          {
+            "key": "b",
+            "text": "All bit positions are set to 1"
+          },
+          {
+            "key": "c",
+            "text": "Bit positions in the interval [i,j] are 1 and all other positions are 0"
+          },
+          {
+            "key": "d",
+            "text": "Only position i is 1, and all others are 0"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "This encoding makes DB(mkw i,j ) equal to the union of documents for all keywords outside [i,j]."
+      },
+      {
+        "id": "W10_Q11",
+        "week": 10,
+        "header": "Q11 — Expressive Database Queries (SQL over Encrypted Data)",
+        "question": "Without bucketization, the storage overhead of the metakeyword-based disjunctive scheme scales as:",
+        "options": [
+          {
+            "key": "a",
+            "text": "O(N)"
+          },
+          {
+            "key": "b",
+            "text": "O(N log N)"
+          },
+          {
+            "key": "c",
+            "text": "O(N²), where N is the number of metakeywords"
+          },
+          {
+            "key": "d",
+            "text": "O(1), independent of N"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "Every pair (i,j) potentially needs its own metakeyword, giving quadratic storage before bucketization is introduced."
+      },
+      {
+        "id": "W10_Q12",
+        "week": 10,
+        "header": "Q12 — CryptDB Architecture & Onion Layers",
+        "question": "In the bucketization technique, keywords are:",
+        "options": [
+          {
+            "key": "a",
+            "text": "Randomly shuffled before grouping"
+          },
+          {
+            "key": "b",
+            "text": "Grouped by document ID"
+          },
+          {
+            "key": "c",
+            "text": "Encrypted individually before bucketing"
+          },
+          {
+            "key": "d",
+            "text": "Arranged in increasing order of frequency and divided into fixed-size buckets"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Sorting by frequency and using constant-size buckets keeps the number of metakeywords per bucket practically bounded (e.g., 16 for bucket size 4)."
+      },
+      {
+        "id": "W10_Q13",
+        "week": 10,
+        "header": "Q13 — Security Degradation in Onion-Layered Databases",
+        "question": "TWINSSE can incorporate which underlying conjunctive SSE schemes in a black-box manner?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Any conjunctive SSE scheme, such as OXT or HXT"
+          },
+          {
+            "key": "b",
+            "text": "Only OXT"
+          },
+          {
+            "key": "c",
+            "text": "Only functional-encryption-based schemes"
+          },
+          {
+            "key": "d",
+            "text": "Only fully homomorphic encryption schemes"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "TWINSSE is designed to layer the meta-keyword idea on top of any existing conjunctive SSE scheme, treating it as a black box."
+      },
+      {
+        "id": "W10_Q14",
+        "week": 10,
+        "header": "Q14 — Functional Encryption (Inner Product FE)",
+        "question": "TWINSSE achieves what improvement in storage overhead compared to the quadratic-storage scheme IEX-2LeV?",
+        "options": [
+          {
+            "key": "a",
+            "text": "2x"
+          },
+          {
+            "key": "b",
+            "text": "60x"
+          },
+          {
+            "key": "c",
+            "text": "1000x"
+          },
+          {
+            "key": "d",
+            "text": "No improvement, only latency gains"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The lecture reports a 60× reduction in storage overhead relative to IEX-2LeV, with storage now scaling linearly in the number of keywords."
+      },
+      {
+        "id": "W10_Q15",
+        "week": 10,
+        "header": "Q15 — Private Information Retrieval (PIR) vs SSE",
+        "question": "Which statement best distinguishes Functional Encryption (FE) from standard Homomorphic Encryption (HE)?",
+        "options": [
+          {
+            "key": "a",
+            "text": "FE requires bilinear maps while HE never does"
+          },
+          {
+            "key": "b",
+            "text": "HE and FE are functionally identical"
+          },
+          {
+            "key": "c",
+            "text": "FE reveals only the output of a function, while HE returns an encrypted result"
+          },
+          {
+            "key": "d",
+            "text": "HE reveals the function output directly to the server without any key"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "FE's defining feature is function-specific keys that expose only the evaluated output, whereas HE produces a ciphertext that must still be decrypted (typically by the data owner)."
+      },
+      {
+        "id": "W10_Q16",
+        "week": 10,
+        "header": "Q16 — Single-Server Computationally Private PIR (cPIR)",
+        "question": "In the DDH-based inner-product FE scheme, what does the master secret key consist of?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The plaintext vector x"
+          },
+          {
+            "key": "b",
+            "text": "The public matrix A"
+          },
+          {
+            "key": "c",
+            "text": "The ciphertext components c i"
+          },
+          {
+            "key": "d",
+            "text": "The randomly chosen secret values s 1 , s 2 , ..., s ℓ"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "msk = (s 1 , ..., s ℓ ), the per-position secret exponents used to both encrypt and to derive the public key elements hi = g si ."
+      },
+      {
+        "id": "W10_Q17",
+        "week": 10,
+        "header": "Q17 — Multi-Server Information-Theoretic PIR (itPIR)",
+        "question": "The Decisional Diffie-Hellman (DDH) assumption states that an attacker cannot distinguish between which two tuples?",
+        "options": [
+          {
+            "key": "a",
+            "text": "(g, gᵃ, g b , g ab ) and (g, gᵃ, g b , gᶜ) for random a, b, c"
+          },
+          {
+            "key": "b",
+            "text": "(gᵃ, g b ) and (g ab , gᶜ)"
+          },
+          {
+            "key": "c",
+            "text": "(g, gᵃ) and (g, g b )"
+          },
+          {
+            "key": "d",
+            "text": "Any two random group elements"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "DDH says the real tuple with g ab is computationally indistinguishable from a tuple where the last element is replaced by g c for independent random c."
+      },
+      {
+        "id": "W10_Q18",
+        "week": 10,
+        "header": "Q18 — Homomorphic PIR (XPIR, SealPIR, OnionPIR)",
+        "question": "What is the key limitation of the DDH-based inner-product FE scheme instantiated in the lecture?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It cannot support ℓ-dimensional vectors"
+          },
+          {
+            "key": "b",
+            "text": "Decryption requires computing a discrete logarithm, infeasible for large ranges"
+          },
+          {
+            "key": "c",
+            "text": "It requires bilinear pairings"
+          },
+          {
+            "key": "d",
+            "text": "It leaks the master secret key during encryption"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Recovering ⟨ x,y ⟩ requires solving a discrete-log problem, which is only tractable when the output space is small, not for cryptographic-size moduli."
+      },
+      {
+        "id": "W10_Q19",
+        "week": 10,
+        "header": "Q19 — Differential Privacy Integration with SSE & PIR",
+        "question": "The LWE-based FE scheme improves on the DDH-based scheme mainly because:",
+        "options": [
+          {
+            "key": "a",
+            "text": "It uses smaller ciphertexts"
+          },
+          {
+            "key": "b",
+            "text": "It avoids randomness entirely during encryption"
+          },
+          {
+            "key": "c",
+            "text": "Decryption is completed via simple rescaling and rounding (i.e. feasible)"
+          },
+          {
+            "key": "d",
+            "text": "It requires no master secret key"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "After cancelling the LWE noise terms, the result is recovered by dividing by the scaling factor and rounding, no discrete-log computation needed."
+      },
+      {
+        "id": "W10_Q20",
+        "week": 10,
+        "header": "Q20 — Comprehensive PETs Stack & Future Directions",
+        "question": "In the formal definition of Zero-Knowledge Proof systems, which is NOT one of the three required properties?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Completeness"
+          },
+          {
+            "key": "b",
+            "text": "Soundness"
+          },
+          {
+            "key": "c",
+            "text": "Zero-Knowledge"
+          },
+          {
+            "key": "d",
+            "text": "Efficiency (polynomial-time provers)"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "ZKPs have Completeness (honest provers always accepted), Soundness (dishonest provers always rejected), and Zero-Knowledge (no extra knowledge leaked) as the three required properties. Prover efficiency is not one of them."
       }
     ]
   }
