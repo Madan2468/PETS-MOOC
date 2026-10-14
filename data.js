@@ -5685,5 +5685,571 @@ window.QUIZ_DATA = [
         "explanation": "ZKPs have Completeness (honest provers always accepted), Soundness (dishonest provers always rejected), and Zero-Knowledge (no extra knowledge leaked) as the three required properties. Prover efficiency is not one of them."
       }
     ]
+  },
+  {
+    "week": 11,
+    "count": 20,
+    "questions": [
+      {
+        "id": "W11_Q1",
+        "week": 11,
+        "header": "Q1 — Three-Move Structure of Σ-Protocols",
+        "question": "What is the three-move structure of a Σ-protocol?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Challenge, commit, response"
+          },
+          {
+            "key": "b",
+            "text": "Setup, prove, verify"
+          },
+          {
+            "key": "c",
+            "text": "Commit, response, challenge"
+          },
+          {
+            "key": "d",
+            "text": "Commit, challenge, response"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "The prover first sends a commitment (for example a = gʳ), the verifier then sends a uniformly random challenge c, and the prover finally sends a response σ = f(r, c, w), where w is the witness."
+      },
+      {
+        "id": "W11_Q2",
+        "week": 11,
+        "header": "Q2 — Discrete-Log Σ-Protocol Verification Equation",
+        "question": "In the Σ-protocol for the discrete-log language (h = gˣ), the verifier accepts if which equation holds?",
+        "options": [
+          {
+            "key": "a",
+            "text": "g^σ = a · hᶜ"
+          },
+          {
+            "key": "b",
+            "text": "g^σ = a + hᶜ"
+          },
+          {
+            "key": "c",
+            "text": "gᶜ = a · h^σ"
+          },
+          {
+            "key": "d",
+            "text": "h^σ = a · gᶜ"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "The prover sends a = gʳ and σ = r + c·x. Completeness follows because g^σ = g^(r+cx) = gʳ · (gˣ)ᶜ = a · hᶜ."
+      },
+      {
+        "id": "W11_Q3",
+        "week": 11,
+        "header": "Q3 — Honest-Verifier Zero-Knowledge (HVZK) Simulation & Rewinding",
+        "question": "Why must the honest-verifier ZK simulator (SIM) rewind the verifier?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It needs to know the challenge before it can build a consistent transcript"
+          },
+          {
+            "key": "b",
+            "text": "It must extract the witness from the prover"
+          },
+          {
+            "key": "c",
+            "text": "It needs to break the discrete-logarithm assumption"
+          },
+          {
+            "key": "d",
+            "text": "It must generate the common reference string"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "SIM has only public inputs (g, h) and not x. It runs the verifier once to learn the challenge c, then rewinds with the same random bits. It fixes the commitment as a = g^σ · h^(−c) for a random σ, which gives a transcript distributed exactly like an honest one."
+      },
+      {
+        "id": "W11_Q4",
+        "week": 11,
+        "header": "Q4 — Knowledge Soundness & Witness Extraction in DLOG Σ-Protocol",
+        "question": "How does the extractor recover the witness x in the knowledge-soundness argument for the DLOG Σ-protocol?",
+        "options": [
+          {
+            "key": "a",
+            "text": "x = (σ1 + σ2)(c1 + c2)^(−1) mod p"
+          },
+          {
+            "key": "b",
+            "text": "x = (σ1 − σ2)(c1 − c2)^(−1) mod p"
+          },
+          {
+            "key": "c",
+            "text": "x = (c1 − c2)(σ1 − σ2)^(−1) mod p"
+          },
+          {
+            "key": "d",
+            "text": "x = σ1 · c1^(−1) mod p"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The extractor rewinds the prover after the same commitment and obtains two accepting responses σ1, σ2 for different challenges c1, c2. Dividing the two verification equations gives g^(σ1−σ2) = h^(c1−c2), so σ1 − σ2 = x·(c1 − c2) mod p. Hence x = (σ1 − σ2)(c1 − c2)^(−1) mod p."
+      },
+      {
+        "id": "W11_Q5",
+        "week": 11,
+        "header": "Q5 — Zero-Knowledge Proofs vs. Proofs of Knowledge (Locked-Door Analogy)",
+        "question": "What is the difference between a zero-knowledge proof and a proof of knowledge, as illustrated by the locked-door example?",
+        "options": [
+          {
+            "key": "a",
+            "text": "A zero-knowledge proof requires interaction, while a proof of knowledge does not"
+          },
+          {
+            "key": "b",
+            "text": "A proof of knowledge is secure only against honest verifiers"
+          },
+          {
+            "key": "c",
+            "text": "A zero-knowledge proof shows a key exists, while a proof of knowledge shows the prover actually knows a key"
+          },
+          {
+            "key": "d",
+            "text": "A zero-knowledge proof reveals the key, while a proof of knowledge does not"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "A ZK proof establishes \"there exists a secret key that opens the door\" and says nothing about whether the prover has it. A proof of knowledge additionally establishes \"I know a secret key that opens the door\"."
+      },
+      {
+        "id": "W11_Q6",
+        "week": 11,
+        "header": "Q6 — Honest-Verifier ZK Failure Against Malicious Verifiers",
+        "question": "Why does the simulator that works for honest-verifier ZK fail against a malicious verifier?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Malicious verifiers can break the discrete-logarithm assumption"
+          },
+          {
+            "key": "b",
+            "text": "A rewound run need not produce the same challenge"
+          },
+          {
+            "key": "c",
+            "text": "The response σ cannot be computed without the witness"
+          },
+          {
+            "key": "d",
+            "text": "Malicious verifiers always reject simulated transcripts"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "A dishonest verifier can compute c ← V(a, $) from the commitment and its private coins. SIM changes the commitment when it rewinds, so it cannot guarantee the same challenge again. The simulation works only with probability about 1/p, when the two challenges happen to match."
+      },
+      {
+        "id": "W11_Q7",
+        "week": 11,
+        "header": "Q7 — Fiat-Shamir Transformation (Non-Interactive ZK)",
+        "question": "In the Fiat-Shamir transformation of the DLOG Σ-protocol, how is the challenge generated?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The verifier sends a fresh random value"
+          },
+          {
+            "key": "b",
+            "text": "c ← H(g, h, a), computed by the prover"
+          },
+          {
+            "key": "c",
+            "text": "c ← H(x), where x is the witness"
+          },
+          {
+            "key": "d",
+            "text": "A trusted party supplies c in the CRS"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The prover computes the commitment a as usual, then derives the challenge as c ← H(g, h, a) instead of interacting with the verifier. The verifier recomputes the same hash and then checks the verification equation."
+      },
+      {
+        "id": "W11_Q8",
+        "week": 11,
+        "header": "Q8 — Random Oracle Model (ROM) Heuristic",
+        "question": "Which statement about the Random Oracle Model is correct?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The oracle returns a fresh random answer every time, even for a repeated query"
+          },
+          {
+            "key": "b",
+            "text": "It assumes only the verifier has access to the oracle"
+          },
+          {
+            "key": "c",
+            "text": "A heuristic model in which real hash functions stand in for the ideal random function"
+          },
+          {
+            "key": "d",
+            "text": "It guarantees security against unbounded provers"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "The ROM (Bellare and Rogaway, 1993) is an idealised model with a truly random function that all parties can query. Repeated queries get consistent answers. No ideal RO exists, so hash functions approximate it, which is a heuristic assumption."
+      },
+      {
+        "id": "W11_Q9",
+        "week": 11,
+        "header": "Q9 — Soundness Loss Factor Q in Fiat-Shamir Transformation",
+        "question": "In the sketch that Fiat-Shamir preserves negligible soundness, why does the reduction lose a factor of Q?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Q is the number of bits in the challenge"
+          },
+          {
+            "key": "b",
+            "text": "Q is the number of witnesses the prover holds"
+          },
+          {
+            "key": "c",
+            "text": "Q is the number of rounds in the sigma protocol"
+          },
+          {
+            "key": "d",
+            "text": "A cheating prover can try Q different RO outputs as challenges"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "In the transformed protocol a cheating prover with Q RO queries effectively gets Q attempts at a \"bad\" challenge, while in the interactive protocol it gets a single challenge. The success probability is therefore at most Q·ε, which is still negligible for polynomial Q and negligible ε."
+      },
+      {
+        "id": "W11_Q10",
+        "week": 11,
+        "header": "Q10 — SNARKs as Computationally Bounded Arguments",
+        "question": "Which property means a SNARK is secure only against computationally bounded provers?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Succinctness"
+          },
+          {
+            "key": "b",
+            "text": "Argument"
+          },
+          {
+            "key": "c",
+            "text": "Non-interactivity"
+          },
+          {
+            "key": "d",
+            "text": "Completeness"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "A SNARK is an \"argument\" and not a \"proof\" because it makes no security claims against unbounded provers. Succinctness refers to proof size, and non-interactivity refers to the absence of rounds of interaction."
+      },
+      {
+        "id": "W11_Q11",
+        "week": 11,
+        "header": "Q11 — Common Reference String (CRS) Model & Setup",
+        "question": "In the Common Reference String (CRS) model, which algorithm is run by a trusted party?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Gen"
+          },
+          {
+            "key": "b",
+            "text": "Prove"
+          },
+          {
+            "key": "c",
+            "text": "Verify"
+          },
+          {
+            "key": "d",
+            "text": "Extract"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "Gen is the setup algorithm run by a trusted party to produce the CRS. Prove takes the CRS, the statement, and the witness and outputs a proof. Verify takes the CRS, the statement, and the proof and accepts or rejects."
+      },
+      {
+        "id": "W11_Q12",
+        "week": 11,
+        "header": "Q12 — Core Ingredients of zk-SNARKs",
+        "question": "Which of the following is NOT one of the four main ingredients of the zk-SNARK described in the lectures?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Encoding the program as a polynomial problem"
+          },
+          {
+            "key": "b",
+            "text": "Succinctness by random sampling"
+          },
+          {
+            "key": "c",
+            "text": "Fully homomorphic encryption of the entire computation"
+          },
+          {
+            "key": "d",
+            "text": "Zero-knowledge through masking with random values"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "The four ingredients are polynomial encoding, succinctness via a random evaluation point, homomorphic encoding/encryption, and zero-knowledge through obfuscation with random multiples."
+      },
+      {
+        "id": "W11_Q13",
+        "week": 11,
+        "header": "Q13 — Schwartz-Zippel Lemma & Polynomial Identity Testing",
+        "question": "What does the Schwartz-Zippel-style argument give the verifier when it checks h(s)·t(s) = v(s)·w(s) at a random point s?",
+        "options": [
+          {
+            "key": "a",
+            "text": "h·t = v·w holds as polynomials with high probability, given a large field"
+          },
+          {
+            "key": "b",
+            "text": "The prover's witness is revealed"
+          },
+          {
+            "key": "c",
+            "text": "The proof size grows with the degree of the polynomials"
+          },
+          {
+            "key": "d",
+            "text": "The equation must hold for every element of the field"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "If h·t − v·w is a nonzero polynomial of degree d, a random s is a root with probability at most d/|F|. With a large field this is negligible, so a passing check at one point convinces the verifier of polynomial equality."
+      },
+      {
+        "id": "W11_Q14",
+        "week": 11,
+        "header": "Q14 — Bilinear Pairings in zk-SNARK Verification",
+        "question": "Which property of a bilinear pairing e does the zk-SNARK verifier rely on to check the prover's values?",
+        "options": [
+          {
+            "key": "a",
+            "text": "e(aP, bQ) = e(P, Q)^(ab)"
+          },
+          {
+            "key": "b",
+            "text": "e(P, Q) = e(Q, P)^(−1)"
+          },
+          {
+            "key": "c",
+            "text": "e(P + Q, R) = e(P, R) + e(Q, R)"
+          },
+          {
+            "key": "d",
+            "text": "e(P, Q) = P · Q"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "Bilinearity lets the verifier compare exponents hidden inside encrypted points, for example checking e(A, g^α) = e(B, g). It does this without learning the secret values. Note that in the multiplicative group G2, pairing outputs combine by multiplication, not addition."
+      },
+      {
+        "id": "W11_Q15",
+        "week": 11,
+        "header": "Q15 — d-Power Knowledge of Exponent (d-PKE) Assumption",
+        "question": "Which assumption underlies the belief that a prover cannot produce valid encrypted values A, B unless it actually evaluated a polynomial from the CRS?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The Diffie-Hellman decision assumption"
+          },
+          {
+            "key": "b",
+            "text": "The RSA assumption"
+          },
+          {
+            "key": "c",
+            "text": "The learning-with-errors assumption"
+          },
+          {
+            "key": "d",
+            "text": "The d-power knowledge of exponent assumption"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "The soundness of the pairing check e(A, g^α) = e(B, g) rests on the d-power knowledge of exponent assumption. It says a prover can pass such a check only if it computed the values from the CRS elements."
+      },
+      {
+        "id": "W11_Q16",
+        "week": 11,
+        "header": "Q16 — Zero-Knowledge Masking via Target Polynomial Multiples",
+        "question": "How is zero-knowledge achieved in the zk-SNARK proof?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The prover encrypts the witness with FHE"
+          },
+          {
+            "key": "b",
+            "text": "The prover interacts with the verifier over several rounds"
+          },
+          {
+            "key": "c",
+            "text": "The verifier chooses a secret witness for the prover"
+          },
+          {
+            "key": "d",
+            "text": "The prover adds random multiples of the target polynomial"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "The prover picks random δ values and replaces v(s) by v(s) + δ_v·t(s) and w(s) by w(s) + δ_w·t(s), with h adjusted accordingly. Because t(s) is a multiple of the target polynomial, the divisibility relation still holds, but the randomness hides the real evaluations."
+      },
+      {
+        "id": "W11_Q17",
+        "week": 11,
+        "header": "Q17 — Verifiable ML: Proof of Inference & Parameter Commitment",
+        "question": "In the proof-of-inference circuit for verifiable ML, why can a cheating prover not swap in different model parameters?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The verifier retrains the model itself"
+          },
+          {
+            "key": "b",
+            "text": "The circuit checks that the hash of the prover's parameters matches public hash"
+          },
+          {
+            "key": "c",
+            "text": "Model parameters are sent in plaintext"
+          },
+          {
+            "key": "d",
+            "text": "The verifier holds the private witness"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The circuit rehashes the private parameters and compares the result with the hash embedded in the CRS, which a trusted party generated. It also checks that y − f(x; θ) = 0. Cheating would require a hash collision or a lucky RO challenge, both of which have negligible probability."
+      },
+      {
+        "id": "W11_Q18",
+        "week": 11,
+        "header": "Q18 — Verifiable ML: Proof of Training vs. Proof of Inference",
+        "question": "Why is a separate proof of training needed in addition to a proof of inference?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Proof of inference cannot verify the hash of the parameters"
+          },
+          {
+            "key": "b",
+            "text": "Zero-knowledge is lost during inference"
+          },
+          {
+            "key": "c",
+            "text": "It does not defend against an adversary who influenced the training itself"
+          },
+          {
+            "key": "d",
+            "text": "Inference circuits cannot be expressed as QAPs"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "A proof of inference only shows that the outputs are consistent with the committed parameters. If an adversary poisoned the training, the committed parameters are already compromised. The proof-of-training circuit checks the hashes of D and Y and that the training loss is below a threshold."
+      },
+      {
+        "id": "W11_Q19",
+        "week": 11,
+        "header": "Q19 — Database Reconstruction: Differencing Attack",
+        "question": "In context of reconstruction attacks, an attacker asks \"How many people have the disease?\" and then \"How many people other than Bob have the disease?\" and subtracts the answers. What is this attack called?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Linkage attack"
+          },
+          {
+            "key": "b",
+            "text": "Membership inference attack"
+          },
+          {
+            "key": "c",
+            "text": "Model extraction attack"
+          },
+          {
+            "key": "d",
+            "text": "Differencing attack"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Each answer is an aggregate on its own, but their difference (2 − 1 = 1) reveals Bob's private bit. A linkage attack, by contrast, joins the released data with a separate public dataset."
+      },
+      {
+        "id": "W11_Q20",
+        "week": 11,
+        "header": "Q20 — Reconstruction Attacks & Bounded Noise on Subset-Sum Queries",
+        "question": "A mechanism adds noise bounded by E = n/401 to every subset-sum query. Following the lecture's analysis, an adversary can reconstruct the database to within how many wrong positions?",
+        "options": [
+          {
+            "key": "a",
+            "text": "About 0.25% of n"
+          },
+          {
+            "key": "b",
+            "text": "About 1% of n"
+          },
+          {
+            "key": "c",
+            "text": "About 4% of n"
+          },
+          {
+            "key": "d",
+            "text": "About 40% of n"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "The attack rules out any candidate database whose subset sums disagree with the released answers by more than E. The surviving candidate differs from the real database in at most 4E positions. With E = n/401, that is 4n/401 ≈ 0.01n, so about 99% of the database is recovered."
+      }
+    ]
   }
 ];
