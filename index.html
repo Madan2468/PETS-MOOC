@@ -19,6 +19,7 @@
 
   <!-- Load Data -->
   <script src="data.js"></script>
+  <script src="lecture_data.js"></script>
 </head>
 <body>
 
@@ -28,8 +29,8 @@
       <div class="brand">
         <div class="brand-icon">📜</div>
         <div>
-          <div class="brand-title">PETs Practice Quiz</div>
-          <div class="brand-subtitle">Privacy Enabling Techniques (PETs) • Weeks 1 to 12 (240 Questions)</div>
+          <div class="brand-title">PETs Practice Quiz Portal</div>
+          <div class="brand-subtitle" id="portal-subtitle">Privacy Enabling Techniques (PETs) • Lecture MCQs (94 Questions from Lecture Notes)</div>
         </div>
       </div>
       <div>
@@ -38,6 +39,27 @@
     </div>
   </header>
 
+  <!-- Route Navigation Bar -->
+  <nav class="route-nav">
+    <div class="nav-container">
+      <button class="nav-tab active" data-route="lectures" id="tab-lectures">
+        <span>🎓</span>
+        <span>Lecture MCQs</span>
+        <span class="tab-badge tab-badge-highlight">Weeks 8, 9, 10 (94 Qs)</span>
+      </button>
+      <button class="nav-tab" data-route="assignments" id="tab-assignments">
+        <span>📋</span>
+        <span>Assignment Quizzes</span>
+        <span class="tab-badge">Weeks 1–12 (240 Qs)</span>
+      </button>
+      <button class="nav-tab" data-route="combined" id="tab-combined">
+        <span>🔀</span>
+        <span>Combined Mega Pool</span>
+        <span class="tab-badge">All 334 Qs</span>
+      </button>
+    </div>
+  </nav>
+
   <!-- Main Container -->
   <main class="container">
 
@@ -45,21 +67,9 @@
     <section class="control-panel">
       <div class="panel-grid">
         <div class="form-group">
-          <label for="week-filter">Select Week / Mode</label>
+          <label for="week-filter" id="filter-label">Select Week / Lecture Topic</label>
           <select id="week-filter" class="form-control">
-            <option value="all" selected>🔀 All Weeks Shuffled (Full 240 Questions Pool)</option>
-            <option value="1">Week 1 — Homomorphic Encryption & Intro</option>
-            <option value="2">Week 2 — TGLWE, TGSW & TFHE Bootstrapping</option>
-            <option value="3">Week 3 — CKKS Scheme & Approximate Arithmetic</option>
-            <option value="4">Week 4 — CKKS Rescaling, CRT & Bootstrapping</option>
-            <option value="5">Week 5 — TFHE Gates, MPC & Secret Sharing</option>
-            <option value="6">Week 6 — Beaver Triples & MPC Division</option>
-            <option value="7">Week 7 — Oblivious Transfer (OT) & GMW</option>
-            <option value="8">Week 8 — Shamir, SSE & Security Games</option>
-            <option value="9">Week 9 — Searchable Symmetric Encryption (SSE)</option>
-            <option value="10">Week 10 — Symmetric-key Hidden Vector Encryption (SHVE)</option>
-            <option value="11">Week 11 — Zero-Knowledge Proofs, zk-SNARKs & Verifiable Computation</option>
-            <option value="12">Week 12 — Differential Privacy & Trusted Execution Environments (TEEs)</option>
+            <option value="all" selected>🔀 All Lecture MCQs Shuffled (94 Questions Pool)</option>
           </select>
         </div>
 

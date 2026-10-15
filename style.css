@@ -130,6 +130,99 @@ header {
   background: var(--card-bg);
 }
 
+/* Route Navigation Tabs */
+.route-nav {
+  background: var(--card-bg);
+  border-bottom: 2px solid var(--card-border);
+  box-shadow: 0 2px 8px rgba(60, 50, 30, 0.04);
+}
+
+.nav-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-tab {
+  background: transparent;
+  border: 1.5px solid transparent;
+  color: var(--text-muted);
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  background: var(--bg-color);
+  color: var(--text-main);
+  border-color: var(--card-border);
+}
+
+.nav-tab.active {
+  background: var(--bg-color);
+  color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.12);
+  font-weight: 700;
+}
+
+.tab-badge {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-border);
+  color: var(--text-main);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.nav-tab.active .tab-badge {
+  background: var(--primary);
+  color: #fffdfa;
+}
+
+.tab-badge-highlight {
+  background: rgba(217, 119, 6, 0.18);
+  color: var(--primary);
+}
+
+/* Question Badges */
+.badge-lecture {
+  background: rgba(124, 58, 237, 0.12) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(124, 58, 237, 0.3) !important;
+}
+
+[data-theme="dark-paper"] .badge-lecture {
+  background: rgba(167, 139, 250, 0.18) !important;
+  color: #c4b5fd !important;
+  border: 1px solid rgba(167, 139, 250, 0.4) !important;
+}
+
+.badge-assignment {
+  background: rgba(14, 116, 144, 0.12) !important;
+  color: #0e7490 !important;
+  border: 1px solid rgba(14, 116, 144, 0.3) !important;
+}
+
+[data-theme="dark-paper"] .badge-assignment {
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: #7dd3fc !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
+
 /* Container */
 .container {
   max-width: 950px;
