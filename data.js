@@ -6251,5 +6251,571 @@ window.QUIZ_DATA = [
         "explanation": "The attack rules out any candidate database whose subset sums disagree with the released answers by more than E. The surviving candidate differs from the real database in at most 4E positions. With E = n/401, that is 4n/401 ≈ 0.01n, so about 99% of the database is recovered."
       }
     ]
+  },
+  {
+    "week": 12,
+    "count": 20,
+    "questions": [
+      {
+        "id": "W12_Q1",
+        "week": 12,
+        "header": "Q1 — Differential Privacy: Privacy Parameter ε (Epsilon)",
+        "question": "For an ε-differentially private mechanism M and datasets x, y with ||x − y||₁ ≤ 1, which statement about ε is correct?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Larger ε forces the outputs on x and y to be more similar, giving stronger privacy"
+          },
+          {
+            "key": "b",
+            "text": "Smaller ε forces the outputs on x and y to be more similar, giving stronger privacy"
+          },
+          {
+            "key": "c",
+            "text": "ε is the probability that the privacy guarantee fails"
+          },
+          {
+            "key": "d",
+            "text": "ε has no effect on privacy and only controls the running time"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "In ε-differential privacy, the definition requires Pr[M(x) ∈ S] ≤ e^ε · Pr[M(y) ∈ S]. As ε approaches 0, e^ε approaches 1, which forces the output distributions on neighboring datasets x and y to be virtually identical, giving stronger privacy protection. Conversely, larger ε allows greater divergence between distributions, resulting in weaker privacy."
+      },
+      {
+        "id": "W12_Q2",
+        "week": 12,
+        "header": "Q2 — Differential Privacy & Population vs. Individual Inferences",
+        "question": "A publicly known smoker participates in a differentially private study showing that smoking causes cancer, and their insurance premium rises. Was their differential privacy violated?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Yes, because the study output revealed the smoker's private data"
+          },
+          {
+            "key": "b",
+            "text": "Yes, because DP must prevent every inference drawn from statistics or machine learning"
+          },
+          {
+            "key": "c",
+            "text": "No, because DP guarantees that a participant's insurance premium can never change"
+          },
+          {
+            "key": "d",
+            "text": "No, because “smoking → cancer” can be inferred whether or not the smoker participated"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Differential privacy protects individuals against harm resulting specifically from their individual participation in the dataset (whether their record is present or absent). It does not prevent broad statistical or population-level discoveries (e.g., discovering that smoking causes cancer). The smoker's insurance premium rises because of the general causal link learned from the overall population, which could be inferred whether or not that specific individual participated in the study."
+      },
+      {
+        "id": "W12_Q3",
+        "week": 12,
+        "header": "Q3 — (ε, δ)-Differential Privacy & Failure Probability δ",
+        "question": "In (ε, δ)-differential privacy, Pr[M(x) ∈ S] ≤ e^ε · Pr[M(y) ∈ S] + δ. What does δ represent?",
+        "options": [
+          {
+            "key": "a",
+            "text": "An upper bound on the probability of an exceptional event in which the ε-DP guarantee fails"
+          },
+          {
+            "key": "b",
+            "text": "The multiplicative factor by which output probabilities may differ"
+          },
+          {
+            "key": "c",
+            "text": "The number of individuals whose data may differ between x and y"
+          },
+          {
+            "key": "d",
+            "text": "The variance of the noise added by the mechanism"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "In approximate (ε, δ)-differential privacy, δ represents the probability of a catastrophic failure where pure ε-differential privacy fails to hold (such as directly leaking an individual's raw record). In practice, δ is chosen to be negligible and strictly smaller than 1/n (where n is the dataset size)."
+      },
+      {
+        "id": "W12_Q4",
+        "week": 12,
+        "header": "Q4 — Sequential Composition of DP Mechanisms",
+        "question": "Two independent mechanisms M₁ (ε₁ = 0.4 differentially private) and M₂ (ε₂ = 0.7 differentially private) are run on the same dataset, and both outputs are released. The composed mechanism is:",
+        "options": [
+          {
+            "key": "a",
+            "text": "0.28-differentially private"
+          },
+          {
+            "key": "b",
+            "text": "0.7-differentially private"
+          },
+          {
+            "key": "c",
+            "text": "1.1-differentially private"
+          },
+          {
+            "key": "d",
+            "text": "0.3-differentially private"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "By the linear (sequential) composition theorem of differential privacy, running independent mechanisms M₁ and M₂ on the same dataset provides (ε₁ + ε₂)-differential privacy. Here, ε = 0.4 + 0.7 = 1.1."
+      },
+      {
+        "id": "W12_Q5",
+        "week": 12,
+        "header": "Q5 — Post-Processing Invariance of Differential Privacy",
+        "question": "An analyst with no extra knowledge of the database applies an arbitrary function g to the output of an ε-DP mechanism M. What can be said about g(M(x))?",
+        "options": [
+          {
+            "key": "a",
+            "text": "It may leak more, so the budget must be doubled to 2ε"
+          },
+          {
+            "key": "b",
+            "text": "It remains ε-DP, because post-processing cannot increase privacy loss"
+          },
+          {
+            "key": "c",
+            "text": "It stays ε-DP only if g is linear"
+          },
+          {
+            "key": "d",
+            "text": "It stays ε-DP only if the analyst is computationally bounded"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Differential privacy is closed under post-processing: for any algorithm g applied to the output of an ε-DP mechanism M without access to the private database, g(M(x)) remains ε-differentially private. An analyst cannot increase the privacy loss through subsequent computation alone."
+      },
+      {
+        "id": "W12_Q6",
+        "week": 12,
+        "header": "Q6 — Differential Privacy: Privacy Loss Calculation",
+        "question": "For some output ξ, Pr[M(x) = ξ] = 0.6 and Pr[M(y) = ξ] = 0.2. What is the privacy loss L = ln(Pr[M(x) = ξ] / Pr[M(y) = ξ])?",
+        "options": [
+          {
+            "key": "a",
+            "text": "≈ −1.10"
+          },
+          {
+            "key": "b",
+            "text": "0.40"
+          },
+          {
+            "key": "c",
+            "text": "≈ 1.10"
+          },
+          {
+            "key": "d",
+            "text": "3"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "The privacy loss L at output ξ is defined as L = ln(Pr[M(x) = ξ] / Pr[M(y) = ξ]) = ln(0.6 / 0.2) = ln(3) ≈ 1.0986 ≈ 1.10."
+      },
+      {
+        "id": "W12_Q7",
+        "week": 12,
+        "header": "Q7 — Randomized Response: Two Coin-Flip Protocol",
+        "question": "In the coin-flip randomised response mechanism, a person flips a coin. On tails they answer truthfully. On heads they flip a second coin and answer “yes” for heads and “no” for tails. If the person truly has property P, what is the probability they report “yes”?",
+        "options": [
+          {
+            "key": "a",
+            "text": "3/4"
+          },
+          {
+            "key": "b",
+            "text": "1/2"
+          },
+          {
+            "key": "c",
+            "text": "1/4"
+          },
+          {
+            "key": "d",
+            "text": "5/8"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "For a person with property P (whose truthful response is \"yes\"): with probability 1/2 (first coin is Tails), they answer truthfully (\"yes\"). With probability 1/2 (first coin is Heads), they flip a second coin and answer \"yes\" with probability 1/2. Total probability = (1/2 × 1) + (1/2 × 1/2) = 1/2 + 1/4 = 3/4."
+      },
+      {
+        "id": "W12_Q8",
+        "week": 12,
+        "header": "Q8 — Randomized Response with Bias Parameter γ",
+        "question": "In randomised response with bias parameter γ ∈ [0, 1/2], a student reports Yᵢ = xᵢ with probability 1/2 + γ and 1 − xᵢ with probability 1/2 − γ. For γ = 1/8, what is the probability that the mechanism reports the flipped value, giving a student who cheated plausible deniability?",
+        "options": [
+          {
+            "key": "a",
+            "text": "1/8"
+          },
+          {
+            "key": "b",
+            "text": "1/4"
+          },
+          {
+            "key": "c",
+            "text": "5/8"
+          },
+          {
+            "key": "d",
+            "text": "3/8"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "The probability of reporting the flipped value 1 − xᵢ is given directly by 1/2 − γ. For γ = 1/8, this probability is 1/2 − 1/8 = 4/8 − 1/8 = 3/8."
+      },
+      {
+        "id": "W12_Q9",
+        "week": 12,
+        "header": "Q9 — Randomized Response Estimator: Variance Bound",
+        "question": "In randomised response, the unbiased estimator X̂ satisfies Var[X̂] ≤ 1/(16γ²n). For γ = 1/4 and n = 100 students, what is the upper bound on the variance?",
+        "options": [
+          {
+            "key": "a",
+            "text": "0.0025"
+          },
+          {
+            "key": "b",
+            "text": "0.01"
+          },
+          {
+            "key": "c",
+            "text": "0.04"
+          },
+          {
+            "key": "d",
+            "text": "0.16"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "Substitute γ = 1/4 and n = 100 into the bound: 16γ² = 16 × (1/4)² = 16 × (1/16) = 1. Thus, Var[X̂] ≤ 1 / (16γ²n) = 1 / (1 × 100) = 0.01."
+      },
+      {
+        "id": "W12_Q10",
+        "week": 12,
+        "header": "Q10 — Laplace Mechanism: Scale Parameter b",
+        "question": "The Laplace mechanism answers k = 5 counting queries in which one individual can change each count by at most 1, with privacy budget ε = 0.25. What is the scale b of the Laplace noise?",
+        "options": [
+          {
+            "key": "a",
+            "text": "1.25"
+          },
+          {
+            "key": "b",
+            "text": "4"
+          },
+          {
+            "key": "c",
+            "text": "20"
+          },
+          {
+            "key": "d",
+            "text": "5"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "The scale b of noise drawn from Lap(b) is b = Δf / ε. In ℓ₁-sensitivity, an individual can change each of the k = 5 count queries by at most 1, so Δf = 5 × 1 = 5. Therefore, b = 5 / 0.25 = 20."
+      },
+      {
+        "id": "W12_Q11",
+        "week": 12,
+        "header": "Q11 — Laplace Mechanism: Maximum Error Bound",
+        "question": "A Laplace mechanism releases k = 1000 counts (each individual contributes to only one count, so Δf = 1) with ε = 0.5. With probability at least 95% (δ = 0.05), no released count is off by more than ln(k/δ) · (Δf/ε). What is this bound?",
+        "options": [
+          {
+            "key": "a",
+            "text": "≈ 9.9"
+          },
+          {
+            "key": "b",
+            "text": "≈ 6.9"
+          },
+          {
+            "key": "c",
+            "text": "≈ 4.95"
+          },
+          {
+            "key": "d",
+            "text": "≈ 19.8"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Substitute the given values: k/δ = 1000 / 0.05 = 20,000. ln(20,000) ≈ 9.9035. Δf / ε = 1 / 0.5 = 2. Multiplying them gives ln(k/δ) · (Δf/ε) ≈ 9.9035 × 2 ≈ 19.807 ≈ 19.8."
+      },
+      {
+        "id": "W12_Q12",
+        "week": 12,
+        "header": "Q12 — TEE vs. FHE: Trust Model & Hardware Assumptions",
+        "question": "How does a TEE-based approach differ from FHE when computing on a user's secret data at an untrusted server?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Trust shifts from the operating system to the CPU manufacturer and its libraries"
+          },
+          {
+            "key": "b",
+            "text": "Computation runs on ciphertext, so no trust in any party is required"
+          },
+          {
+            "key": "c",
+            "text": "Trust is placed in the cloud provider's OS, which must behave honestly"
+          },
+          {
+            "key": "d",
+            "text": "Trust is placed only in the user's client, and the server hardware may be malicious"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "In FHE, calculations are performed directly on encrypted ciphertexts, requiring zero trust in the server hardware or OS. In contrast, TEEs (Trusted Execution Environments) compute directly on decrypted/plaintext data inside isolated hardware enclaves, meaning trust is shifted from the untrusted OS/hypervisor to the CPU manufacturer (e.g. Intel/AMD) and its cryptographic firmware/libraries."
+      },
+      {
+        "id": "W12_Q13",
+        "week": 12,
+        "header": "Q13 — Abstract TEE Model: Context Switches & Register State",
+        "question": "In the abstract TEE model, what happens to the secret values in the register file when the CPU switches from trusted mode to the untrusted OS?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The registers are wiped and the OS restarts the computation"
+          },
+          {
+            "key": "b",
+            "text": "They are saved in encrypted form, with the key held in the trusted hardware"
+          },
+          {
+            "key": "c",
+            "text": "The OS receives a plaintext copy but is forbidden by policy from reading it"
+          },
+          {
+            "key": "d",
+            "text": "Nothing is done, since the OS cannot read hardware registers"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "When switching context from trusted mode to the untrusted host OS (e.g. during an interrupt), the CPU saves sensitive register values into encrypted memory/storage protected by keys held inside the secure hardware, and scrubs the general-purpose registers so the OS cannot read enclave secrets."
+      },
+      {
+        "id": "W12_Q14",
+        "week": 12,
+        "header": "Q14 — TEE Memory Integrity: Ownership Tracking",
+        "question": "Memory encryption stops a malicious OS from reading secret memory but not from modifying it. What additional mechanism does the lecture introduce for integrity?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Using a longer encryption key"
+          },
+          {
+            "key": "b",
+            "text": "None is needed, since encryption alone prevents modification"
+          },
+          {
+            "key": "c",
+            "text": "An ownership bit (and other bookkeeping)"
+          },
+          {
+            "key": "d",
+            "text": "Letting the OS keep a checksum of the secret pages"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "Memory encryption ensures confidentiality against passive snooping but does not prevent tampering, splicing, or replay attacks. To guarantee integrity, TEE architectures introduce ownership bits and internal security metadata (such as EPCM entries and Merkle integrity trees) maintained by the processor hardware to enforce page ownership and detect unauthorized modifications."
+      },
+      {
+        "id": "W12_Q15",
+        "week": 12,
+        "header": "Q15 — TEE Security Checklist: Residual Threats & Side Channels",
+        "question": "According to the TEE security checklist, which threat is NOT fully addressed by basic TEE isolation?",
+        "options": [
+          {
+            "key": "a",
+            "text": "A malicious OS reading secret memory contents"
+          },
+          {
+            "key": "b",
+            "text": "A malicious OS redirecting accesses by tampering with page tables"
+          },
+          {
+            "key": "c",
+            "text": "A DMA-capable peripheral reading protected physical memory"
+          },
+          {
+            "key": "d",
+            "text": "A malicious OS repeatedly interrupting the enclave (DoS) and observing timing"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "Baseline TEE hardware isolation prevents direct physical memory readout (via memory encryption), page-table remapping attacks (via hardware ownership/EPCM checks), and DMA snooping. However, controlled timing attacks, cache side-channel leakages, and repeated interrupt injection (DoS / controlled page-fault timing) are subtle microarchitectural threats that are not fully prevented by basic isolation alone."
+      },
+      {
+        "id": "W12_Q16",
+        "week": 12,
+        "header": "Q16 — Intel SGX: Trusted Computing Base (TCB)",
+        "question": "What is the Trusted Computing Base (TCB) of Intel SGX?",
+        "options": [
+          {
+            "key": "a",
+            "text": "Processor + SGX firmware (Intel-signed microcode) + enclave"
+          },
+          {
+            "key": "b",
+            "text": "Processor + OS kernel + hypervisor"
+          },
+          {
+            "key": "c",
+            "text": "Enclave + hypervisor"
+          },
+          {
+            "key": "d",
+            "text": "The entire server, including all peripherals"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "In Intel SGX, the operating system, hypervisor, BIOS, and external hardware peripherals are outside the trust boundary. The Trusted Computing Base (TCB) consists strictly of the CPU hardware, the Intel-signed microcode/firmware, and the enclave application code."
+      },
+      {
+        "id": "W12_Q17",
+        "week": 12,
+        "header": "Q17 — Intel SGX: Asynchronous Enclave Exit (AEX)",
+        "question": "What happens in SGX when an interrupt arrives while the CPU is executing enclave code?",
+        "options": [
+          {
+            "key": "a",
+            "text": "The interrupt is serviced inside the enclave using the OS handler"
+          },
+          {
+            "key": "b",
+            "text": "The enclave is destroyed and all its secrets are wiped"
+          },
+          {
+            "key": "c",
+            "text": "The CPU performs an Asynchronous Enclave Exit"
+          },
+          {
+            "key": "d",
+            "text": "Interrupts are queued and cannot be delivered until the enclave terminates"
+          }
+        ],
+        "correct": [
+          "c"
+        ],
+        "explanation": "When an external interrupt or exception arrives during enclave execution, the hardware triggers an Asynchronous Enclave Exit (AEX). The CPU saves enclave register state in the enclave's State Save Area (SSA), replaces registers with synthetic values to avoid leaking secrets, and switches to untrusted mode to service the interrupt."
+      },
+      {
+        "id": "W12_Q18",
+        "week": 12,
+        "header": "Q18 — Intel SGX: Remote Attestation & Enclave Measurement",
+        "question": "In the SGX lung-scan example, how does the user gain confidence that it is talking to a correctly configured enclave?",
+        "options": [
+          {
+            "key": "a",
+            "text": "By reading the server's OS logs"
+          },
+          {
+            "key": "b",
+            "text": "By trusting the cloud provider's assurance"
+          },
+          {
+            "key": "c",
+            "text": "By directly inspecting the enclave's memory contents"
+          },
+          {
+            "key": "d",
+            "text": "A hash of the enclave's initial state is computed"
+          }
+        ],
+        "correct": [
+          "d"
+        ],
+        "explanation": "SGX Remote Attestation allows a remote client to verify that genuine Intel hardware is executing the intended enclave software. During enclave creation, the hardware computes a cryptographic hash of the enclave's initial code and data (recorded in MRENCLAVE). The hardware issues a signed quote of this measurement, allowing the user to cryptographically verify the enclave's integrity."
+      },
+      {
+        "id": "W12_Q19",
+        "week": 12,
+        "header": "Q19 — Enclaves vs. Confidential VMs: Intel SGX vs. Intel TDX",
+        "question": "What is the key difference between Intel SGX and Intel TDX?",
+        "options": [
+          {
+            "key": "a",
+            "text": "SGX protects a small part of an application (the enclave) while TDX protects an entire VM with its own OS"
+          },
+          {
+            "key": "b",
+            "text": "SGX protects an entire VM, while TDX protects only a small enclave inside an application"
+          },
+          {
+            "key": "c",
+            "text": "Both protect only CPU registers and neither protects memory"
+          },
+          {
+            "key": "d",
+            "text": "TDX requires the application to be rewritten, while SGX does not"
+          }
+        ],
+        "correct": [
+          "a"
+        ],
+        "explanation": "Intel SGX is an application-level enclave mechanism that protects isolated code modules within a process (requiring application partitioning). Intel TDX (Trust Domain Extensions) provides VM-level confidential computing, isolating an entire virtual machine (Trust Domain)—including its guest OS and all running applications—from the untrusted host hypervisor without requiring application refactoring."
+      },
+      {
+        "id": "W12_Q20",
+        "week": 12,
+        "header": "Q20 — Intel TDX: SEAMCALL and TDCALL Instructions",
+        "question": "In Intel TDX, the hypervisor invokes the TDX Module (running in SEAM mode) using _____, and a Trust Domain communicates with the TDX Module using _____.",
+        "options": [
+          {
+            "key": "a",
+            "text": "TDCALL; SEAMCALL"
+          },
+          {
+            "key": "b",
+            "text": "SEAMCALL (returning via SEAMRET); TDCALL"
+          },
+          {
+            "key": "c",
+            "text": "VMLAUNCH; VMRESUME"
+          },
+          {
+            "key": "d",
+            "text": "EADD; EINIT"
+          }
+        ],
+        "correct": [
+          "b"
+        ],
+        "explanation": "In Intel TDX, the host hypervisor / VMM calls into the TDX Module (operating in Secure Arbitration Mode or SEAM) via the SEAMCALL instruction (which returns via SEAMRET). Inside the guest VM, the Trust Domain (TD) communicates with the TDX Module using the TDCALL instruction."
+      }
+    ]
   }
 ];
